@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block contentViewTitle %}
+	<h3>Crear nuevo servicio</h3>
+{% endblock contentViewTitle %}
+{% block content %}
+	{% if form.errors %}
+		<div class="alert alert-danger">
+			Corrija los <strong>errores</strong> por favor
+			<p>{{ form.non_field_errors }}</p>
+		</div>
+	{% endif %}
+	<div class="well">
+		<form method="POST">
+			<fieldset>
+				<legend>Servicio</legend>
+				{% csrf_token %}
+				<div class="form-group row middle">
+					{{ form.nombre.errors }}
+					<label class="col-2" for="{{ form.nombre.id_for_label }}">
+						{{form.nombre.label}}:
+					</label>
+					{{ form.nombre }}
+				</div>
+				<div class="form-group row middle">
+					{{ form.valor.errors }}
+					<label class="col-2" for="{{ form.valor.id_for_label }}">
+						{{form.valor.label}}:
+					</label>
+					{{ form.valor }}
+				</div>
+				<div class="row">
+					<div class="form-group col-6 middle flex">
+						{{ form.grupo.errors }}
+						<label class="col-4" for="{{ form.grupo.id_for_label }}">
+							{{form.grupo.label}}:
+						</label>
+						{{ form.grupo }}
+					</div>
+					<div class="form-group col-6 middle flex">
+						{{ form.servicio.errors }}
+						<label class="col-2" for="{{ form.servicio.id_for_label }}">
+							{{form.servicio.label}}:
+						</label>
+						{{ form.servicio }}
+					</div>
+				</div>
+				<input type="submit" class="btn btn-success" value="Crear">
+			</fieldset>
+		</form>
+	</div>
+{% endblock content %}

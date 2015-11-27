@@ -1,0 +1,150 @@
+@import "reticula.styl"
+@import "fonts.styl"
+
+colorLetter = #3D3F3F
+headerHeight = 80px
+menuContentColor = #eaeaea
+menuContentLetterColor = #3D3F3F
+subMenuBackgroundColor = white
+errorTextColor = #b94a48
+
+
+html, body
+	height 100%
+
+h1, h2, h3, h4
+	margin 0
+
+ul
+	margin 0
+	padding 0
+
+li
+	list-style none
+
+a
+	color colorLetter
+	text-decoration none
+
+label
+	margin 0
+
+input
+	margin 0
+
+.header
+	background-color #293A4A
+	border-bottom 2px solid #062A6B
+	height headerHeight
+	color white
+
+.logo
+	display none
+	background-image url('../img/logo.jpg')
+	background-repeat no-repeat
+	height 50px
+	margin 0 auto
+	width 220px
+
+.app-name
+	height 100%
+	display flex
+
+.app-name-title
+	color white
+	display inline-block
+	margin-right 10px
+
+.header-info
+	height 100%
+	display flex
+
+.content-view
+	width calc(100% - 260px)
+	overflow overlay
+	&-title
+		margin-bottom 10px
+
+.content-view-detail
+	width 98%
+	margin 0 auto
+
+.menu-content
+	background-color menuContentColor
+	border-right 3px solid #999999
+	width 260px
+
+.menu-search
+	margin-top 10px
+	margin-bottom 10px
+	position relative
+	
+.search-menu
+	position absolute
+	top 10px
+	font-size 20px
+	right 10px
+
+.content-main
+	display flex
+	height calc(100% - 80px)
+
+.menu-list
+	margin 0
+	margin-top 15px
+	padding 0
+	li
+		list-style none
+
+.menu-group
+	border-bottom 1px solid #999999
+	margin-bottom 10px
+
+.menu-group-item
+	padding 5px
+	margin-right: 1px;
+	&:hover
+		background-color #cccccc
+	a
+		color menuContentLetterColor
+		text-decoration none
+		border-right 1px solid #999999
+
+.menu-action-deploy
+	display flex
+
+.submenu-list
+	background-color subMenuBackgroundColor
+	color menuContentLetterColor
+	display none
+	&-activate
+		display block
+
+.show-submenu
+	cursor pointer
+
+.submenu-item
+	padding 5px
+	&:hover
+		background-color #F5F5F5
+	a
+		display block
+
+.errorlist
+	color errorTextColor
+	position absolute
+	right 0
+	bottom 0
+	z-index 2
+
+.form-group
+	position relative
+
+.actions-top
+	margin-top 10px
+	padding-bottom 15px
+	border-bottom 1px solid gainsboro
+	margin-bottom 15px
+
+.flex
+	display flex
