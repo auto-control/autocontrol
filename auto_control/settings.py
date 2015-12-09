@@ -35,6 +35,7 @@ PROJECT_APPS = (
     'articulos_servicios',
     'clientes',
     'maestros',
+    'vehiculos',
 )
 
 DJANGO_APPS = (
