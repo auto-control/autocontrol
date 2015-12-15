@@ -16,3 +16,4 @@ class listServicioView(ListView):
 	template_name = 'list_servicio.html'
 	model = servicioModel
 	context_object_name = 'servicios'
+	paginate_by = 10

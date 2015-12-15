@@ -8,9 +8,10 @@ from clientes.forms import clienteModelForm
 
 
 class listClientesView(ListView):
-	queryset = clienteModel.objects.all().order_by('-id')
+	queryset = clienteModel.objects.all().order_by('apellido')
 	template_name = 'list_clientes.html'
 	context_object_name = 'clientes'
+	paginate_by = 10
 
 class createClienteView(SuccessMessageMixin, CreateView):
 	template_name = 'create_clientes.html'

@@ -11,6 +11,7 @@ class listMecanicosView(ListView):
 	template_name = 'list_mecanicos.html'
 	model = mecanicoModel
 	context_object_name = 'mecanicos'
+	paginate_by = 10
 
 class createMecanicoView(SuccessMessageMixin, CreateView):
 	template_name = 'create_mecanicos.html'

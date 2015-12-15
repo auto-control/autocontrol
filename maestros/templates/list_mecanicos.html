@@ -3,6 +3,17 @@
 	<h3>Lista de Mecánicos</h3>
 {% endblock contentViewTitle %}
 {% block content %}
+	<div class="row well actions-top middle">
+		<div class="col-1">
+			<label for="">Buscar:</label>
+		</div>
+		<div class="col-8">
+			<input type="text" class="form-control" placeholder="">
+		</div>
+		<div class="col-3">
+			<input type="submit" class="btn btn-success" value="Buscar">
+		</div>
+	</div>
 	{% if messages %}
 		<div class="alert alert-success " role="alert">
 			{% for message in messages %}
@@ -30,4 +41,24 @@
 		{% endfor %}
 		</tbody>
 	</table>
+	<div class="row">
+		{% if is_paginated %}
+			{% if page_obj.has_previous %}
+				<a class="paginate-change" href="{% url 'list_mecanicos' %}?page={{ page_obj.previous_page_number }}">
+					atrás&nbsp;
+				</a>
+			{% endif %}
+			<span class="page-current">
+				Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+			</span>
+			{% if page_obj.has_next %}
+				<a class="paginate-change" href="{% url 'list_mecanicos' %}?page={{ page_obj.next_page_number }}">
+					&nbsp;siguiente
+				</a>
+			{% endif %}
+		{% endif %}
+	</div>
+	<div class="row center">
+		<a class='btn btn-primary' href="{% url 'create_mecanicos' %}">Nuevo Mecánico</a>
+	</div>
 {% endblock content %}
