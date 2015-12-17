@@ -6,5 +6,7 @@ urlpatterns = [
     url('', include('clientes.urls')),
     url('', include('articulos_servicios.urls')),
     url('', include('maestros.urls')),
+    url('', include('ordenes_servicios.urls')),
+    url('', include('vehiculos.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]

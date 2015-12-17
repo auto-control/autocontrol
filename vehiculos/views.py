@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def historialVehiculo(request):
+	return render(request, 'historial_vehiculo.html')
