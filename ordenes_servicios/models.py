@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 from vehiculos.models import vehiculoModel
@@ -7,7 +9,7 @@ from maestros.models import mecanicoModel
 
 class ordenServicioModel(models.Model):
 	vehiculo = models.ForeignKey(vehiculoModel,null=False,blank=False)
-	fecha = models.DateTimeField(null=False,blank=False)
+	fecha = models.DateTimeField(null=False,blank=False,default=datetime.now)
 
 	def __str__(self):
 		return u'%s' % (self.pk)
@@ -18,8 +20,8 @@ class ordenServicioModel(models.Model):
 class ordenServicioDetalleModel(models.Model):
 	servicio = models.ForeignKey(servicioModel,null=False,blank=False)
 	cantidad = models.PositiveIntegerField(null=False,blank=False)
-	valorUnitario = models.PositiveIntegerField(null=False,blank=False)
-	valorTotal = models.PositiveIntegerField(null=False,blank=False)
+	valorUnitario = models.PositiveIntegerField(null=False,blank=False,verbose_name='V. Unitario')
+	valorTotal = models.PositiveIntegerField(null=False,blank=False, verbose_name='V. Total')
 	mecanico = models.ForeignKey(mecanicoModel,null=True,blank=True)
 	ordenServicio = models.ForeignKey(ordenServicioModel,null=False,blank=False)
 

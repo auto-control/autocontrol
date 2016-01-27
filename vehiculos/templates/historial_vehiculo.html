@@ -3,71 +3,24 @@
 	<h3>Historial del vehiculo</h3>
 {% endblock contentViewTitle %}
 {% block content %}
-	<div class="row well actions-top middle">
-		<div class="col-1">
-			<label for="">Buscar:</label>
-		</div>
-		<div class="col-8">
-			<input type="text" class="form-control" placeholder="">
-		</div>
-		<div class="col-3">
-			<input type="submit" class="btn btn-success" value="Buscar">
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="well col-8">
-			<h3>Datos del Vehiculo</h3>
-			<div class="row">
+	<form action="{% url 'historial' %}" method="POST">
+		<p>Busca el historial de servicios del vehiculo</p>
+		<div class="row well actions-top middle">
+				{% csrf_token %}
+				<div class="col-1">
+					{{ form.placa.label_tag}}
+				</div>
 				<div class="col-8">
-					<figure>
-						<img src="http://imganuncios.mitula.net/vendo_chevrolet_spark_96635423131743163.jpg" width="400px">
-					</figure>
+					{{ form.placa }}
 				</div>
-				<div class="col-4">
-					<br>
-					<p><strong>Placa: </strong>GRF-500</p>
-					<p><strong>Marca:</strong> Chevrolet</p>
-					<p><strong>Modelo:</strong> Spark 2011</p>
-					<p><strong>Ingreso:</strong> 2015 -12 -01</p>
+				<div class="col-3">
+					<input type="submit" class="btn btn-success" value="Buscar">
 				</div>
-			</div>
 		</div>
-		<div class="well col-4">
-			<h3>Cliente</h3>
-			<br>
-			<p><strong>Nombre: </strong>Ivan Nicolas Ramirez</p>
-			<p><strong>Doc. Identidad</strong> 1.070.611.648</p>
-			<p><strong>Telefono:</strong> 316 819 9209</p>
-			<p><strong>Email:</strong> erickmateo@gmail.com</p>
-			<p><strong>Dirección:</strong> Cra 11 # 19 -70</p>
+	</form>
+	{% if message %}
+		<div class="alert alert-info" role="alert">
+		{{ message }}
 		</div>
-	</div>
-	<h3>Ordenes de servicios</h3>
-	<table class="table table-striped table-hover ">
-		<thead>
-			<tr>
-				<th>Código Orden</th>
-				<th>Fecha</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>OS000001</td>
-				<td>2015-03-12</td>
-			</tr>
-			<tr>
-				<td>OS000002</td>
-				<td>2015-04-21</td>
-			</tr>
-			<tr>
-				<td>OS000003</td>
-				<td>2015-05-16</td>
-			</tr>
-			<tr>
-				<td>OS000004</td>
-				<td>2015-06-09</td>
-			</tr>
-		</tbody>
-	</table>
+	{% endif %}
 {% endblock content %}

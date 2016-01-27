@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block contentViewTitle %}
+	<h3>Orden de servicio</h3>
+{% endblock contentViewTitle %}
+{% block content %}
+	<p>Ingrese la placa del vehiculo para crear una <b>Orden de Servicio</b> Nueva</p>
+	<div class="row">
+		<form action="" method="POST" class="col-8">
+			{% csrf_token %}
+			<div class="form-group">
+				{{ formVehiculo.placa.errors }}
+				{{ formVehiculo.placa.label_tag }}
+				{{ formVehiculo.placa }}
+			</div>
+			{% if message %}
+				<div class="alert alert-info" role="alert">
+				{{ message }} <b><a class="underline-decoration" href="#">Crear Nuevo</a></b>
+				</div>
+			{% endif %}
+			<input type="submit" class="btn btn-success" >
+		</form>
+	</div>
+{% endblock content %}

@@ -28,21 +28,20 @@
 					</label>
 					{{ form.valor }}
 				</div>
-				<div class="row">
-					<div class="form-group col-6 middle flex">
-						{{ form.grupo.errors }}
-						<label class="col-4" for="{{ form.grupo.id_for_label }}">
-							{{form.grupo.label}}:
-						</label>
-						{{ form.grupo }}
-					</div>
-					<div class="form-group col-6 middle flex">
-						{{ form.servicio.errors }}
-						<label class="col-2" for="{{ form.servicio.id_for_label }}">
-							{{form.servicio.label}}:
-						</label>
-						{{ form.servicio }}
-					</div>
+				<div class="form-group row middle flex">
+					{{ form.grupo.errors }}
+					<label class="col-2" for="{{ form.grupo.id_for_label }}">
+						{{form.grupo.label}}:
+					</label>
+					{{ form.grupo }}
+					<a href="#" class="add-foreign-field icon-plus col-2" title="Agregar nuevo"></a>
+				</div>
+				<div class="form-group row middle flex">
+					{{ form.servicio.errors }}
+					<label class="col-2" for="{{ form.servicio.id_for_label }}">
+						{{form.servicio.label}}:
+					</label>
+					{{ form.servicio }}
 				</div>
 				<input type="submit" class="btn btn-success" value="Crear">
 			</fieldset>
