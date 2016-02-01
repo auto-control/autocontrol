@@ -2,37 +2,32 @@
 
 import ho.pisa as pisa
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-
-from app.utils import get_or_none
+from app.utils import get_or_none, generar_pdf
 from ordenes_servicios.forms import vehiculoOrdenForm, ordenServicioDetalle
 from vehiculos.models import vehiculoModel
 from articulos_servicios.models import servicioModel
 from ordenes_servicios.models import ordenServicioModel, ordenServicioDetalleModel
 from maestros.models import mecanicoModel
 
-
-import ho.pisa as pisa
-import cStringIO as StringIO
-import cgi
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 
-def generar_pdf(html):
-		# Función para generar el archivo PDF y devolverlo mediante HttpResponse
-		result = StringIO.StringIO()
-		pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
-		if not pdf.err:
-				return HttpResponse(result.getvalue(),mimetype='application/pdf')
-		return HttpResponse('Error al generar el PDF: %s' % cgi.escape(html))
 
-def pdf(request):
-		# vista de ejemplo con un hipotético modelo Libro
-		html = "<h1>Hola Mundo</h1>"
+def ordenServicioImprimir(request, pk):
+		orden = get_object_or_404(ordenServicioModel, pk=pk)
+		ordenDetalle = ordenServicioDetalleModel.objects.filter(ordenServicio=orden)
+
+		contexto = {
+			'orden' : orden,
+			'ordenDetalle' : ordenDetalle
+		}
+
+		html = render_to_string('imprimir_orden_servicio.html', contexto)
 		return generar_pdf(html)
 
 def detalleOrdenServicio(request, pk):
@@ -44,8 +39,6 @@ def detalleOrdenServicio(request, pk):
 		'ordenDetalle' : ordenDetalle, 
 	}
 	return render(request,'detail_orden_servicio.html', context)
-
-
 
 @csrf_exempt
 def guardarOrden(request):
