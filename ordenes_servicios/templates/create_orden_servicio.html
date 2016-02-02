@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block contentViewTitle %}
+	<h3>Orden de servicio</h3>
+{% endblock contentViewTitle %}
+{% block content %}
+	<div class="well orden-servicio">
+		<h4>Datos del Vehiculo</h4>
+		<div class="row orden-datos-vehiculo">
+			<div class="col-2">
+				<span class="labelfield">Placa</span>
+				<span class="dato">{{ vehiculo.placa }}</span>
+			</div>
+			<div class="col-2">
+				<span class="labelfield">Marca</span>
+				<span class="dato">{{ vehiculo.marca }}</span>
+			</div>
+			<div class="col-2">
+				<span class="labelfield">Modelo</span>
+				<span class="dato">Modelo</span>
+			</div>
+			<div class="col-2">
+				<span class="labelfield">Tipo</span>
+				<span class="dato">{{ vehiculo.tipo }}</span>
+			</div>
+		</div>
+		<div class="separator-horizontal"></div>
+		<h4>Datos del Cliente</h4>
+		<div class="row orden-datos-cliente">
+			<div class="col-3">
+				<span class="labelfield">Nombre</span>
+				<span class="dato">{{ vehiculo.cliente }}</span>
+			</div>
+			<div class="col-2">
+				<span class="labelfield">Documento</span>
+				<span class="dato">{{ vehiculo.cliente.documento }}</span>
+			</div>
+			<div class="col-3">
+				<span class="labelfield">Telefono</span>
+				<span class="dato">{{ vehiculo.cliente.celular }} - {{ vehiculo.cliente.telefono }}</span>
+			</div>
+			<div class="col-3">
+				<span class="labelfield">Dirección</span>
+				<span class="dato">{{ vehiculo.cliente.direccion }}</span>
+			</div>
+		</div>
+		<div class="separator-horizontal"></div>
+		<h4>Datos Orden</h4>
+		<div class="row">
+			<div class="col-1 middle flex">
+				<label for="">copas:</label>
+				<input type="checkbox">
+			</div>
+			<div class="col-2 middle flex">
+				<label for="">Plumillas:</label>
+				<input type="checkbox">
+			</div>
+		</div>
+		<div class="separator-horizontal"></div>
+		<div class="row">
+			<div class="col-3">
+				<span class="labelfield">FECHA</span>
+				<input id="fecha" name="fecha" type="date" disabled>
+			</div>
+			<div class="col-6"></div>
+			<div class="col-3 center">
+				<span class="labelfield">N° ORDEN</span>
+				<input type="text" disabled>
+			</div>
+		</div>
+		<form id="form-servicio" method="POST">
+			<div class="row orden-datos-servicio">
+				<div class="col-3 center">
+					{{ formDetalleOrden.servicio.label_tag }}
+					<span class="labelfield">{{ formDetalleOrden.servicio }}</span>
+				</div>
+				<div class="col-1 center">
+					{{ formDetalleOrden.cantidad.label_tag }}
+					{{ formDetalleOrden.cantidad }}
+				</div>
+				<div class="col-2 center">
+					{{ formDetalleOrden.valorUnitario.label_tag }}
+					{{ formDetalleOrden.valorUnitario }}
+				</div>
+				<div class="col-2 center">
+					{{ formDetalleOrden.valorTotal.label_tag }}
+					{{ formDetalleOrden.valorTotal }}
+				</div>
+				<div class="col-2 center">
+					{{ formDetalleOrden.mecanico.label_tag }}
+					{{ formDetalleOrden.mecanico }}
+				</div>
+				<div class="col-2 bottom center flex">
+					<input class="btn btn-success all-space" value="Agregar" type="submit">
+				</div>
+			</div>
+		</form>
+		<form id="form-save" action="{% url 'guardar_orden' %}" method="POST">
+				<input type="hidden" id="placa" name="placa" value="{{ vehiculo.placa }}">
+			<div id="orden-items">
+			</div>
+			<div class="separator-horizontal"></div>
+			<div class="row end">
+				<input id="form-save-btn" type="submit" class="btn btn-success mright-15" value="Guardar" disabled>
+				<button type="button" class="btn btn-danger" disabled>Cancelar</button>
+		</form>
+		</div>
+	</div>
+{% endblock content %}
+{% block scripts %}
+	<script src="{% static "js/jquery.min.js" %}"></script>
+	<script>
+		var form = document.getElementById('form-servicio')
+		var servicio = document.getElementById('id_servicio')
+		var valor = document.getElementById('id_valorUnitario')
+		var cantidad = document.getElementById('id_cantidad')
+		var vTotal = document.getElementById('id_valorTotal')
+
+		servicio.addEventListener('change', function(){
+			if( this.value )
+				getServicioData(this.value)
+		})
+
+		valor.addEventListener('change', function(){
+			valorTotal()
+		})
+
+		cantidad.addEventListener('change', function(){
+			valorTotal()
+		})
+
+		form.onsubmit = function(e){
+			e.preventDefault()
+			var check = checkFormServicio(form)
+			if (!check)
+				alert("Llene todos los campos")
+			else
+				addServicio(form)
+		}
+
+		function addServicio (form) {
+			
+			var html = "<div class='row orden-servicio-item'><div class='col-3 center'><input id=''  type='text' disabled value='"+form.servicio.options[form.servicio.selectedIndex].text+"'> <input type='hidden' id='servicio' name='servicios[]' value='"+form.servicio.options[form.servicio.selectedIndex].value+"'/></div><div class='col-1 center'><input id='' type='number' disabled value='"+form.elements.id_cantidad.value+"'><input id='cantidad' name='cantidades[]' type='hidden' value='"+form.elements.id_cantidad.value+"'></div><div class='col-2 center'><input id='vunitario' name='vunitarios[]' type='number' disabled value="+form.elements.id_valorUnitario.value+"></div><div class='col-2 center'><input id='vtotal' name='vtotales[]' type='number' disabled value='"+form.elements.id_valorTotal.value+"'></div><div class='col-2 center'><input id='' type='text' disabled value='"+form.mecanico.options[form.mecanico.selectedIndex].text+"'><input type='hidden' id='mecanico' name='mecanicos[]' value='"+form.mecanico.options[form.mecanico.selectedIndex].value+"'/></div></div>";
+
+			$('#orden-items').append(html);
+			var btn = document.getElementById('form-save-btn')
+			btn.disabled = false
+			form.reset()
+		}
+
+		function checkFormServicio (form) {
+			var elements = form.elements
+			for (var i = 0; i < elements.length; i++) {
+				if(!elements[i].value)
+					return false
+			}
+			return true
+		}
+
+		function valorTotal(){
+			vTotal.value = valor.value * cantidad.value
+		}
+
+		function getServicioData(servicio){
+			//get data from JSON
+			// {valor}
+
+			$.ajax({
+				method: "GET",
+				url:'{% url 'get_servicio_valor' %}',
+				data: { servicio: servicio }
+			})
+			.done(function( json ) {
+				valor.value = json.valor
+				cantidad.value = 1
+				valorTotal()
+			});
+
+		}
+
+	</script>
+{% endblock scripts %}

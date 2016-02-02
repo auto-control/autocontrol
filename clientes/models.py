@@ -5,6 +5,7 @@ class clienteModel(models.Model):
 	"""Modelo Cliente"""
 	nombre = models.CharField(max_length=50)
 	apellido = models.CharField(max_length=50)
+	documento = models.CharField(max_length=20)
 	telefono = models.CharField(max_length=20, blank=True, null=True)
 	celular = models.CharField(max_length=50)
 	direccion = models.CharField(max_length=50, blank=True, null=True)

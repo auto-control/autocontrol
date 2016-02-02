@@ -15,6 +15,9 @@ html, body
 h1, h2, h3, h4
 	margin 0
 
+h4
+	margin-bottom 15px
+
 ul
 	margin 0
 	padding 0
@@ -31,6 +34,15 @@ label
 
 input
 	margin 0
+input[type="text"]
+	width 100%
+
+input[type="number"]
+	width 100%
+	text-align right
+
+select
+	width 100%
 
 .header
 	background-color #293A4A
@@ -155,3 +167,49 @@ input
 	font-weight bold
 	&:hover
 		text-decoration: underline
+
+.quick-access-bar
+	background-color #d9edf7
+	color #31708f
+	font-size 20px
+	margin 0
+	padding-right 10px
+	width calc(100% - 260px)
+	position absolute
+	bottom 0
+	.icon
+		padding-top 5px
+		padding-right 5px
+
+.add-foreign-field
+	&:hover
+		color green
+
+.mright-15
+	margin-right 15px
+
+.underline-decoration
+	text-decoration underline
+
+.separator-horizontal
+	border-bottom 2px solid gainsboro
+	margin-top 10px
+	margin-bottom 10px
+
+.orden-servicio
+	.labelfield
+		display inherit
+		font-weight bold
+	.dato
+		display inherit
+
+.orden-datos-servicio
+	margin-top 20px
+	margin-bottom 20px
+
+.orden-servicio-item
+	border-bottom 1px solid gainsboro
+	margin-bottom 8px
+
+.all-space
+	width 100%
