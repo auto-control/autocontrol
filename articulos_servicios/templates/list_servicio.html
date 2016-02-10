@@ -28,6 +28,7 @@
 				<th>Nombre</th>
 				<th>valor</th>
 				<th>Grupo</th>
+				<th>Tiempo estimado</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -36,6 +37,7 @@
 					<td>{{ servicio.nombre }}</td>
 					<td>$ {{ servicio.valor | intcomma}}</td>
 					<td>{{ servicio.grupo }}</td>
+					<td>{{ servicio.time }} Hrs</td>
 				</tr>
 			{% endfor %}
 		</tbody>

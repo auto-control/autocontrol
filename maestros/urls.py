@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 
-from maestros.views import listMecanicosView, createMecanicoView
+from .views import *
 
 urlpatterns = [
 	url(r'^mecanicos/$', listMecanicosView.as_view(), name = 'list_mecanicos'),

@@ -12,8 +12,9 @@ class grupoServicioModel(models.Model):
 class servicioModel(models.Model):
 	nombre = models.CharField(max_length=100)
 	valor =  models.PositiveIntegerField()
-	servicio = models.BooleanField(default=True)
+	servicio = models.BooleanField(default = True)
 	grupo = models.ForeignKey(grupoServicioModel)
+	time = models.TimeField(default = '0:00:00')
 
 	def __str__(self):
 		return u'%s' % (self.nombre)

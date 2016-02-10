@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 
-import ho.pisa as pisa
+# import ho.pisa as pisa
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from app.utils import get_or_none, generar_pdf
+from app.utils import get_or_none
 from ordenes_servicios.forms import vehiculoOrdenForm, ordenServicioDetalle
 from vehiculos.models import vehiculoModel
 from articulos_servicios.models import servicioModel
@@ -16,6 +16,7 @@ from maestros.models import mecanicoModel
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.http import HttpResponse
+from django.db.models import Sum
 
 
 def ordenServicioImprimir(request, pk):
@@ -31,8 +32,9 @@ def ordenServicioImprimir(request, pk):
 		return generar_pdf(html)
 
 def detalleOrdenServicio(request, pk):
+	sum_tot = 0
 	orden = get_or_none(ordenServicioModel, pk=pk)
-	ordenDetalle = ordenServicioDetalleModel.objects.filter(ordenServicio=orden)
+	ordenDetalle = ordenServicioDetalleModel.objects.filter(ordenServicio = orden)
 
 	context = {
 		'orden' : orden,
@@ -55,16 +57,10 @@ def guardarOrden(request):
 
 		for i in range(0,len(servicios)):
 			servicio = get_or_none(servicioModel, pk=servicios[i])
-			cantidad = cantidades[i]
 			mecanico = get_or_none(mecanicoModel, pk=mecanicos[i])
-			total = int(servicio.valor)* int(cantidad)
-			print total
 
 			ordenDetalle = ordenServicioDetalleModel(
 				servicio = servicio,
-				cantidad = cantidad,
-				valorUnitario = servicio.valor,
-				valorTotal = total,
 				mecanico = mecanico,
 				ordenServicio = orden
 			)

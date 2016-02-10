@@ -9,5 +9,6 @@ class servicioModelForm(forms.ModelForm):
 		widgets = {
 			'nombre': forms.TextInput(attrs={'class': 'form-control col-10'}),
 			'valor': forms.NumberInput(attrs={'class': 'form-control col-10'}),
-			'grupo': forms.Select(attrs={'class': 'form-control col-8'}),
+			'time': forms.TextInput(attrs={'class': 'form-control col-10'}),
+			'grupo': forms.Select(attrs={'class': 'form-control col-10'}),
 		}

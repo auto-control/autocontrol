@@ -8,7 +8,7 @@ class vehiculoOrdenForm(forms.Form):
 class ordenServicioDetalle(forms.ModelForm):
 	class Meta:
 		model = ordenServicioDetalleModel
-		exclude = ['ordenServicio']
+		exclude = ['ordenServicio', 'cantidad', 'valorUnitario', 'valorTotal']
 		widgets = {
 			'valorTotal': forms.NumberInput(attrs={'disabled' : 'disabled'})
 		}

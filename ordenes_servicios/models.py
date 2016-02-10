@@ -19,9 +19,9 @@ class ordenServicioModel(models.Model):
 
 class ordenServicioDetalleModel(models.Model):
 	servicio = models.ForeignKey(servicioModel,null=False,blank=False)
-	cantidad = models.PositiveIntegerField(null=False,blank=False)
-	valorUnitario = models.PositiveIntegerField(null=False,blank=False,verbose_name='V. Unitario')
-	valorTotal = models.PositiveIntegerField(null=False,blank=False, verbose_name='V. Total')
+	cantidad = models.PositiveIntegerField(null=True,blank=True)
+	valorUnitario = models.PositiveIntegerField(null=True,blank=True,verbose_name='V. Unitario')
+	valorTotal = models.PositiveIntegerField(null=True,blank=True, verbose_name='V. Total')
 	mecanico = models.ForeignKey(mecanicoModel,null=True,blank=True)
 	ordenServicio = models.ForeignKey(ordenServicioModel,null=False,blank=False)
 
