@@ -22,6 +22,10 @@ class createMecanicoView(SuccessMessageMixin, CreateView):
 	success_url = '/mecanicos'
 	success_message = 'Se añadio con exito el Mecánico'
 
+def time_mecanicos(request):
+	mecanicos = mecanicoModel.objects.all()
+	return render(request, 'time_mecanicos.html', {'mecanicos': mecanicos})
+
 def disp_mecanico(request):
 	response = {}
 	mecanico_pk =  request.GET.get('mecanico_pk')

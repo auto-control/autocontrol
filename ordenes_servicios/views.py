@@ -57,10 +57,14 @@ def guardarOrden(request):
 
 		for i in range(0,len(servicios)):
 			servicio = get_or_none(servicioModel, pk=servicios[i])
+			cantidad = cantidades[i]
 			mecanico = get_or_none(mecanicoModel, pk=mecanicos[i])
-
+			total = int(servicio.valor)* int(cantidad)
 			ordenDetalle = ordenServicioDetalleModel(
 				servicio = servicio,
+				cantidad = cantidad,
+				valorUnitario = servicio.valor,
+				valorTotal = total,
 				mecanico = mecanico,
 				ordenServicio = orden
 			)

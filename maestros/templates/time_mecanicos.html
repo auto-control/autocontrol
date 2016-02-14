@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load custom_filters %}
+
+{% block contentViewTitle %}
+	<h3>Lista de Tiempos de Mecánicos</h3>
+{% endblock contentViewTitle %}
+{% block content %}
+	<div class="row">
+		{% for mecanico in mecanicos %}
+			<div class="col-sm-6">
+				<ul class="list-group">
+					<li class="list-group-item active">
+						<span class="badge">{{ mecanico.pk|time_tot }}</span>
+						<strong>{{ mecanico.nombre }} {{ mecanico.apellido }}</strong>
+					</li>
+					{% for time in mecanico.ordenserviciodetallemodel_set.all %}
+						<li class="list-group-item">
+							<span class="badge">{{ time.servicio.time|time:'H:i:s' }}</span>
+							{{ time.servicio.nombre }}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock content %}

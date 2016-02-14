@@ -9,6 +9,7 @@ urlpatterns = [
 
 	#Ajax request Urls
 	url(r'^getServicioValor/$','ordenes_servicios.views.getServicioValor', name = 'get_servicio_valor'),
+	url(r'^mecanicos/tiempos$', 'maestros.views.time_mecanicos', name = 'time_mecanicos'),
 	url(r'^mecanicos/disponibilidad/$', 'maestros.views.disp_mecanico', name = 'disp_mecanico'),
 
 ]

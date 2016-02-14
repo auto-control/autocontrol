@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 PROJECT_APPS = (
 	'app',
+	'app.templatetags',
 	'articulos_servicios',
 	'clientes',
 	'maestros',
