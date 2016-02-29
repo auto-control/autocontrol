@@ -17,6 +17,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.db.models import Sum
+from datetime import datetime, time, timedelta
 
 
 def ordenServicioImprimir(request, pk):
@@ -59,6 +60,10 @@ def guardarOrden(request):
 			servicio = get_or_none(servicioModel, pk=servicios[i])
 			cantidad = cantidades[i]
 			mecanico = get_or_none(mecanicoModel, pk=mecanicos[i])
+			time_service = datetime.strptime(str(servicio.time), '%H:%M:%S')
+			time_now = datetime.now()
+			time = time_now + timedelta(hours = time_service.hour, minutes = time_service.minute)
+			print time
 			total = int(servicio.valor)* int(cantidad)
 			ordenDetalle = ordenServicioDetalleModel(
 				servicio = servicio,
@@ -66,15 +71,14 @@ def guardarOrden(request):
 				valorUnitario = servicio.valor,
 				valorTotal = total,
 				mecanico = mecanico,
-				ordenServicio = orden
+				ordenServicio = orden,
+				time = time
 			)
 
 			ordenDetalle.save()
 
-
 		url = u'%s/%s' % ('/orden-servicio', orden.pk)
 		return HttpResponseRedirect(url)
-
 
 def ordenServicioNueva(request, pk):
 
