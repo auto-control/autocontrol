@@ -1,0 +1,82 @@
+<nav class="navbar navbar-inverse sidebar navbar-static-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+			</button>      
+		</div>
+		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="{% url 'home' %}">Inicio <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Clientes <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span>
+					</a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a href="{% url 'list_clientes' %}">Lista de Clientes</a></li>
+						<li><a href="{% url 'create_clientes' %}">Crear Cliente</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Vehiculos <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity icon-truck"></span>
+					</a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a href="{% url 'list_clientes' %}">Crear Vehiculos</a></li>
+						<li><a href="{% url 'historial' %}">Historial de Vehiculos</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Articulos y Servicios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity icon-stack"></span>
+					</a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a href="{% url 'create_servicio' %}">Crear Nuevo</a></li>
+						<li><a href="{% url 'list_servicio' %}">Lista de Servicios</a></li>
+						<li><a href="#">Grupo de Servicios</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Ordenes de Servicio <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity icon-profile"></span>
+					</a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a href="{% url 'orden_servicio' %}">Nueva Orden</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Maestros <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity icon-users"></span>
+					</a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a href="{% url 'list_mecanicos' %}">Mecánicos</a></li>
+						<li><a href="{% url 'create_mecanicos' %}">Crear Mecánico</a></li>
+						<li><a href="{% url 'time_mecanicos' %}">Tiempos</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Configuraciones <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity icon-cog"></span>
+					</a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a href="#">Menu 1</a></li>
+						<li><a href="#">Menu 2</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Ayuda <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity icon-question"></span>
+					</a>
+					<ul class="dropdown-menu forAnimate" role="menu">
+						<li><a href="#">Manual</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

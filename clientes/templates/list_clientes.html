@@ -1,21 +1,14 @@
 {% extends "base.html" %}
-{% block contentViewTitle %}
-	<h3>
-		Lista de Clientes
-	</h3>
-{% endblock contentViewTitle %}
 {% block content %}
-	<div class="row well actions-top middle">
-		<div class="col-1">
-			<label for="">Buscar:</label>
+	<h3>Lista de Clientes</h3>
+	<form class="form-inline">
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Ingrese cliente a buscar">
 		</div>
-		<div class="col-8">
-			<input type="text" class="form-control" placeholder="">
-		</div>
-		<div class="col-3">
+		<div class="form-group">
 			<input type="submit" class="btn btn-success" value="Buscar">
 		</div>
-	</div>
+	</form>
 	{% if messages %}
 		<div class="alert alert-success " role="alert">
 			{% for message in messages %}
