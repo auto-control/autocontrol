@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-
 # import ho.pisa as pisa
 
 from django.shortcuts import render, get_object_or_404
