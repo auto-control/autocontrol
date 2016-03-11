@@ -1,0 +1,92 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	{% block head %}
+	{% endblock head %}
+	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+	<link href="{% static 'css/timeTo.css' %}" rel="stylesheet">
+	<script src="{% static 'js/jquery.1.11.min.js' %}"></script>
+	<script src="{% static 'js/jquery.time-to.js' %}"></script>
+	<script src="http://listjs.com/no-cdn/list.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="header">
+		<div class="container header">
+			<div class="row header bottom">
+				<div class="col-3">
+					<div class="logo"></div>
+				</div>
+				<div class="col-6 app-name middle">
+					<h1 class="app-name-title">Auto control</h1>
+					<span class="version">v 0.1</span>
+				</div>
+				<div class="col-3 header-info middle">
+					<span class="label label-primary"> Erick Mateo Patiño Gomez</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-main">
+		<div class="menu-content">
+			<div class="container">
+				<div class="row menu-search">
+					<input class="form-control" type="text">
+					<span class="icon-search search-menu"></span>
+				</div>
+				<div class="row">
+					<h4>Menú</h4>
+				</div>
+			</div>
+			<div class="menu">
+				{% include "menu.html" %}
+			</div>
+		</div>
+		<div class="content-view">
+			<div class="row quick-access-bar">
+				<span class="icon-arrow-up icon"></span>
+				<span>Acceso rapido</span>
+			</div>
+			<div class="container">
+				<div class="row content-view-title middle">
+					{% block contentViewTitle %}
+					{% endblock contentViewTitle %}
+				</div>
+				{% block content %}
+				{% endblock content %}
+			</div>
+		</div>
+	</div>
+</body>
+{% block scripts %}
+{% endblock scripts %}
+<script>
+
+	var activateSubMenuListClass = document.getElementsByClassName("show-submenu")
+
+	var showSubMenu = function () {
+		var listparent = this.parentNode.parentNode
+		var submenu = listparent.childNodes[3]
+		var icon = this.childNodes[1]
+
+
+		if (submenu.style.display == 'block')
+		{
+			submenu.style.display = 'none'
+			icon.innerHTML = ">"
+		}
+		else{
+			submenu.style.display = 'block'
+			icon.innerHTML = "v"
+		}
+	}
+
+	for (var i=0; i < activateSubMenuListClass.length ; i++) {
+		activateSubMenuListClass[i].addEventListener('click', showSubMenu)
+	};
+
+</script>
+</html>

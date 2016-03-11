@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block contentViewTitle %}
+	<h3>Historial del vehiculo</h3>
+{% endblock contentViewTitle %}
+{% block content %}
+	<form action="{% url 'historial' %}" method="POST">
+		<p>Busca el historial de servicios del vehiculo</p>
+		<div class="row well actions-top middle">
+				{% csrf_token %}
+				<div class="col-1">
+					{{ form.placa.label_tag}}
+				</div>
+				<div class="col-8">
+					{{ form.placa }}
+				</div>
+				<div class="col-3">
+					<input type="submit" class="btn btn-success" value="Buscar">
+				</div>
+		</div>
+	</form>
+	{% if message %}
+		<div class="alert alert-info" role="alert">
+		{{ message }}
+		</div>
+	{% endif %}
+{% endblock content %}

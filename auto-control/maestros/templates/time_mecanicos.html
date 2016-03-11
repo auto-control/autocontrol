@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load custom_filters %}
+
+{% block contentViewTitle %}
+	<h3>Lista de Tiempos de Mecánicos</h3>
+{% endblock contentViewTitle %}
+{% block content %}
+	<div class="row">
+		<div id="mechanics" style="width: 100%">
+			<input class="search form-control col-md-4" placeholder="Search" />
+			<ul class="list col-md-12">
+				{% for mecanico in mecanicos %}
+					<li>
+						<ul class="list-group col-md-6">
+							<li class="list-group-item active">
+								<span class="badge">{{ mecanico.pk|time_tot }}</span>
+								<strong class="name">{{ mecanico.nombre }} {{ mecanico.apellido }}</strong>
+							</li>
+							{% for time in mecanico.ordenserviciodetallemodel_set.all %}
+								<li class="list-group-item">
+									<span class="badge time" id="time-{{ mecanico.pk }}-{{ time.servicio.pk }}" time="{{ time.ordenServicio.fecha|date:'Y-m-d' }} {{ time.time|time:'H:i:s' }}">{{ time.time|time:'H:i:s' }}</span>
+									{{ time.servicio.nombre }}
+								</li>
+							{% endfor %}
+						</ul>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<script>
+		$('.time').map(function(){
+			var date = new Date($(this).attr('time'));
+			console.log(date);
+			$('#'+$(this).attr('id')).timeTo({
+				timeTo: date,
+				displayDays: 2,
+				fontSize: 15,
+				function(){
+					$('#'+$(this).attr('id')).html('Complete');
+				}
+			});
+		}).get();
+		var options = {
+			valueNames: ['name']
+		};
+		var userList = new List('mechanics', options);
+	</script>
+{% endblock content %}
