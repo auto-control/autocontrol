@@ -1,11 +1,16 @@
+# -*- encoding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import DetailView, CreateView, ListView
+
+
 from app.utils import get_or_none
 
 from django.views.generic import DetailView
 from ordenes_servicios.models import ordenServicioModel
-from vehiculos.forms import buscarVehiculoHistorialForm
 from vehiculos.models import vehiculoModel
+from vehiculos.forms import buscarVehiculoHistorialForm, vehiculoModelForm
 
 
 def historialVehiculo(request):
@@ -46,6 +51,18 @@ class vehiculoDetail(DetailView):
 
 		return ordenesServicios
 
+
+class createVehiculoView(SuccessMessageMixin, CreateView):
+	template_name = 'create_vehiculo.html'
+	form_class = vehiculoModelForm
+	success_url = '/vehiculo'
+	success_message ='Se añadio con éxito el vehiculo!'
+
+class listVehiculosView(ListView):
+	template_name = 'list_vehiculo.html'
+	model = vehiculoModel
+	context_object_name = 'vehiculos'
+	paginate_by = 10
 
 	#def get_object(self, queryset=None):
 	#	pk = self.kwargs.get(self.pk_url_kwarg)

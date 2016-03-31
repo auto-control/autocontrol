@@ -18,7 +18,7 @@ class vehiculoModel(models.Model):
 	marca = models.CharField(max_length=50, null=True, blank=True)
 	tipo = models.ForeignKey(tipoVehiculoModel, null=True, blank=True)
 	cliente = models.ForeignKey(clienteModel, null=False, blank=False)
-
+	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.png')
 	def __str__(self):
 		return u'%s' % (self.placa)
 

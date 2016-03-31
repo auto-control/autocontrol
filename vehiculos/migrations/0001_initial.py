@@ -7,6 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('clientes', '0001_initial'),
     ]
 
     operations = [
@@ -23,7 +24,9 @@ class Migration(migrations.Migration):
                 ('placa', models.CharField(max_length=10, serialize=False, primary_key=True)),
                 ('cilindraje', models.IntegerField(null=True, blank=True)),
                 ('marca', models.CharField(max_length=50, null=True, blank=True)),
-                ('tipo', models.ForeignKey(to='vehiculos.tipoVehiculoModel')),
+                ('foto', models.ImageField(default=b'img/none.jpg', upload_to=b'img/vehiculo/')),
+                ('cliente', models.ForeignKey(to='clientes.clienteModel')),
+                ('tipo', models.ForeignKey(blank=True, to='vehiculos.tipoVehiculoModel', null=True)),
             ],
         ),
     ]

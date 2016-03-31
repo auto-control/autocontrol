@@ -1,0 +1,42 @@
+{% extends 'base_m.html' %}
+
+{% block head %}
+	<script>
+		$(document).ready(function (){
+			$("form").submit(function(event){
+				var formData = new FormData(this);
+				$.ajax({
+					url: $(this).attr('action'),
+					type: $(this).attr('method'),
+					dataType: "json",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data){
+						if(data.response == null){
+							alert('Vehiculo no encontrado, por favor agrega uno.')
+						}else{
+							window.location.replace('/mobile/new-orden-detalle/'+data.orden_servicio);
+						}
+					}
+				});
+				event.preventDefault();
+			});
+		});
+	</script>
+{% endblock head %}
+
+{% block content %}
+	<h2>Orden de servicio</h2>
+	<p>Digite la placa del vehiculo para crear una orden de servicio nueva</p>
+	<form method="POST" action="{% url 'find_vehiculo' %}">
+		<div class="form-group">
+			<input type="text" class="form-control" name="placa" placeholder="Placa del vehiculo" required>
+		</div>
+		<div class="form-group text-center">
+			<input type="submit" class="btn btn-primary send" value="Enviar">
+			<a href="{% url 'new_vehiculo' %}" class="btn btn-success open-modal" data-toggle="modal" data-target="#myModal">Agregar vehiculo</a>
+		</div>
+	</form>
+{% endblock content %}

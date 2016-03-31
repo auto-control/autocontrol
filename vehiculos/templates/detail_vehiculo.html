@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% load staticfiles %}
+
 {% block contentViewTitle %}
 	<div class="col-4">
 		<h3>Historial del vehiculo</h3>
@@ -14,7 +17,7 @@
 			<div class="row">
 				<div class="col-8">
 					<figure>
-						<img src="http://imganuncios.mitula.net/vendo_chevrolet_spark_96635423131743163.jpg" width="400px">
+						<img src="{% static vehiculo.foto %}" width="400px">
 					</figure>
 				</div>
 				<div class="col-4">

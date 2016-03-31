@@ -10,6 +10,7 @@ urlpatterns = [
 		url('', include('maestros.urls')),
 		url('', include('ordenes_servicios.urls')),
 		url('', include('vehiculos.urls')),
+		url('mobile/', include('mobile.urls')),
 		url(r'^admin/', include(admin.site.urls)),
 
 		url(r'^media/(?P<path>.*)$','django.views.static.serve',

@@ -10,6 +10,7 @@ from maestros.models import mecanicoModel
 class ordenServicioModel(models.Model):
 	vehiculo = models.ForeignKey(vehiculoModel,null=False,blank=False)
 	fecha = models.DateField(null=False,blank=False,default=datetime.now)
+	state = models.PositiveIntegerField(default = 1)
 
 	def __str__(self):
 		return u'%s' % (self.pk)
@@ -24,7 +25,7 @@ class ordenServicioDetalleModel(models.Model):
 	valorTotal = models.PositiveIntegerField(null=True,blank=True, verbose_name='V. Total')
 	mecanico = models.ForeignKey(mecanicoModel,null=True,blank=True)
 	ordenServicio = models.ForeignKey(ordenServicioModel,null=False,blank=False)
-	time = models.TimeField(auto_now = False, null = False, blank = False)
+	time = models.TimeField(auto_now = False, null = True, blank = True)
 	def __str__(self):
 		return u'%s - %s' % (self.ordenServicio, self.pk)
 

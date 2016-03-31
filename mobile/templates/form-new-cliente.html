@@ -1,0 +1,43 @@
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
+		</div>
+		<form action="{% url 'add_cliente' %}" method="POST">
+			{% csrf_token %}
+			<div class="modal-body">
+				{% for form in forms %}
+					<div class="form-group">
+						<label>{{ form.label }}</label>
+						{{ form }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<input type="submit" class="btn btn-primary" value="Agregar">
+			</div>
+		</form>
+	</div>
+</div>
+
+<script>
+	$("form").submit(function(event){
+		var formData = new FormData(this);
+		$.ajax({
+			url: $(this).attr('action'),
+			type: $(this).attr('method'),
+			dataType: "json",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data){
+				alert(data.msg)
+				$('#Modal').modal('hide');
+			}
+		});
+		event.preventDefault();
+	});
+</script>

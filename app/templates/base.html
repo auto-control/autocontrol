@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	{% block head %}
-	{% endblock head %}
 	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
 	<link href="{% static 'css/timeTo.css' %}" rel="stylesheet">
 	<script src="{% static 'js/jquery.1.11.min.js' %}"></script>
 	<script src="{% static 'js/jquery.time-to.js' %}"></script>
 	<script src="http://listjs.com/no-cdn/list.js"></script>
+	{% block head %}
+	{% endblock head %}
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -42,120 +42,7 @@
 				</div>
 			</div>
 			<div class="menu">
-				<ul class="menu-list">
-					<li class="menu-group">
-						<div class="row menu-group-item">
-							<a class="col-10" href="#">
-								<div>
-									<span class="icon-user-tie"> Clientes</span>
-								</div>
-							</a>
-							<div class="col-2 center middle show-submenu">
-								<span>></span>
-							</div>
-						</div>
-						<ul class="submenu-list">
-							<li class="submenu-item"><a href="{% url 'list_clientes' %}">Lista de Clientes</a></li>
-							<li class="submenu-item"><a href="{% url 'create_clientes' %}">Crear Cliente</a></li>
-						</ul>
-					</li>
-					<li class="menu-group">
-						<div class="row menu-group-item">
-							<a class="col-10" href="#">
-								<div>
-									<span class="icon-truck"> Vehiculos</span>
-								</div>
-							</a>
-							<div class="col-2 center middle show-submenu">
-								<span>></span>
-							</div>
-						</div>
-						<ul class="submenu-list">
-							<li class="submenu-item"><a href="{% url 'list_clientes' %}">Crear Vehiculos</a></li>
-							<li class="submenu-item"><a href="{% url 'historial' %}">Historial del vehiculos</a></li>
-						</ul>
-					</li>
-					<li class="menu-group">
-						<div class="row menu-group-item">
-							<a class="col-10" href="#">
-								<div>
-									<span class="icon-stack"> Articulos y servicios</span>
-								</div>
-							</a>
-							<div class="col-2 center middle show-submenu">
-								<span>></span>
-							</div>
-						</div>
-						<ul class="submenu-list">
-							<li class="submenu-item"><a href="{% url 'create_servicio' %}">Crear nuevo</a></li>
-							<li class="submenu-item"><a href="{% url 'list_servicio' %}">Lista de servicios</a></li>
-							<li class="submenu-item"><a href="#">Grupos de servicios</a></li>
-						</ul>
-					</li>
-					<li class="menu-group">
-						<div class="row menu-group-item">
-							<a class="col-10" href="#">
-								<div>
-									<span class="icon-profile"> ordenes de servicio</span>
-								</div>
-							</a>
-							<div class="col-2 center middle show-submenu">
-								<span>></span>
-							</div>
-						</div>
-						<ul class="submenu-list">
-							<li class="submenu-item"><a href="{% url 'orden_servicio' %}">Nueva orden</a></li>
-						</ul>
-					</li>
-					<li class="menu-group">
-						<div class="row menu-group-item">
-							<a class="col-10" href="#">
-								<div>
-									<span class="icon-users"> Maestros</span>
-								</div>
-							</a>
-							<div class="col-2 center middle show-submenu">
-								<span>></span>
-							</div>
-						</div>
-						<ul class="submenu-list">
-							<li class="submenu-item"><a href="{% url 'list_mecanicos' %}">Mecánicos</a></li>
-							<li class="submenu-item"><a href="{% url 'create_mecanicos' %}">Crear Mecánico</a></li>
-							<li class="submenu-item"><a href="{% url 'time_mecanicos' %}">Tiempos</a></li>
-						</ul>
-					</li>
-					<li class="menu-group">
-						<div class="row menu-group-item">
-							<a class="col-10" href="#">
-								<div>
-									<span class="icon-cog"> Configuraciones</span>
-								</div>
-							</a>
-							<div class="col-2 center middle show-submenu">
-								<span>></span>
-							</div>
-						</div>
-						<ul class="submenu-list">
-							<li class="submenu-item"><a href="#">Menu 1</a></li>
-							<li class="submenu-item"><a href="#">Menu 2</a></li>
-						</ul>
-					</li>
-					<li class="menu-group">
-						<div class="row menu-group-item">
-							<a class="col-10" href="#">
-								<div>
-									<span class="icon-question"> Ayuda</span>
-								</div>
-							</a>
-							<div class="col-2 center middle show-submenu">
-								<span>></span>
-							</div>
-						</div>
-						<ul class="submenu-list">
-							<li class="submenu-item"><a href="#">Manual</a></li>
-						</ul>
-					</li>
-				</ul>
+				{% include "menu.html" %}
 			</div>
 		</div>
 		<div class="content-view">

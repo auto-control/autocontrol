@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('telefono', models.CharField(max_length=20, null=True, blank=True)),
                 ('celular', models.CharField(max_length=20)),
                 ('direccion', models.CharField(max_length=50, null=True, blank=True)),
+                ('activo', models.BooleanField(default=True)),
             ],
         ),
     ]

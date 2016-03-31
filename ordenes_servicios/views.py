@@ -6,18 +6,17 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from app.utils import get_or_none
-from ordenes_servicios.forms import vehiculoOrdenForm, ordenServicioDetalle
+from ordenes_servicios.forms import *
 from vehiculos.models import vehiculoModel
 from articulos_servicios.models import servicioModel
-from ordenes_servicios.models import ordenServicioModel, ordenServicioDetalleModel
+from ordenes_servicios.models import *
 from maestros.models import mecanicoModel
 
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.db.models import Sum
-from datetime import datetime, time, timedelta
-
+from easy_pdf.views import PDFTemplateView
 
 def ordenServicioImprimir(request, pk):
 		orden = get_object_or_404(ordenServicioModel, pk=pk)
@@ -59,11 +58,8 @@ def guardarOrden(request):
 			servicio = get_or_none(servicioModel, pk=servicios[i])
 			cantidad = cantidades[i]
 			mecanico = get_or_none(mecanicoModel, pk=mecanicos[i])
-			time_service = datetime.strptime(str(servicio.time), '%H:%M:%S')
-			time_now = datetime.now()
-			time = time_now + timedelta(hours = time_service.hour, minutes = time_service.minute)
-			print time
 			total = int(servicio.valor)* int(cantidad)
+			time = get_time(servicio.time)
 			ordenDetalle = ordenServicioDetalleModel(
 				servicio = servicio,
 				cantidad = cantidad,
@@ -73,9 +69,7 @@ def guardarOrden(request):
 				ordenServicio = orden,
 				time = time
 			)
-
 			ordenDetalle.save()
-
 		url = u'%s/%s' % ('/orden-servicio', orden.pk)
 		return HttpResponseRedirect(url)
 
@@ -125,3 +119,26 @@ def getServicioValor(request):
 			{'valor' : servicio.valor },
 			safe=False
 		)
+
+def orden_servicio_auto(request):
+	error = ''
+	form = ordenServicioAutoForm()
+	if request.method == "POST":
+		form = ordenServicioAutoForm(request.POST)
+	return render(request, 'orden_servicio_auto.html', {'forms': form, 'error': error})
+
+class OrdenReporteAutoPDFView(PDFTemplateView):
+	template_name = "pdf_orden_reporte_auto.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(OrdenReporteAutoPDFView, self).get_context_data(**kwargs)
+		placa = self.kwargs['placa']
+		fecha_in = self.kwargs['fecha_in']
+		fecha_fin = self.kwargs['fecha_fin']
+		orden_servicio = ordenServicioModel.objects.filter(fecha__range = [fecha_in, fecha_fin])
+		if placa != 'ALL':
+			orden_servicio.filter(vehiculo = placa)
+		context['orden_servicio'] = orden_servicio
+		#factura = Factura.objects.get(pk = self.kwargs['factura_pk'])
+		# context['query'] = factura
+		return context

@@ -8,10 +8,11 @@ class clienteModelForm(forms.ModelForm):
 		model = clienteModel
 		fields = '__all__'
 		widgets = {
-			'nombre': forms.TextInput(attrs={'class': 'form-control col-10'}),
-			'apellido': forms.TextInput(attrs={'class': 'form-control col-10'}),
-			'telefono': forms.TextInput(attrs={'class': 'form-control col-10'}),
-			'celular': forms.TextInput(attrs={'class': 'form-control col-10'}),
-			'direccion': forms.TextInput(attrs={'class': 'form-control col-10'}),
-			'email': forms.EmailInput(attrs={'class': 'form-control col-10'})
+			'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+			'documento': forms.TextInput(attrs={'class': 'form-control'}),
+			'apellido': forms.TextInput(attrs={'class': 'form-control'}),
+			'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+			'celular': forms.TextInput(attrs={'class': 'form-control'}),
+			'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+			'email': forms.EmailInput(attrs={'class': 'form-control'})
 		}

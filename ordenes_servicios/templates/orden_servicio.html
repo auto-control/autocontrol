@@ -14,7 +14,7 @@
 			</div>
 			{% if message %}
 				<div class="alert alert-info" role="alert">
-				{{ message }} <b><a class="underline-decoration" href="#">Crear Nuevo</a></b>
+				{{ message }} <b><a class="underline-decoration" href="{% url 'create_vehiculo' %}">Crear Nuevo</a></b>
 				</div>
 			{% endif %}
 			<input type="submit" class="btn btn-success" >

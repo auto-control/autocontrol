@@ -1,0 +1,55 @@
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
+		</div>
+		<form action="{% url 'new_vehiculo' %}" class="form-vehiculo" method="POST">
+			<div class="modal-body">
+				{% csrf_token %}
+				{% for form in forms %}
+				<div class="form-group">
+					<label>{{ form.label }}</label>
+					{{ form }}
+				</div>
+				{% endfor %}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<input type="submit" class="btn btn-primary" value="Agregar">
+				<a href="{% url 'add_cliente' %}" class="btn btn-success open-modal-2">Agregar Cliente</a>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal fade" id="Modal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+<script>
+	$(document).ready(function(){
+		$(".open-modal-2").click(function(e) {
+			$('#Modal').load($(this).attr('href'), function(){
+				$('#Modal').modal({
+					show:true
+				});
+			});
+			//$('#Modal').removeAttr('style').attr('style', 'display: none');
+			e.preventDefault();
+		});
+	});
+	$("form.form-vehiculo").submit(function(event){
+		var formData = new FormData(this);
+		$.ajax({
+			url: $(this).attr('action'),
+			type: $(this).attr('method'),
+			dataType: "json",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data){
+				alert(data.msg);
+				$('#Modal').modal('hide');
+			}
+		});
+		event.preventDefault();
+	});
+</script>

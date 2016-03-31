@@ -1,6 +1,20 @@
 from django import forms
+from clientes.models import clienteModel
+from vehiculos.models import *
 
-from vehiculos.models import vehiculoModel
+class vehiculoModelForm(forms.ModelForm):
+	class Meta:
+		model = vehiculoModel
+		fields = '__all__'
+		widgets = {
+			'placa': forms.TextInput(attrs={'class': 'form-control', 'required': True, 'max_length': 10}),
+			'marca': forms.TextInput(attrs={'class': 'form-control', 'max_length': 50}),
+			'cilindraje': forms.TextInput(attrs={'class': 'form-control'})
+		}
+	def __init__(self, *args, **kwargs):
+		super(vehiculoModelForm, self).__init__(*args, **kwargs)
+		self.fields['tipo'] = forms.ModelChoiceField(queryset = tipoVehiculoModel.objects.all(), widget = forms.Select(attrs = {'class': 'form-control'}), required = False)
+		self.fields['cliente'] = forms.ModelChoiceField(queryset = clienteModel.objects.all(), widget = forms.Select(attrs = {'class': 'form-control', 'required': True}))
 
 class buscarVehiculoHistorialForm(forms.Form):
 	placa = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}))

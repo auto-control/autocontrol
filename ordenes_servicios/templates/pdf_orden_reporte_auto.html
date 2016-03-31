@@ -1,0 +1,68 @@
+{% load humanize %}
+
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<style type="text/css">
+			@page {
+				size: letter portrait;
+				@frame header_frame {
+					top: 1.5cm;
+					bottom: 1cm;
+					-pdf-frame-content: header_content;
+				}
+				@frame content_frame{
+					top: 4cm;
+				}
+				@frame footer {
+					-pdf-frame-content: footerContent;
+					bottom: 0cm;
+					height: 1cm;
+				}
+			}
+			body {
+				text-align: center;
+				font-size: 12px;
+				font-family: 'Courier Bold';
+			}
+			table {
+				border-collapse: collapse;
+			}
+			td, th {
+				padding: 1px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="header_content">
+			<thead>
+				<tr>
+					<th>TALLER ALMACEN DE REPUESTOS LT MOTORS S.A.S</th>
+				</tr>
+				<tr>
+					<th>CR 10 # 24 - 33 BARRIO SUCRE</th>
+				</tr>
+				<tr>
+					<th>NIT: 900620734-2</th>
+				</tr>
+				<tr>
+					<th>GIRARDOT - CUNDINAMARCA</th>
+				</tr>
+			</thead>
+		</table>
+		{% regroup orden_servicio by vehiculo as orden_servicio_list %}
+		{% for orden in orden_servicio_list %}
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							{{ orden.grouper.cilindraje }}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		{% endfor %}
+	</body>
+</html>

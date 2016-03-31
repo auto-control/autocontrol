@@ -38,6 +38,8 @@ PROJECT_APPS = (
 	'maestros',
 	'vehiculos',
 	'ordenes_servicios',
+	'mobile',
+	'easy_pdf',
 )
 
 DJANGO_APPS = (
@@ -87,14 +89,12 @@ WSGI_APPLICATION = 'auto_control.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.sqlite3',
 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	}
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -113,6 +113,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+"""
 STATIC_URL = '/static/'
 
 STATIC_ROOT = 'staticfiles'
@@ -125,4 +126,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MEDIA_URL = '/media/'
 
+"""
+STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR,'static')
+
+MEDIA_URL ='/img/'
+
+STATICFILES_DIRS = (
+	os.path.join(BASE_DIR, 'static'),
+)
