@@ -59,7 +59,7 @@ def add_service(request, orden):
 			response['response'] = "Ha ocurrido un error"
 		return HttpResponse(json.dumps(response), content_type = 'application/json')
 	else:
-		form = ordenServicioDetalle(instance = orden)
+		form = ordenServicioDetalle(instance = orden, service = orden)
 	return render(request, 'form-detalle-servicio.html', {'title': 'Detalle Orden de servicio No.'+str(orden.pk), 'forms': form, 'orden': orden.pk})
 
 def delete_detalle(request, orden_detalle):

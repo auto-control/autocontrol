@@ -32,10 +32,10 @@
 	<p>Digite la placa del vehiculo para crear una orden de servicio nueva</p>
 	<form method="POST" action="{% url 'find_vehiculo' %}">
 		<div class="form-group">
-			<input type="text" class="form-control" name="placa" placeholder="Placa del vehiculo" required>
+			<input type="text" class="form-control" name="placa" placeholder="Placa del vehiculo" pattern="[A-Z]{3}[0-9]{3}" required>
 		</div>
 		<div class="form-group text-center">
-			<input type="submit" class="btn btn-primary send" value="Enviar">
+			<input type="submit" class="btn btn-primary send" value="Crear">
 			<a href="{% url 'new_vehiculo' %}" class="btn btn-success open-modal" data-toggle="modal" data-target="#myModal">Agregar vehiculo</a>
 		</div>
 	</form>

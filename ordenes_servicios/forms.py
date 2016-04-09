@@ -22,8 +22,10 @@ class ordenServicioDetalle(forms.ModelForm):
 		}
 
 	def __init__(self, *args, **kwargs):
+		service = kwargs.pop('service', None)
+		detail_service = [x.servicio.pk for x in ordenServicioDetalleModel.objects.filter(ordenServicio = service)]
 		super(ordenServicioDetalle, self).__init__(*args, **kwargs)
-		self.fields['servicio'] = forms.ChoiceField(label = "Propietario", choices = [('','Seleccione un Servicio')]+[(x.pk, x.nombre) for x in servicioModel.objects.all()], widget = forms.Select(attrs = {'class': 'form-control', 'required': True}))
+		self.fields['servicio'] = forms.ChoiceField(label = "Propietario", choices = [('','Seleccione un Servicio')]+[(x.pk, x.nombre) for x in servicioModel.objects.exclude(pk__in = detail_service).distinct()], widget = forms.Select(attrs = {'class': 'form-control', 'required': True}))
 		self.fields['mecanico'] = forms.ChoiceField(label = "Propietario", choices = [('','Seleccione un Mecanico')]+[(x.pk, x.nombre) for x in mecanicoModel.objects.all()], widget = forms.Select(attrs = {'class': 'form-control', 'required': True}))
 
 	def save(self):
