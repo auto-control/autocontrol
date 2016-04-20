@@ -121,11 +121,16 @@ def getServicioValor(request):
 		)
 
 def orden_servicio_auto(request):
-	error = ''
 	form = ordenServicioAutoForm()
 	if request.method == "POST":
 		form = ordenServicioAutoForm(request.POST)
-	return render(request, 'orden_servicio_auto.html', {'forms': form, 'error': error})
+	return render(request, 'orden_servicio_auto.html', {'forms': form})
+
+def orden_servicio_mecanico(request):
+	form = ordenServicioMecanicoForm()
+	if request.method == "POST":
+		form = ordenServicioMecanicoForm(request.POST)
+	return render(request, 'orden_servicio_mecanico.html', {'forms': form})
 
 class OrdenReporteAutoPDFView(PDFTemplateView):
 	template_name = "pdf_orden_reporte_auto.html"
@@ -138,6 +143,22 @@ class OrdenReporteAutoPDFView(PDFTemplateView):
 		orden_servicio = ordenServicioModel.objects.filter(fecha__range = [fecha_in, fecha_fin])
 		if placa != 'ALL':
 			orden_servicio.filter(vehiculo = placa)
+		context['orden_servicio'] = orden_servicio
+		#factura = Factura.objects.get(pk = self.kwargs['factura_pk'])
+		# context['query'] = factura
+		return context
+
+class OrdenReporteMecanicoPDFView(PDFTemplateView):
+	template_name = "pdf_orden_reporte_mecanico.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(OrdenReporteMecanicoPDFView, self).get_context_data(**kwargs)
+		mecanico = self.kwargs['mecanico']
+		fecha_in = self.kwargs['fecha_in']
+		fecha_fin = self.kwargs['fecha_fin']
+		orden_servicio = ordenServicioModel.objects.filter(fecha__range = [fecha_in, fecha_fin])
+		if mecanico != 'ALL':
+			orden_servicio.filter(vehiculo = mecanico)
 		context['orden_servicio'] = orden_servicio
 		#factura = Factura.objects.get(pk = self.kwargs['factura_pk'])
 		# context['query'] = factura

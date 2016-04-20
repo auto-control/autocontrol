@@ -1,6 +1,8 @@
 {% load humanize %}
 
-{% load staticfiles %}
+{% load custom_filters %}
+
+{% load static %}
 
 <html>
 	<head>
@@ -9,12 +11,11 @@
 			@page {
 				size: letter portrait;
 				@frame header_frame {
-					top: 1.5cm;
-					bottom: 1cm;
+					top: 1cm;
 					-pdf-frame-content: header_content;
 				}
 				@frame content_frame{
-					top: 4cm;
+					top: 4.9cm;
 				}
 				@frame footer {
 					-pdf-frame-content: footerContent;
@@ -27,6 +28,7 @@
 				font-size: 12px;
 				font-family: 'Courier Bold';
 			}
+			img { zoom: 80%; }
 			table {
 				border-collapse: collapse;
 			}
@@ -51,18 +53,74 @@
 					<th>GIRARDOT - CUNDINAMARCA</th>
 				</tr>
 			</thead>
+			<tbody>
+				<tr>
+					<td>_________________________________________________________________________________________</td>
+				</tr>
+				<tr>
+					<th>
+						<h1>HISTORIAL DE SERVICIOS POR AUTO</h1>
+					</th>
+				</tr>
+			</tbody>
 		</table>
 		{% regroup orden_servicio by vehiculo as orden_servicio_list %}
 		{% for orden in orden_servicio_list %}
-			<table>
-				<tbody>
+			<table width="70%" align="center">
+				<tbody style="text-align: left">
 					<tr>
-						<td>
-							{{ orden.grouper.cilindraje }}
-						</td>
+						<th>Placa:</th>
+						<td>{{ orden.grouper.placa }}</td>
+						<th>Nombre:</th>
+						<td>{{ orden.grouper.cliente.nombre }}</td>
+					</tr>
+					<tr>
+						<th>Cilindraje:</th>
+						<td>{{ orden.grouper.cilindraje }}</td>
+						<th>Cédula:</th>
+						<td>{{ orden.grouper.cliente.documento }}</td>
+					</tr>
+					<tr>
+						<th>Marca:</th>
+						<td>{{ orden.grouper.marca }}</td>
+						<th>Telefono:</th>
+						<td>{{ orden.grouper.cliente.telefono }}</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td></td>
+						<th>Email:</th>
+						<td>{{ orden.grouper.cliente.email }}</td>
 					</tr>
 				</tbody>
 			</table>
+			<table width="90%" align="center">
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Servicio</th>
+						<th>Hora Ingreso</th>
+						<th>Hora Salida</th>
+						<th>Descripcion</th>
+						<th>Mecanico</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in orden.list %}
+						{% for item_detail in item.ordenserviciodetallemodel_set.all %}
+							<tr>
+								<td>{{ item.fecha }}</td>
+								<td>{{ item_detail.servicio.nombre }}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>{{ item_detail.mecanico.nombre }}</td>
+							</tr>
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</table>
+			-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		{% endfor %}
 	</body>
 </html>

@@ -10,7 +10,9 @@ urlpatterns = [
 
 	#Reportes
 	url(r'^orden-servicio-auto/$', 'ordenes_servicios.views.orden_servicio_auto', name = 'orden_servicio_auto'),
+	url(r'^orden-servicio-mecanico/$', 'ordenes_servicios.views.orden_servicio_mecanico', name = 'orden_servicio_mecanico'),
 	url(r'^orden-servicio-reporte-auto/(?P<placa>[\w\-]+)/(?P<fecha_in>[\w\-]+)/(?P<fecha_fin>[\w\-]+)/$', OrdenReporteAutoPDFView.as_view(), name = 'orden_servicio_reporte_auto'),
+	url(r'^orden-servicio-reporte-mecanico/(?P<mecanico>[\w\-]+)/(?P<fecha_in>[\w\-]+)/(?P<fecha_fin>[\w\-]+)/$', OrdenReporteMecanicoPDFView.as_view(), name = 'orden_servicio_reporte_mecanico'),
 
 	#Ajax request Urls
 	url(r'^getServicioValor/$','ordenes_servicios.views.getServicioValor', name = 'get_servicio_valor'),

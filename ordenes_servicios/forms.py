@@ -13,6 +13,11 @@ class ordenServicioAutoForm(forms.Form):
 	fecha_in = forms.CharField(label = "Fecha de inicio", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))
 	fecha_fin = forms.CharField(label = "Fecha Final", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))
 
+class ordenServicioMecanicoForm(forms.Form):
+	mecanico = forms.ChoiceField(label = "Mecanico", choices = [('','Seleccione un Mecanico')]+[('ALL', 'Todos')]+[(x.pk, x.nombre+' '+x.apellido) for x in mecanicoModel.objects.all()], widget = forms.Select(attrs = {'class': 'form-control', 'required': True}))
+	fecha_in = forms.CharField(label = "Fecha de inicio", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))
+	fecha_fin = forms.CharField(label = "Fecha Final", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))
+
 class ordenServicioDetalle(forms.ModelForm):
 	class Meta:
 		model = ordenServicioDetalleModel

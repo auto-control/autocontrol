@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block contentViewTitle %}
+	<h3>Reporte servicios por auto</h3>
+{% endblock contentViewTitle %}
+
+{% load staticfiles %}
+
+{% block head %}
+	<script src="{% static 'js/moment.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.datetimepicker.css' %}">
+	<script src="{% static 'js/bootstrap.datetimepicker.js' %}"></script>
+{% endblock head %}
+
+{% block content %}
+	<p>Ingrese los datos solicitados</p>
+	<div class="row">
+		<form action="" method="POST" class="col-8">
+			{% csrf_token %}
+			{% for form in forms %}
+				<div class="form-group">
+					<label>{{ form.label }}</label>
+					{{ form }}
+				</div>
+			{% endfor %}
+			<input type="submit" class="btn btn-success" >
+		</form>
+	</div>
+{% endblock content %}
+
+{% block scripts %}
+	<script>
+		$('.datepicker').datetimepicker({format: 'YYYY-MM-DD'});
+		$('form').submit(function(){
+			var id_fecha_in = $('#id_fecha_in').val();
+			var id_fecha_fin = $('#id_fecha_fin').val();
+			var mecanico = $('#id_mecanico').val();
+			if(id_fecha_in > id_fecha_fin){
+				alert('La fecha inicial debe ser menor a la fecha inicial');
+				$('#id_fecha_in').val('');
+				$('#id_fecha_fin').val('');
+			}else{
+				window.open('/orden-servicio-reporte-mecanico/'+mecanico+'/'+id_fecha_in+'/'+id_fecha_fin+'/', '_blank');
+			}
+			return false;
+		});
+	</script>
+{% endblock scripts %}

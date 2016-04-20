@@ -1,6 +1,7 @@
 from ordenes_servicios.models import *
 from maestros.models import *
 from django import template
+import urllib, cStringIO, base64
 from datetime import datetime, time, timedelta
 register = template.Library()
 from django.db.models import Sum
@@ -19,3 +20,11 @@ def time_tot(value):
 	if sum_tot.minute > 0:
 		time = ' y '+str(sum_tot.minute)+' minutos'
 	return 'Tiempo de carga: '+str(sum_tot.hour)+' horas'+time
+
+@register.filter
+def get64(url):
+	if url.startswith("http"):
+		image = cStringIO.StringIO(urllib.urlopen(url).read())
+		return 'data:image/jpg;base64,' + base64.b64encode(image.read())
+
+	return url
