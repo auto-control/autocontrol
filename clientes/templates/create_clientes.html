@@ -15,6 +15,13 @@
 				<legend>Cliente</legend>
 					{% csrf_token %}
 					<div class="form-group row middle">
+						{{ form.documento.errors }}
+						<label class="col-2" for="{{ form.documento.id_for_label }}">
+							{{form.documento.label}}:
+						</label>
+						{{ form.documento }}
+					</div>
+					<div class="form-group row middle">
 						{{ form.nombre.errors }}
 						<label class="col-2" for="{{ form.nombre.id_for_label }}">
 							{{form.nombre.label}}:
