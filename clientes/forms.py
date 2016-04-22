@@ -14,5 +14,5 @@ class clienteModelForm(forms.ModelForm):
 			'telefono': forms.TextInput(attrs={'placeholder': 'XXXXXXXXX', 'class': 'form-control', 'maxlength': 10, 'pattern': '[0-9]{1,10}', 'title': 'Digite solo numeros'}),
 			'celular': forms.TextInput(attrs={'placeholder': 'XXXXXXXXX', 'class': 'form-control', 'maxlength': 10, 'pattern': '[0-9]{1,10}', 'title': 'Digite solo numeros'}),
 			'direccion': forms.TextInput(attrs={'placeholder': 'XXXXXXXX', 'class': 'form-control'}),
-			'email': forms.EmailInput(attrs={'required': True, 'class': 'form-control'})
+			'email': forms.EmailInput(attrs={'placeholder': 'ejemplo@ejemplo.com', 'required': True, 'class': 'form-control'})
 		}
