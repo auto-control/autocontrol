@@ -7,7 +7,7 @@ class vehiculoModelForm(forms.ModelForm):
 		model = vehiculoModel
 		fields = '__all__'
 		widgets = {
-			'placa': forms.TextInput(attrs={'class': 'form-control', 'required': True, 'max_length': 10, 'pattern': '[A-Z]{3}[0-9]{3}'}),
+			'placa': forms.TextInput(attrs={'class': 'form-control', 'required': True, 'placeholder': 'XXX111', 'max_length': 10, 'title': 'XXX000', 'pattern': '[A-Z]{3}[0-9]{3}'}),
 			'marca': forms.TextInput(attrs={'class': 'form-control', 'max_length': 50}),
 			'cilindraje': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{1,9}', 'title': 'Solo dato numerico'})
 		}
