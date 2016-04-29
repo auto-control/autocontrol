@@ -13,12 +13,37 @@
 			});
 			return false;
 		});
+		$(document).ready(function(){
+			window.onbeforeunload = function(){
+				if(!$('table tbody tr').length){
+					delete_orden();
+				}
+			};
+			function delete_orden(){
+				$.get('/mobile/delete-orden-servicio/'+{{ orden.pk }});
+			}
+		});
 	</script>
 {% endblock scripts %}
 
 {% block content %}
 	<h3>Orden de servicio No.{{ orden.pk }}</h3>
-	<h4><strong>Fecha:</strong> {{ orden.fecha }}</h4>
+	<h6><strong>Fecha:</strong> {{ orden.fecha }}</h6>
+	<div class="row">
+		<div class="col-sm-6">
+			<h6><strong>DATOS DEL VEHICULO</strong></h6>
+			<h6><strong>Placa: </strong>{{ orden.vehiculo.placa }}</h6>
+			<h6><strong>Marca: </strong>{{ orden.vehiculo.marca }}</h6>
+			<h6><strong>Tipo: </strong>{{ orden.vehiculo.tipo.nombre }}</h6>
+		</div>
+		<div class="col-sm-6">
+			<h6><strong>DATOS DEL CLIENTE</strong></h6>
+			<h6><strong>Nombre: </strong>{{ orden.vehiculo.cliente.nombre }}</h6>
+			<h6><strong>Documento: </strong>{{ orden.vehiculo.cliente.documento }}</h6>
+			<h6><strong>Telefono: </strong>{{ orden.vehiculo.cliente.telefono }}</h6>
+			<h6><strong>Direccion: </strong>{{ orden.vehiculo.cliente.direccion }}</h6>
+		</div>
+	</div>
 	<div class="text-center" style="margin-bottom: 10px;">
 		{% if orden.state == 1 %}
 			<a href="{% url 'add_service' orden.pk %}" class="btn btn-success open-modal" data-toggle="modal" data-target="#myModal">Agregar servicio</a>
@@ -29,6 +54,7 @@
 				<p>Esta orden de servicio ya se encuentra cerrada.</p>
 			</div>
 		{% endif %}
+			<a href="{% url 'list_orden' %}"  class="btn btn-default">Lista de servicios</a>
 		</div>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered">

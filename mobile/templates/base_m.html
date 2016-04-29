@@ -23,9 +23,6 @@
 					});
 				});
 			}
-			$("#reload").click(function(){
-				location.reload();
-			});
 			$(".open-modal").click(function() {
 				modal($(this).attr('href'));
 				return false;
@@ -39,7 +36,6 @@
 		{% block content %}
 		{% endblock content %}
 	</div>
-	<a class="btn btn-default" id="reload">reload</a>
 	<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
 	{% block scripts %}
 	{% endblock scripts %}

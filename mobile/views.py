@@ -40,8 +40,11 @@ def find_vehiculo(request):
 	return HttpResponse(json.dumps(response), "application/json")
 
 def orden_servicio_detalle(request, orden):
-	orden = ordenServicioModel.objects.get(pk = orden)
-	return render(request, 'orden-servicio-detalle-m.html', {'title': 'Detalle orden de servicio', 'orden': orden})
+	try:
+		orden = ordenServicioModel.objects.get(pk = orden)
+		return render(request, 'orden-servicio-detalle-m.html', {'title': 'Detalle orden de servicio', 'orden': orden})
+	except:
+		return HttpResponseRedirect(reverse('orden_servicio_mobile'))
 
 def add_service(request, orden):
 	response = {}
@@ -65,6 +68,13 @@ def add_service(request, orden):
 def delete_detalle(request, orden_detalle):
 	response = {}
 	orden = get_or_none(ordenServicioDetalleModel, pk = orden_detalle)
+	orden.delete()
+	response['msg'] = 'Eliminado'
+	return HttpResponse(json.dumps(response), "application/json")
+
+def delete_service(request, orden):
+	response = {}
+	orden = get_or_none(ordenServicioModel, pk = orden)
 	orden.delete()
 	response['msg'] = 'Eliminado'
 	return HttpResponse(json.dumps(response), "application/json")
