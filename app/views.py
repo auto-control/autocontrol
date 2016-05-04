@@ -8,7 +8,7 @@ def inicio(request):
 
 
 def home(request):
-	ordenesPendientes = ordenServicioModel.objects.filter(state=1)
+	ordenesPendientes = ordenServicioModel.objects.filter()
 	context = {
 		'ordenesPendientes' : ordenesPendientes
 	}

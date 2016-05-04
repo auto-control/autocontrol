@@ -13,7 +13,7 @@ class servicioModel(models.Model):
 	nombre = models.CharField(max_length=100)
 	valor =  models.PositiveIntegerField()
 	servicio = models.BooleanField(default = True)
-	grupo = models.ForeignKey(grupoServicioModel)
+	grupo = models.ForeignKey(grupoServicioModel, blank = True, null = True)
 	time = models.TimeField(default = '0:00:00')
 	detail = models.CharField(max_length = 1000, default = '-')
 
