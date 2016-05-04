@@ -15,6 +15,7 @@ class servicioModel(models.Model):
 	servicio = models.BooleanField(default = True)
 	grupo = models.ForeignKey(grupoServicioModel)
 	time = models.TimeField(default = '0:00:00')
+	detail = models.CharField(max_length = 1000, default = '-')
 
 	def __str__(self):
 		return u'%s' % (self.nombre)

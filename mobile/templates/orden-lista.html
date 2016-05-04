@@ -8,6 +8,7 @@
 			<thead>
 				<tr>
 					<th>No. orden</th>
+					<th>Placa</th>
 					<th>Fecha</th>
 					<th>Estado</th>
 					<th></th>
@@ -17,6 +18,7 @@
 				{% for orden in ordenes %}
 				<tr>
 					<td>{{ orden.pk }}</td>
+					<td>{{ orden.vehiculo.placa }}</td>
 					<td>{{ orden.fecha }}</td>
 					<td>{% if orden.state == 1 %}<span class="label label-success">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</td>
 					<td>

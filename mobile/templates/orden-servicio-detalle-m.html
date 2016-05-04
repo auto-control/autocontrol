@@ -47,7 +47,7 @@
 	<div class="text-center" style="margin-bottom: 10px;">
 		{% if orden.state == 1 %}
 			<a href="{% url 'add_service' orden.pk %}" class="btn btn-success open-modal" data-toggle="modal" data-target="#myModal">Agregar servicio</a>
-			<a href="{% url 'close_orden_servicio' orden.pk %}" class="btn btn-info" id="close-service">Cerrar servicio</a>
+			<a href="{% url 'close_orden_servicio' orden.pk %}" class="btn btn-danger" id="close-service">Cerrar servicio</a>
 		{% else %}
 			<div class="alert alert-dismissible alert-warning text-left">
 				<h4>Alerta</h4>
