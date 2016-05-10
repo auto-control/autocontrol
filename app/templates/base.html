@@ -65,12 +65,13 @@
 {% endblock scripts %}
 <script>
 
-	var activateSubMenuListClass = document.getElementsByClassName("show-submenu")
+	var activateSubMenuListClass = document.getElementsByClassName("clk")
 
 	var showSubMenu = function () {
 		var listparent = this.parentNode.parentNode
 		var submenu = listparent.childNodes[3]
-		var icon = this.childNodes[1]
+		//var icon = this.childNodes[1]
+		var icon = this.parentNode.childNodes[3]
 
 
 		if (submenu.style.display == 'block')

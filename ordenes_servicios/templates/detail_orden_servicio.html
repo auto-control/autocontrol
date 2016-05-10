@@ -71,10 +71,11 @@
 				<tr>
 					<th>Servicio</th>
 					<th>Cantidad</th>
+					<th>Descripción</th>
 					<th>V. Unitario</th>
-					<th>V. Total</th>
 					<th>Mecánico</th>
 					<th>Tiempo</th>
+					<th>V. Total</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -82,10 +83,11 @@
 					<tr>
 						<td>{{ detalle.servicio }}</td>
 						<td>{{ detalle.cantidad }}</td>
+						<td>{{ detalle.servicio.detail }}</td>
 						<td>{{ detalle.valorUnitario }}</td>
-						<td>{{ detalle.valorTotal }}</td>
 						<td>{{ detalle.mecanico }}</td>
 						<td>{{ detalle.servicio.time }} Hrs</td>
+						<td>{{ detalle.valorTotal }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>
