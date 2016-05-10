@@ -137,12 +137,14 @@ class OrdenReporteAutoPDFView(PDFTemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(OrdenReporteAutoPDFView, self).get_context_data(**kwargs)
-		placa = self.kwargs['placa']
 		fecha_in = self.kwargs['fecha_in']
 		fecha_fin = self.kwargs['fecha_fin']
+		placa = self.kwargs['placa']
 		orden_servicio = ordenServicioModel.objects.filter(fecha__range = [fecha_in, fecha_fin])
 		if placa != 'ALL':
-			orden_servicio.filter(vehiculo = placa)
+			placa = vehiculoModel.objects.get(placa = self.kwargs['placa'])
+			orden_servicio = ordenServicioModel.objects.filter(vehiculo = placa)
+		orden_servicio.filter(fecha__range = [fecha_in, fecha_fin])
 		context['orden_servicio'] = orden_servicio
 		#factura = Factura.objects.get(pk = self.kwargs['factura_pk'])
 		# context['query'] = factura
