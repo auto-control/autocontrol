@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.db import models
 
 from clientes.models import clienteModel
@@ -31,8 +32,8 @@ class vehiculoModel(models.Model):
 	cliente = models.ForeignKey(clienteModel, null=False, blank=False)
 	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg')
 	def __str__(self):
-		return u'%s' % (self.placa)
+		return str(self.placa)
 
 	def __unicode__(self):
-		return u'%s' % (self.placa)
+		return str(self.placa)
 

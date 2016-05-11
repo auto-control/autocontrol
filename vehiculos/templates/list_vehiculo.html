@@ -31,6 +31,7 @@
 				<th>marca</th>
 				<th>tipo</th>
 				<th>cliente</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,6 +42,7 @@
 					<td>{{ vehiculo.marca }}</td>
 					<td>{{ vehiculo.tipo }}</td>
 					<td>{{ vehiculo.cliente }}</td>
+					<td><a href="{% url 'detail_vehiculo' vehiculo.pk %}" class="btn btn-primary">Ver</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

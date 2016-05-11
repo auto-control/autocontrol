@@ -71,7 +71,7 @@
 		</div>
 		<form id="form-servicio" method="POST">
 			<div class="row orden-datos-servicio">
-				<div class="col-3 center">
+				<div class="col-2 center">
 					{{ formDetalleOrden.servicio.label_tag }}
 					<span class="labelfield">{{ formDetalleOrden.servicio }}</span>
 				</div>
@@ -80,6 +80,10 @@
 					{{ formDetalleOrden.cantidad }}
 				</div>
 				<div class="col-2 center">
+					<label>Detalle</label>
+					<input type="text" name="detalle" id="detalle" readonly>
+				</div>
+				<div class="col-1 center">
 					{{ formDetalleOrden.valorUnitario.label_tag }}
 					{{ formDetalleOrden.valorUnitario }}
 				</div>
@@ -167,6 +171,7 @@
 			})
 			.done(function( json ) {
 				valor.value = json.valor
+				$('#detalle').val(json.detalle)
 				cantidad.value = 1
 				valorTotal()
 			});
