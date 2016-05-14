@@ -24,7 +24,7 @@
 				<th>Telefono</th>
 				<th>Dirección</th>
 				<th>email</th>
-				<th></th>
+				<th>No. vehiculos</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,7 +35,13 @@
 					<td>{{ cliente.telefono }} - {{ cliente.celular }}</td>
 					<td>{{ cliente.direccion }}</td>
 					<td>{{ cliente.email }}</td>
-					<td><a href="#" class="btn btn-primary">Ver</a></td>
+					<td>
+						{% if cliente.vehiculomodel_set.count > 0 %}
+							Vehiculos asociados {{ cliente.vehiculomodel_set.count }}
+						{% else %}
+							No tiene vehiculos asociados
+						{% endif %}
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
