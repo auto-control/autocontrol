@@ -14,8 +14,8 @@ class vehiculoModelForm(forms.ModelForm):
 		}
 	def __init__(self, *args, **kwargs):
 		super(vehiculoModelForm, self).__init__(*args, **kwargs)
+		self.fields['tipo'] = forms.ModelChoiceField(queryset = tipoVehiculoModel.objects.all(), widget = forms.Select(attrs = {'class': 'form-control'}), required = False)
 		self.fields['cliente'] = forms.ModelChoiceField(queryset = clienteModel.objects.all(), widget = forms.Select(attrs = {'class': 'form-control', 'required': True}))
-		self.fields['marca'] = forms.ModelChoiceField(queryset = MarcaModel.objects.all(), widget = forms.Select(attrs = {'class': 'form-control', 'required': True}))
 
 class buscarVehiculoHistorialForm(forms.Form):
 	placa = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}))
