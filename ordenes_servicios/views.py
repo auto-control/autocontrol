@@ -116,7 +116,7 @@ def getServicioValor(request):
 		servicio = get_or_none(servicioModel, pk=codigoServicio)
 		
 		return JsonResponse(
-			{'valor' : servicio.valor },
+			{'valor' : servicio.valor, 'detalle': servicio.detail },
 			safe=False
 		)
 

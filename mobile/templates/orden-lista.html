@@ -23,6 +23,9 @@
 					<td>{% if orden.state == 1 %}<span class="label label-success">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</td>
 					<td>
 						<a href="{% url 'orden_servicio_detalle' orden.pk %}" class="btn btn-primary">Ver</a>
+						{% if orden.state == 1 %}
+						<a href="{% url 'close_orden_servicio' orden.pk %}" class="btn btn-danger">Cerrar servicio</a>
+						{% endif %}
 					</td>
 				</tr>
 				{% endfor %}
