@@ -2,6 +2,9 @@
 {% block contentViewTitle %}
 	<h3>Orden de servicio</h3>
 {% endblock contentViewTitle %}
+
+{% load staticfiles %}
+
 {% block content %}
 <div class="well orden-servicio">
 	<h4>Datos del Vehiculo</h4>
@@ -22,6 +25,9 @@
 			<span class="labelfield">Tipo</span>
 			<span class="dato">{{ orden.vehiculo.tipo }}</span>
 		</div>
+		<div class="col-4">
+			<img src="{% static orden.vehiculo.foto %}" width="300px">
+		</div>
 	</div>
 	<div class="separator-horizontal"></div>
 	<h4>Datos del Cliente</h4>
@@ -41,16 +47,6 @@
 		<div class="col-3">
 			<span class="labelfield">Dirección</span>
 			<span class="dato">{{ orden.vehiculo.cliente.direccion }}</span>
-		</div>
-	</div>
-	<div class="separator-horizontal"></div>
-	<h4>Datos Orden</h4>
-	<div class="row">
-		<div class="col-1 middle flex">
-			<label for="">copas: </label>O
-		</div>
-		<div class="col-2 middle flex">
-			<label for="">Plumillas: </label>X
 		</div>
 	</div>
 	<div class="separator-horizontal"></div>

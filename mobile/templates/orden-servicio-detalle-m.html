@@ -61,6 +61,7 @@
 			<thead>
 				<tr>
 					<th>Servicio</th>
+					<th>Detalle</th>
 					<th>Valor</th>
 					<th>Mecanico</th>
 					{% if orden.state == 1 %}
@@ -72,6 +73,7 @@
 				{% for detalle in orden.ordenserviciodetallemodel_set.all %}
 				<tr id="detail-{{ detalle.pk }}">
 					<td>{{ detalle.servicio.nombre }}</td>
+					<td>{{ detalle.servicio.detail }}</td>
 					<td>$ {{ detalle.servicio.valor|floatformat|intcomma }}</td>
 					<td>{{ detalle.mecanico.nombre }}</td>
 					{% if orden.state == 1 %}

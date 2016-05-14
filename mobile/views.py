@@ -16,7 +16,7 @@ def orden_servicio_mobile(request):
 def new_vehiculo(request):
 	response = {}
 	if request.method == 'POST':
-		form = vehiculoModelForm(request.POST)
+		form = vehiculoModelForm(request.POST, request.FILES)
 		print form.errors
 		if form.is_valid():
 			form.save()
@@ -54,6 +54,7 @@ def add_service(request, orden):
 		if form.is_valid():
 			detalle_orden = form.save()
 			response['pk'] = detalle_orden.pk
+			response['detail'] = detalle_orden.servicio.detail
 			response['servicio'] = detalle_orden.servicio.nombre
 			response['mecanico'] = detalle_orden.mecanico.nombre
 			response['valor'] = str("{0:,}".format(detalle_orden.servicio.valor))

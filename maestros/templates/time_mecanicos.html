@@ -20,7 +20,7 @@
 							{% for time in mecanico.ordenserviciodetallemodel_set.all %}
 								<li class="list-group-item">
 									<span class="badge time" id="time-{{ mecanico.pk }}-{{ time.servicio.pk }}" time="{{ time.ordenServicio.fecha|date:'Y-m-d' }} {{ time.time|time:'H:i:s' }}">{{ time.time|time:'H:i:s' }}</span>
-									{{ time.servicio.nombre }}
+									{{ time.servicio.nombre }} - Orden No. {{ time.ordenServicio }}
 								</li>
 							{% endfor %}
 						</ul>

@@ -6,13 +6,17 @@
 	{% if form.errors %}
 		<div class="alert alert-danger">
 			Corrija los <strong>errores</strong> por favor
-			<p>{{ form.non_field_errors }}</p>
 		</div>
 	{% endif %}
 	<div class="well">
 		<form method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
-			{{ form.as_p }}
+			{% for forms in form %}
+				<div class="form-group">
+					{{ forms }}
+					{{ forms.errors }}
+				</div>
+			{% endfor %}
 			<input type="submit" value="Guardar" class="btn btn-success">
 		</form>
 	</div>
