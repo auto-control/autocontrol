@@ -65,7 +65,6 @@
 			</tbody>
 		</table>
 		{% regroup orden_servicio by vehiculo as orden_servicio_list %}
-		{{ orden_servicio_list }}
 		{% for orden in orden_servicio_list %}
 			<table width="70%" align="center">
 				<tbody style="text-align: left">

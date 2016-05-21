@@ -1,0 +1,70 @@
+{% load humanize %}
+
+{% load custom_filters %}
+
+{% load static %}
+
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<style type="text/css">
+			@page {
+				size: letter portrait;
+				@frame header_frame {
+					top: 1cm;
+					-pdf-frame-content: header_content;
+				}
+				@frame content_frame{
+					top: 4.9cm;
+				}
+				@frame footer {
+					-pdf-frame-content: footerContent;
+					bottom: 0cm;
+					height: 1cm;
+				}
+			}
+			body {
+				text-align: center;
+				font-size: 12px;
+				font-family: 'Courier Bold';
+			}
+			img { zoom: 80%; }
+			table {
+				border-collapse: collapse;
+			}
+			td, th {
+				padding: 1px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="header_content">
+			<thead>
+				<tr>
+					<th>TALLER ALMACEN DE REPUESTOS LT MOTORS S.A.S</th>
+				</tr>
+				<tr>
+					<th>CR 10 # 24 - 33 BARRIO SUCRE</th>
+				</tr>
+				<tr>
+					<th>NIT: 900620734-2</th>
+				</tr>
+				<tr>
+					<th>GIRARDOT - CUNDINAMARCA</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>_________________________________________________________________________________________</td>
+				</tr>
+				<tr>
+					<th>
+						<h1>HISTORIAL DE SERVICIOS POR MECÁNICO</h1>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+		
+			-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	</body>
+</html>
