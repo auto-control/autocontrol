@@ -29,6 +29,8 @@ class vehiculoModel(models.Model):
 	#marca = models.CharField(max_length=50, null=True, blank=True)
 	marca = models.ForeignKey(MarcaModel, null=True, blank=True)
 	clase = models.CharField(max_length=50, null=True, blank=True)
+	kilometraje_actual = models.CharField(max_length = 10, null = True, blank = True)
+	soat = models.DateField(auto_now = False, null = True, blank = True)
 	tipo = models.ForeignKey(tipoVehiculoModel, null=True, blank=True)
 	cliente = models.ForeignKey(clienteModel, null=False, blank=False)
 	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg')
