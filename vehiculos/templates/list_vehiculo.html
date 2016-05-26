@@ -27,6 +27,7 @@
 		<thead>
 			<tr>
 				<th>placa</th>
+				<th>soat</th>
 				<th>cilindraje</th>
 				<th>marca</th>
 				<th>clase</th>
@@ -38,6 +39,11 @@
 			{% for vehiculo in vehiculos %}
 				<tr>
 					<td>{{ vehiculo.placa }}</td>
+					{% if vehiculo.soat %}
+						<td>{{ vehiculo.soat }}</td>
+					{% else %}
+						<td></td>
+					{% endif %}						
 					<td>{{ vehiculo.cilindraje }}</td>
 					<td>{{ vehiculo.marca }}</td>
 					<td>{{ vehiculo.clase }}</td>

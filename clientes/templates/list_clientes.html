@@ -21,6 +21,7 @@
 			<tr>
 				<th>Apellido</th>
 				<th>Nombre</th>
+				<th>F. nacimiento</th>
 				<th>Telefono</th>
 				<th>Dirección</th>
 				<th>email</th>
@@ -32,6 +33,11 @@
 				<tr>
 					<td>{{ cliente.apellido }}</td>
 					<td>{{ cliente.nombre }}</td>
+					{% if cliente.fnaci %}
+						<td>{{ cliente.fnaci }}</td>
+					{% else %}
+						<td></td>
+					{% endif %}
 					<td>{{ cliente.telefono }} - {{ cliente.celular }}</td>
 					<td>{{ cliente.direccion }}</td>
 					<td>{{ cliente.email }}</td>
