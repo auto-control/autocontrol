@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import DetailView, CreateView, ListView
+from django.views.generic import DetailView, CreateView, ListView, UpdateView
 
 
 from app.utils import get_or_none
@@ -57,6 +57,13 @@ class createVehiculoView(SuccessMessageMixin, CreateView):
 	form_class = vehiculoModelForm
 	success_url = '/vehiculo'
 	success_message ='Se añadio con éxito el vehiculo!'
+
+class updateVehiculoView(SuccessMessageMixin, UpdateView):
+	model = vehiculoModel
+	form_class = vehiculoModelForm
+	template_name = 'create_vehiculo.html'
+	success_url = '/vehiculo'
+	success_message = 'Se ha actualizado con exito el vehiculo'
 
 class listVehiculosView(ListView):
 	template_name = 'list_vehiculo.html'

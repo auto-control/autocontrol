@@ -26,6 +26,7 @@
 				<th>Dirección</th>
 				<th>email</th>
 				<th>No. vehiculos</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +48,9 @@
 						{% else %}
 							No tiene vehiculos asociados
 						{% endif %}
+					</td>
+					<td>
+						<a href="{% url 'update_clientes' cliente.pk %}" class="btn btn-primary">Editar</a>
 					</td>
 				</tr>
 			{% endfor %}

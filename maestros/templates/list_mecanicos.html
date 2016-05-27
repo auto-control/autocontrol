@@ -28,6 +28,7 @@
 				<th>Apellido</th>
 				<th>Tel - Cel</th>
 				<th>Dirección</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,6 +38,9 @@
 				<td>{{ mecanico.apellido }}</td>
 				<td>{{ mecanico.telefono }} - {{ mecanico.celular }}</td>
 				<td>{{ mecanico.direccion }}</td>
+				<td>
+					<a href="{% url 'update_mecanicos' mecanico.pk %}" class="btn btn-primary">Editar</a>
+				</td>
 			</tr>
 		{% endfor %}
 		</tbody>

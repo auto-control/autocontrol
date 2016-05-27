@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 
 from clientes.models import clienteModel
@@ -18,3 +18,10 @@ class createClienteView(SuccessMessageMixin, CreateView):
 	form_class = clienteModelForm
 	success_url = '/clientes'
 	success_message ='Se añadio con éxito el cliente!'
+
+class updateClienteView(SuccessMessageMixin, UpdateView):
+	model = clienteModel
+	form_class = clienteModelForm
+	template_name = 'create_clientes.html'
+	success_url = '/clientes'
+	success_message = 'Se ha actualizado con exito el cliente'

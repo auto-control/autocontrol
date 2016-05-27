@@ -43,6 +43,20 @@
 						{{ form.celular }}
 					</div>
 					<div class="form-group row middle">
+						{{ form.documento.errors }}
+						<label class="col-2" for="{{ form.documento.id_for_label }}">
+							{{form.documento.label}}:
+						</label>
+						{{ form.documento }}
+					</div>
+					<div class="form-group row middle">
+						{{ form.fnaci.errors }}
+						<label class="col-2" for="{{ form.fnaci.id_for_label }}">
+							{{form.fnaci.label}}:
+						</label>
+						{{ form.fnaci }}
+					</div>
+					<div class="form-group row middle">
 						{{ form.direccion.errors }}
 						<label class="col-2" for="{{ form.direccion.id_for_label }}">
 							{{form.direccion.label}}:
