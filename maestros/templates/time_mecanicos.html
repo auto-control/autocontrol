@@ -18,10 +18,12 @@
 								<strong class="name">{{ mecanico.nombre }} {{ mecanico.apellido }}</strong>
 							</li>
 							{% for time in mecanico.ordenserviciodetallemodel_set.all %}
+								{% if time.ordenServicio.fecha >= now %}
 								<li class="list-group-item">
 									<span class="badge time" id="time-{{ mecanico.pk }}-{{ time.servicio.pk }}" time="{{ time.ordenServicio.fecha|date:'Y-m-d' }} {{ time.time|time:'H:i:s' }}">{{ time.time|time:'H:i:s' }}</span>
 									{{ time.servicio.nombre }} - Orden No. {{ time.ordenServicio }}
 								</li>
+								{% endif %}
 							{% endfor %}
 						</ul>
 					</li>
@@ -32,14 +34,12 @@
 	<script>
 		$('.time').map(function(){
 			var date = new Date($(this).attr('time'));
-			console.log(date);
+			console.log(date)
 			$('#'+$(this).attr('id')).timeTo({
 				timeTo: date,
 				displayDays: 2,
 				fontSize: 15,
-				function(){
-					$('#'+$(this).attr('id')).html('Complete');
-				}
+				displayCaptions: true,
 			});
 		}).get();
 		var options = {
