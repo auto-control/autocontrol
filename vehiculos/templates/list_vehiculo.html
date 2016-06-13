@@ -48,7 +48,10 @@
 					<td>{{ vehiculo.marca }}</td>
 					<td>{{ vehiculo.clase }}</td>
 					<td>{{ vehiculo.cliente }}</td>
-					<td><a href="{% url 'detail_vehiculo' vehiculo.pk %}" class="btn btn-primary">Ver</a></td>
+					<td>
+						<a href="{% url 'detail_vehiculo' vehiculo.pk %}" class="btn btn-primary">Ver</a>
+						<a href="{% url 'update_vehiculo' vehiculo.pk %}" class="btn btn-primary">Editar</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>

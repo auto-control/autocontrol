@@ -5,6 +5,8 @@ class mecanicoModel(models.Model):
 	apellido = models.CharField(max_length=50)
 	telefono = models.CharField(max_length=20, blank=True, null=True)
 	celular = models.CharField(max_length=20)
+	documento = models.CharField(max_length=20, blank=True, null=True)
+	fnaci = models.DateField(blank=True, null=True)
 	direccion = models.CharField(max_length=50, blank=True, null=True)
 	activo = models.BooleanField(default=True)
 

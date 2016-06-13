@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -21,6 +21,13 @@ class createMecanicoView(SuccessMessageMixin, CreateView):
 	form_class = mecanicoModelForm
 	success_url = '/mecanicos'
 	success_message = 'Se añadio con exito el Mecánico'
+
+class updateMecanicoView(SuccessMessageMixin, UpdateView):
+	model = mecanicoModel
+	form_class = mecanicoModelForm
+	template_name = 'create_mecanicos.html'
+	success_url = '/mecanicos'
+	success_message = 'Se ha actualizado con exito el mecanico'
 
 def time_mecanicos(request):
 	mecanicos = mecanicoModel.objects.all()
