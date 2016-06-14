@@ -146,8 +146,6 @@ class OrdenReporteAutoPDFView(PDFTemplateView):
 			orden_servicio = ordenServicioModel.objects.filter(vehiculo = placa)
 		orden_servicio.filter(fecha__range = [fecha_in, fecha_fin])
 		context['orden_servicio'] = orden_servicio
-		#factura = Factura.objects.get(pk = self.kwargs['factura_pk'])
-		# context['query'] = factura
 		return context
 
 class OrdenReporteMecanicoPDFView(PDFTemplateView):
@@ -158,10 +156,10 @@ class OrdenReporteMecanicoPDFView(PDFTemplateView):
 		mecanico = self.kwargs['mecanico']
 		fecha_in = self.kwargs['fecha_in']
 		fecha_fin = self.kwargs['fecha_fin']
-		orden_servicio = ordenServicioModel.objects.filter(fecha__range = [fecha_in, fecha_fin])
+		orden_servicio = ordenServicioDetalleModel.objects.all()
 		if mecanico != 'ALL':
-			orden_servicio.filter(vehiculo = mecanico)
+			orden_servicio.filter(mecanico = mecanico)
 		context['orden_servicio'] = orden_servicio
-		#factura = Factura.objects.get(pk = self.kwargs['factura_pk'])
-		# context['query'] = factura
+		context['fecha_in'] = fecha_in
+		context['fecha_fin'] = fecha_fin
 		return context

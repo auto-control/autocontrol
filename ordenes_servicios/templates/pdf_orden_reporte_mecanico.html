@@ -25,7 +25,7 @@
 			}
 			body {
 				text-align: center;
-				font-size: 12px;
+				font-size: 11px;
 				font-family: 'Courier Bold';
 			}
 			img { zoom: 80%; }
@@ -64,7 +64,50 @@
 				</tr>
 			</tbody>
 		</table>
-		
+		{% regroup orden_servicio by mecanico as orden_servicio_list %}
+		{% for orden in orden_servicio_list %}
+		<table align="center">
+			<table width="70%" align="center">
+				<tbody style="text-align: left">
+					<tr>
+						<th colspan="2">Nombres completos:</th>
+						<td colspan="2">{{ orden.grouper }}</td>
+					</tr>
+					<tr>
+						<th>Telefono:</th>
+						<td>{{ orden.grouper.telefono }}</td>
+						<th>Celular:</th>
+						<td>{{ orden.grouper.celular }}</td>
+					</tr>
+					<tr>
+						<th>Documento:</th>
+						<td>{{ orden.grouper.documento }}</td>
+						<th>Direccion:</th>
+						<td>{{ orden.grouper.direccion }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</table>
+		<table width="90%" align="center">
+			<thead>
+				<tr>
+					<th>Placa vehiculo</th>
+					<th>Servicio</th>
+					<th>Descripcion</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for list in orden.list %}
+					<tr>
+						<td>{{ list.ordenServicio.vehiculo }}</td>
+						<td>{{ list.servicio.nombre }}</td>
+						<td>{{ list.servicio.detail }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+		{% endfor %}
 			-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	</body>
 </html>
