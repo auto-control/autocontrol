@@ -25,7 +25,8 @@ class Migration(migrations.Migration):
                 ('valor', models.PositiveIntegerField()),
                 ('servicio', models.BooleanField(default=True)),
                 ('time', models.TimeField(default=b'0:00:00')),
-                ('grupo', models.ForeignKey(to='articulos_servicios.grupoServicioModel')),
+                ('detail', models.CharField(default=b'-', max_length=1000)),
+                ('grupo', models.ForeignKey(blank=True, to='articulos_servicios.grupoServicioModel', null=True)),
             ],
         ),
     ]

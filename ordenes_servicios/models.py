@@ -9,7 +9,7 @@ from maestros.models import mecanicoModel
 
 class ordenServicioModel(models.Model):
 	vehiculo = models.ForeignKey(vehiculoModel,null=False,blank=False)
-	fecha = models.DateField(null=False,blank=False,default=datetime.now)
+	fecha = models.DateTimeField(null=False,blank=False,default=datetime.now)
 	state = models.PositiveIntegerField(default = 1)
 
 	def __str__(self):

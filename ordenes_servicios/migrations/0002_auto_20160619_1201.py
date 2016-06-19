@@ -2,18 +2,19 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+import datetime
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vehiculos', '0004_auto_20160329_1650'),
+        ('ordenes_servicios', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='vehiculomodel',
-            name='foto',
-            field=models.ImageField(default=b'img/none.jpg', upload_to=b'img/vehiculo/'),
+            model_name='ordenserviciomodel',
+            name='fecha',
+            field=models.DateTimeField(default=datetime.datetime.now),
         ),
     ]

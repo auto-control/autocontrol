@@ -24,7 +24,7 @@ class tipoVehiculoModel(models.Model):
 		return u'%s' % (self.nombre)
 
 class vehiculoModel(models.Model):
-	placa = models.CharField(max_length=10, primary_key=True, null=False, blank=False)
+	placa = models.CharField(max_length=10, null=False, blank=False)
 	cilindraje = models.IntegerField(null=True, blank=True)
 	#marca = models.CharField(max_length=50, null=True, blank=True)
 	marca = models.ForeignKey(MarcaModel, null=True, blank=True)
@@ -34,9 +34,13 @@ class vehiculoModel(models.Model):
 	tipo = models.ForeignKey(tipoVehiculoModel, null=True, blank=True)
 	cliente = models.ForeignKey(clienteModel, null=False, blank=False)
 	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg')
+
 	def __str__(self):
 		return str(self.placa)
 
 	def __unicode__(self):
 		return str(self.placa)
+
+	class Meta:
+		ordering = ['-pk']
 

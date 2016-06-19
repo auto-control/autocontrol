@@ -18,6 +18,8 @@ class Migration(migrations.Migration):
                 ('apellido', models.CharField(max_length=50)),
                 ('telefono', models.CharField(max_length=20, null=True, blank=True)),
                 ('celular', models.CharField(max_length=20)),
+                ('documento', models.CharField(max_length=20, null=True, blank=True)),
+                ('fnaci', models.DateField(null=True, blank=True)),
                 ('direccion', models.CharField(max_length=50, null=True, blank=True)),
                 ('activo', models.BooleanField(default=True)),
             ],
