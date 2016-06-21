@@ -12,13 +12,15 @@
 		<form method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
 			{% for forms in form %}
-				<div class="form-group">
+				<div class="form-group col-md-6">
 					<label>{{ forms.label }}</label>
 					{{ forms }}
 					{{ forms.errors }}
 				</div>
 			{% endfor %}
-			<input type="submit" value="Guardar" class="btn btn-success">
+			<div class="form-group">
+				<input type="submit" value="Guardar" class="btn btn-success">
+			</div>
 		</form>
 	</div>
 {% endblock content %}

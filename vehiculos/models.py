@@ -26,7 +26,6 @@ class tipoVehiculoModel(models.Model):
 class vehiculoModel(models.Model):
 	placa = models.CharField(max_length=10, null=False, blank=False)
 	cilindraje = models.IntegerField(null=True, blank=True)
-	#marca = models.CharField(max_length=50, null=True, blank=True)
 	marca = models.ForeignKey(MarcaModel, null=True, blank=True)
 	clase = models.CharField(max_length=50, null=True, blank=True)
 	kilometraje_actual = models.CharField(max_length = 10, null = True, blank = True)

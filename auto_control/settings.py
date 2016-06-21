@@ -102,7 +102,7 @@ DATABASES = {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'auto_control',
 		'USER': 'root',
-		'PASSWORD': '',
+		'PASSWORD': 'root',
 		'OPTIONS': {
 			'autocommit': True,
 		},
