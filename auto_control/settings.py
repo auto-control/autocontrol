@@ -89,13 +89,26 @@ WSGI_APPLICATION = 'auto_control.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+"""
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.sqlite3',
 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	}
 }
-
+"""
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'auto_control',
+		'USER': 'root',
+		'PASSWORD': '',
+		'OPTIONS': {
+			'autocommit': True,
+		},
+		'HOST': '127.0.0.1',
+	}
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
