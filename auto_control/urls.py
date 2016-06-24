@@ -10,6 +10,7 @@ urlpatterns = [
 		url('', include('maestros.urls')),
 		url('', include('ordenes_servicios.urls')),
 		url('', include('vehiculos.urls')),
+		url('', include('usuarios.urls')),
 		url('mobile/', include('mobile.urls')),
 		url(r'^admin/', include(admin.site.urls)),
 

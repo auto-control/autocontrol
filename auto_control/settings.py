@@ -39,6 +39,7 @@ PROJECT_APPS = (
 	'vehiculos',
 	'ordenes_servicios',
 	'mobile',
+	'usuarios',
 	'easy_pdf',
 )
 
