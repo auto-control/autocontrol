@@ -30,7 +30,7 @@
 				<th>soat</th>
 				<th>cilindraje</th>
 				<th>marca</th>
-				<th>clase</th>
+				<th>linea</th>
 				<th>cliente</th>
 				<th></th>
 			</tr>
@@ -46,7 +46,7 @@
 					{% endif %}						
 					<td>{{ vehiculo.cilindraje }}</td>
 					<td>{{ vehiculo.marca }}</td>
-					<td>{{ vehiculo.clase }}</td>
+					<td>{{ vehiculo.linea }}</td>
 					<td>{{ vehiculo.cliente }}</td>
 					<td>
 						<a href="{% url 'detail_vehiculo' vehiculo.pk %}" class="btn btn-primary">Ver</a>

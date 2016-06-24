@@ -10,16 +10,17 @@ class vehiculoModelForm(forms.ModelForm):
 		fields = '__all__'
 		widgets = {
 			'placa': forms.TextInput(attrs={'class': 'form-control', 'required': True, 'placeholder': 'XXX111', 'max_length': 10, 'title': 'XXX000(Mayusculas)', 'pattern': '[A-Z]{3}[0-9]{3}'}),
-			'clase': forms.TextInput(attrs={'class': 'form-control', 'max_length': 50, 'required': True,}),
+			'linea': forms.TextInput(attrs={'class': 'form-control', 'max_length': 50, 'required': True,}),
 			'kilometraje_actual': forms.TextInput(attrs={'class': 'form-control', 'max_length': 10, 'required': True,}),
 			'soat': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'required': True,}),
-			'cilindraje': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{1,9}', 'title': 'Solo dato numerico', 'required': True,})
+			'cilindraje': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{1,9}', 'title': 'Solo dato numerico', 'required': True,}),
+			'modelo': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{4}', 'title': 'Solo dato numerico', 'required': True,}),
 		}
 
 	def __init__(self, *args, **kwargs):
 		super(vehiculoModelForm, self).__init__(*args, **kwargs)
 		self.fields['marca'] = forms.ModelChoiceField(queryset = MarcaModel.objects.all().order_by('marca'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = True)
-		self.fields['tipo'] = forms.ModelChoiceField(queryset = tipoVehiculoModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = True)
+		self.fields['categoria'] = forms.ModelChoiceField(queryset = tipoVehiculoModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = True)
 		self.fields['cliente'] = forms.ModelChoiceField(queryset = clienteModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen', 'required': True}))
 
 	def clean_placa(self):
@@ -36,6 +37,12 @@ class vehiculoModelForm(forms.ModelForm):
 		if soat < before:
 			raise forms.ValidationError("Fecha incorrecta. Maximo un año de vencimiento")
 		return soat
+
+	def clean_modelo(self):
+		modelo = self.cleaned_data['modelo']
+		if int(modelo) < 1900:
+			raise forms.ValidationError("Modelo incorrecto.")
+		return modelo
 
 class buscarVehiculoHistorialForm(forms.Form):
 	placa = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}))
