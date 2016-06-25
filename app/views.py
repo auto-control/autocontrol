@@ -15,7 +15,7 @@ def home(request):
 	return render(request, 'home.html', context)
 
 def close_service(request, orden):
-	orden = ordenServicioModel.objects.get(pk = orden)
+	orden = ordenServicioModel.objects.get(pk=orden)
 	orden.state = 0
 	orden.save(update_fields = ['state'])
 	return HttpResponseRedirect('/')
