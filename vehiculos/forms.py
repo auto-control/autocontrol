@@ -25,7 +25,7 @@ class vehiculoModelForm(forms.ModelForm):
 
 	def clean_placa(self):
 		placa = self.cleaned_data['placa']
-		if vehiculoModel.objects.filter(placa = placa).count() > 0:
+		if vehiculoModel.objects.filter(placa = placa).exclude(pk = self.instance.id).exists():
 			raise forms.ValidationError("La placa ya se encuentra registrada")
 		return placa
 
