@@ -23,12 +23,21 @@ class tipoVehiculoModel(models.Model):
 	def __unicode__(self):
 		return u'%s' % (self.nombre)
 
+class tipoLineaModel(models.Model):
+	nombre_tipo = models.CharField(max_length = 50)
+	marca = models.ForeignKey(MarcaModel, null=True, blank=True)
+
+	def __str__(self):
+		return u'%s' % (self.nombre_tipo)
+
+	def __unicode__(self):
+		return u'%s' % (self.nombre_tipo)
+
 class vehiculoModel(models.Model):
 	placa = models.CharField(max_length=10, null=False, blank=False)
 	cilindraje = models.IntegerField(null=True, blank=True)
-	marca = models.ForeignKey(MarcaModel, null=True, blank=True)
 	#clase = models.CharField(max_length=50, null=True, blank=True)
-	linea = models.CharField(max_length=50, null=True, blank=True)
+	linea = models.ForeignKey(tipoLineaModel, null=True, blank=True)
 	kilometraje_actual = models.CharField(max_length = 10, null = True, blank = True)
 	soat = models.DateField(auto_now = False, null = True, blank = True)
 	#tipo = models.ForeignKey(tipoVehiculoModel, null=True, blank=True)

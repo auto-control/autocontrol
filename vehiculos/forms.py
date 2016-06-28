@@ -15,6 +15,7 @@ class vehiculoModelForm(forms.ModelForm):
 			'soat': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'required': True,}),
 			'cilindraje': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{1,9}', 'title': 'Solo dato numerico', 'required': True,}),
 			'modelo': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{4}', 'title': 'Solo dato numerico', 'required': True,}),
+			'linea': forms.Select(attrs={'class': 'form-control', 'disabled': True}),
 		}
 
 	def __init__(self, *args, **kwargs):

@@ -6,10 +6,10 @@ from django.views.generic import DetailView, CreateView, ListView, UpdateView
 
 
 from app.utils import get_or_none
-
+from django.core import serializers
 from django.views.generic import DetailView
 from ordenes_servicios.models import ordenServicioModel
-from vehiculos.models import vehiculoModel
+from vehiculos.models import *
 from vehiculos.forms import buscarVehiculoHistorialForm, vehiculoModelForm
 
 
@@ -51,6 +51,11 @@ class vehiculoDetail(DetailView):
 
 		return ordenesServicios
 
+def getLinea(request, marca):
+	current_marca = MarcaModel.objects.get(pk=marca)
+	models = tipoLineaModel.objects.filter(marca=current_marca)
+	json_models = serializers.serialize("json", models)
+	return HttpResponse(json_models, content_type = 'application/json')
 
 class createVehiculoView(SuccessMessageMixin, CreateView):
 	template_name = 'create_vehiculo.html'

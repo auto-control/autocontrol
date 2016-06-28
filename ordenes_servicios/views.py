@@ -49,10 +49,12 @@ def guardarOrden(request):
 		cantidades = request.POST.getlist('cantidades[]')
 		mecanicos = request.POST.getlist('mecanicos[]')
 
-		vehiculo = get_or_none(vehiculoModel, placa=placa)
-
-		orden = ordenServicioModel(vehiculo=vehiculo)
-		orden.save()
+		if 'orden' in request.GET:
+			orden = ordenServicioModel(pk=request.GET.get('orden'))
+		else:
+			vehiculo = get_or_none(vehiculoModel, placa=placa)
+			orden = ordenServicioModel(vehiculo=vehiculo)
+			orden.save()
 
 		for i in range(0,len(servicios)):
 			servicio = get_or_none(servicioModel, pk=servicios[i])
@@ -85,7 +87,18 @@ def ordenServicioNueva(request, pk):
 	return render(request,'create_orden_servicio.html', context)
 
 
+def ordenServicioEditar(request, pk, orden):
 
+	vehiculo = get_or_none(vehiculoModel, placa=pk)
+	orden = ordenServicioModel.objects.get(pk = orden)
+	form = ordenServicioDetalle()
+
+	context = {
+		'vehiculo' : vehiculo,
+		'formDetalleOrden' : form,
+		'orden': orden
+	}
+	return render(request,'edit_orden_servicio.html', context)
 
 def ordenServicio(request):
 
