@@ -17,6 +17,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.db.models import Sum
 from easy_pdf.views import PDFTemplateView
+import json
 
 def ordenServicioImprimir(request, pk):
 		orden = get_object_or_404(ordenServicioModel, pk=pk)
@@ -37,7 +38,8 @@ def detalleOrdenServicio(request, pk):
 
 	context = {
 		'orden' : orden,
-		'ordenDetalle' : ordenDetalle, 
+		'ordenDetalle' : ordenDetalle,
+		'total_valor': ordenDetalle.aggregate(Sum('valorTotal'))
 	}
 	return render(request,'detail_orden_servicio.html', context)
 
@@ -144,6 +146,12 @@ def orden_servicio_mecanico(request):
 	if request.method == "POST":
 		form = ordenServicioMecanicoForm(request.POST)
 	return render(request, 'orden_servicio_mecanico.html', {'forms': form})
+
+def delete_orden_servicio(request, pk):
+	response = {}
+	orden = ordenServicioDetalleModel.objects.get(pk = pk)
+	orden.delete()
+	return HttpResponse(json.dumps(response), "application/json")
 
 class OrdenReporteAutoPDFView(PDFTemplateView):
 	template_name = "pdf_orden_reporte_auto.html"

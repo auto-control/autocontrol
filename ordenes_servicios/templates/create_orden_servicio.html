@@ -15,7 +15,7 @@
 				</div>
 				<div class="col-md-3">
 					<span class="labelfield">Marca</span>
-					<span class="dato">{{ vehiculo.marca }}</span>
+					<span class="dato">{{ vehiculo.linea.marca }}</span>
 				</div>
 				<div class="col-md-3">
 					<span class="labelfield">Modelo</span>
@@ -32,6 +32,10 @@
 				<div class="col-md-3">
 					<span class="labelfield">Kilometraje</span>
 					<span class="dato">{{ vehiculo.kilometraje_actual }}</span>
+				</div>
+				<div class="col-md-3">
+					<span class="labelfield">SOAT</span>
+					<span class="dato">{{ vehiculo.soat }}</span>
 				</div>
 			</div>
 			<div class="col-md-4">

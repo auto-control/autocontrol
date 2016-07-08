@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^orden-servicio/imprimir/(?P<pk>[\w\-]+)/$', 'ordenes_servicios.views.ordenServicioImprimir', name = 'imprimir_orden_servicio'),
 	url(r'^guardar-orden/$', 'ordenes_servicios.views.guardarOrden', name = 'guardar_orden'),
 	url(r'^orden-servicio/(?P<pk>[\w\-]+)/$', 'ordenes_servicios.views.detalleOrdenServicio', name = 'detalle_orden_servicio'),
+	url(r'^delete-orden-servicio/(?P<pk>[\w\-]+)/$', 'ordenes_servicios.views.delete_orden_servicio', name = 'delete_orden_servicio'),
 
 	#Reportes
 	url(r'^orden-servicio-auto/$', 'ordenes_servicios.views.orden_servicio_auto', name = 'orden_servicio_auto'),

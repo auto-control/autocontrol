@@ -69,11 +69,12 @@
 						<th>Mecánico</th>
 						<th>Tiempo</th>
 						<th>V. Total</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for detalle in orden.ordenserviciodetallemodel_set.all %}
-						<tr>
+						<tr id="object-{{ detalle.pk }}">
 							<td>{{ detalle.servicio }}</td>
 							<td>{{ detalle.cantidad }}</td>
 							<td>{{ detalle.servicio.detail }}</td>
@@ -81,6 +82,11 @@
 							<td>{{ detalle.mecanico }}</td>
 							<td>{{ detalle.servicio.time }} Hrs</td>
 							<td>{{ detalle.valorTotal }}</td>
+							<td>
+								<a href="{% url 'delete_orden_servicio' detalle.pk %}" class="btn btn-danger delete" id="{{ detalle.pk }}">
+									<i class="glyphicon glyphicon-remove"></i>
+								</a>
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -133,6 +139,14 @@
 {% block scripts %}
 	<script src="{% static "js/jquery.min.js" %}"></script>
 	<script>
+		$(document).on("click", ".delete", function(){
+			var id = $(this).attr('id');
+			var href = $(this).attr('href');
+			$.get(href, function(data){
+				$('#object-'+id).remove();
+			});
+			return false;
+		});
 		var form = document.getElementById('form-servicio')
 		var servicio = document.getElementById('id_servicio')
 		var valor = document.getElementById('id_valorUnitario')

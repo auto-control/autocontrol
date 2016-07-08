@@ -16,7 +16,7 @@
 			</div>
 			<div class="col-md-3">
 				<span class="labelfield">Marca</span>
-				<span class="dato">{{ orden.vehiculo.marca }}</span>
+				<span class="dato">{{ orden.vehiculo.linea.marca }}</span>
 			</div>
 			<div class="col-md-3">
 				<span class="labelfield">Modelo</span>
@@ -33,6 +33,10 @@
 			<div class="col-md-3">
 				<span class="labelfield">Kilometraje</span>
 				<span class="dato">{{ orden.vehiculo.kilometraje_actual }}</span>
+			</div>
+			<div class="col-md-3">
+				<span class="labelfield">SOAT</span>
+				<span class="dato">{{ orden.vehiculo.soat }}</span>
 			</div>
 		</div>
 		<div class="col-md-4">
@@ -72,7 +76,7 @@
 		</div>
 	</div>
 	<div class="row orden-datos-servicio">
-		<table class="table table-striped table-hover ">
+		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
 					<th>Servicio</th>
@@ -97,6 +101,14 @@
 					</tr>
 				{% endfor %}
 			</tbody>
+		</table>
+		<table class="table table-striped table-hover ">
+			<thead>
+				<tr>
+					<th>Valor total</th>
+					<td>$ {{ total_valor.valorTotal__sum }}</td>
+				</tr>
+			</thead>
 		</table>
 	</div>
 	<div class="separator-horizontal"></div>
