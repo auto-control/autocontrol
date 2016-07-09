@@ -10,7 +10,7 @@ urlpatterns = [
 	url(r'^orden-servicio/(?P<pk>[\w\-]+)/$', 'ordenes_servicios.views.detalleOrdenServicio', name = 'detalle_orden_servicio'),
 	url(r'^delete-orden-servicio/(?P<pk>[\w\-]+)/$', 'ordenes_servicios.views.delete_orden_servicio', name = 'delete_orden_servicio'),
 
-	#Reportes
+	#Reportes urls
 	url(r'^orden-servicio-auto/$', 'ordenes_servicios.views.orden_servicio_auto', name = 'orden_servicio_auto'),
 	url(r'^orden-servicio-mecanico/$', 'ordenes_servicios.views.orden_servicio_mecanico', name = 'orden_servicio_mecanico'),
 	url(r'^orden-servicio-reporte-auto/(?P<placa>[\w\-]+)/(?P<fecha_in>[\w\-]+)/(?P<fecha_fin>[\w\-]+)/$', OrdenReporteAutoPDFView.as_view(), name = 'orden_servicio_reporte_auto'),
