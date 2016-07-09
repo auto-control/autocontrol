@@ -25,7 +25,7 @@
 						<td>
 							{% if orden.state == 1 %}
 								<a href="{% url 'edit_orden_servicio' orden.vehiculo.placa orden.pk %}" class="btn btn-success btn-sm">Editar</a>
-								<a href="{% url 'close_service' orden.pk %}" class="btn btn-danger btn-sm">cerrar</a>
+								<a href="{% url 'close_service' orden.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
 							{% endif %}
 							<a href="{% url 'detalle_orden_servicio' orden.pk %}" class="btn btn-primary btn-sm">Ver</a>
 						</td>
@@ -35,3 +35,13 @@
 		</table
 	</div>
 {% endblock content %}
+
+{% block scripts %}
+	<script>
+		$("#close").click(function(){
+			if(!confirm("¿Desea cerrar la orden?")){
+				return false;
+			}
+		});
+	</script>
+{% endblock scripts %}
