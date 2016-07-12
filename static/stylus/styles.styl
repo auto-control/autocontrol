@@ -1,8 +1,10 @@
 @import "reticula.styl"
 @import "fonts.styl"
+@import "normalize.styl"
 
 colorLetter = #3D3F3F
 headerHeight = 80px
+headerColor = #293a4a
 menuContentColor = #eaeaea
 menuContentLetterColor = #3D3F3F
 subMenuBackgroundColor = white
@@ -44,8 +46,11 @@ input[type="number"]
 select
 	width 100%
 
+.flex
+	display flex
+
 .header
-	background-color #293A4A
+	background-color headerColor 
 	border-bottom 2px solid #062A6B
 	height headerHeight
 	color white
@@ -213,3 +218,19 @@ select
 
 .all-space
 	width 100%
+
+.nav-bar
+	background-color headerColor
+	width 100%
+	height 80px
+	padding 10px
+	color white
+
+.loginContent
+	width 100%
+	height calc( 100% - 80px )
+	padding 10px
+	&-image
+		width 100%
+	&-contentform
+		width 90%
