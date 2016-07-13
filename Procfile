@@ -1,1 +1,1 @@
-web: gunicorn autocontrol.wsgi
+web: gunicorn auto_control.wsgi
