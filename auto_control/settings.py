@@ -120,6 +120,18 @@ DATABASES = {
 		'PORT': '5432'
 	}
 }
+"""
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'autocontrol',
+		'USER': 'root',
+		'PASSWORD': 'root',
+		'HOST': 'localhost',
+		'PORT': '',
+	}
+}
+"""
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -165,8 +177,8 @@ STATIC_ROOT = 'static'
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'static')
+MEDIA_ROOT = os.path.join(BASE_DIR,'auto_control/static')
 
 STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'static'),
+	os.path.join(BASE_DIR, 'auto_control/static'),
 )
