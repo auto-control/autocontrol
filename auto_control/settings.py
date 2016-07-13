@@ -97,7 +97,6 @@ DATABASES = {
 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	}
 }
-"""
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
@@ -108,6 +107,17 @@ DATABASES = {
 			'autocommit': True,
 		},
 		'HOST': '127.0.0.1',
+	}
+}
+"""
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'd111qq0fcuv8ph',
+		'USER': 'bllipqwogiiigf',
+		'PASSWORD': '9IL7SJGvT0yJppe0JEsqEu4hOg',
+		'HOST': 'ec2-54-83-202-115.compute-1.amazonaws.com',
+		'PORT': '5432'
 	}
 }
 # Internationalization
