@@ -1,0 +1,159 @@
+{% load humanize %}
+
+{% load static %}
+
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<style type="text/css">
+			@page {
+				size: letter portrait;
+				@frame header_frame {
+					top: 1cm;
+					-pdf-frame-content: header_content;
+				}
+				@frame content_frame{
+					top: 4cm;
+				}
+				@frame footer {
+					-pdf-frame-content: footerContent;
+					bottom: 0cm;
+					height: 1cm;
+				}
+			}
+			body {
+				text-align: center;
+				font-size: 12px;
+				font-family: 'Courier Bold';
+			}
+			table {
+				border-collapse: collapse;
+			}
+			td, th {
+				padding: 1px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="header_content">
+			<thead>
+				<tr>
+					<th>TALLER ALMACEN DE REPUESTOS LT MOTORS S.A.S</th>
+				</tr>
+				<tr>
+					<th>CR 10 # 24 - 33 BARRIO SUCRE</th>
+				</tr>
+				<tr>
+					<th>NIT: 900620734-2</th>
+				</tr>
+				<tr>
+					<th>GIRARDOT - CUNDINAMARCA</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>_________________________________________________________________________________________</td>
+				</tr>
+			</tbody>
+		</table>
+		<table width="80%" align="center">
+			<thead>
+				<tr>
+					<td><b>Fecha:</b> {{ servicio_data.fecha }}</td>
+					<td><b>No. Orden:</b> {{ servicio_data.pk }}</td>
+				</tr>
+			</thead>
+		</table>
+		<table width="80%" align="center" style="background-color: #F5F5F5; margin-bottom: 15px;">
+			<thead>
+				<tr>
+					<th colspan="4" style="text-align: left; padding: 5px;">
+						DATOS DEL SERVICIO
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Placa</th>
+					<th>Marca</th>
+					<th>Modelo</th>
+					<th>Línea</th>
+				</tr>
+				<tr>
+					<td>{{ servicio_data.vehiculo }}</td>
+					<td>{{ servicio_data.vehiculo.linea.marca }}</td>
+					<td>{{ servicio_data.vehiculo.modelo }}</td>
+					<td>{{ servicio_data.vehiculo.linea }}</td>
+				</tr>
+				<tr>
+					<th>Cilindraje</th>
+					<th>Kilometraje</th>
+					<th>SOAT</th>
+				</tr>
+				<tr>
+					<td>{{ servicio_data.vehiculo.cilindraje }}</td>
+					<td>{{ servicio_data.vehiculo.kilometraje_actual }}</td>
+					<td>{{ servicio_data.vehiculo.soat }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table width="80%" align="center" style="background-color: #F5F5F5; margin-bottom: 25px;">
+			<thead>
+				<tr>
+					<th colspan="4" style="text-align: left; padding: 5px;">
+						DATOS DEL CLIENTE
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Nombre</th>
+					<th>Documento</th>
+					<th>Teléfono</th>
+					<th>Dirección</th>
+				</tr>
+				<tr>
+					<td>{{ servicio_data.vehiculo.cliente }}</td>
+					<td>{{ servicio_data.vehiculo.cliente.documento }}</td>
+					<td>{{ servicio_data.vehiculo.cliente.celular }} - {{ servicio_data.vehiculo.cliente.telefono }}</td>
+					<td>{{ servicio_data.vehiculo.cliente.direccion }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table width="90%" align="center">
+			<thead>
+				<tr>
+					<th>Servicio</th>
+					<th>Cantidad</th>
+					<th>Descripción</th>
+					<th>V. Unitario</th>
+					<th>Mecánico</th>
+					<th>Tiempo</th>
+					<th>V. Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for detalle in servicio_data.ordenserviciodetallemodel_set.all %}
+					<tr>
+						<td>{{ detalle.servicio }}</td>
+						<td>{{ detalle.cantidad }}</td>
+						<td>{{ detalle.servicio.detail }}</td>
+						<td>{{ detalle.valorUnitario }}</td>
+						<td>{{ detalle.mecanico }}</td>
+						<td>{{ detalle.servicio.time }} Hrs</td>
+						<td>{{ detalle.valorTotal }}</td>
+					</tr>
+					<tr>
+						<td colspan="7" style="color: #999999;">---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="6">Valor Total</th>
+					<th>$ {{ total_valor.valorTotal__sum }}</th>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+</html>

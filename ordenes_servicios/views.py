@@ -19,18 +19,6 @@ from django.db.models import Sum
 from easy_pdf.views import PDFTemplateView
 import json
 
-def ordenServicioImprimir(request, pk):
-		orden = get_object_or_404(ordenServicioModel, pk=pk)
-		ordenDetalle = ordenServicioDetalleModel.objects.filter(ordenServicio=orden)
-
-		contexto = {
-			'orden' : orden,
-			'ordenDetalle' : ordenDetalle
-		}
-
-		html = render_to_string('imprimir_orden_servicio.html', contexto)
-		return generar_pdf(html)
-
 def detalleOrdenServicio(request, pk):
 	sum_tot = 0
 	orden = get_or_none(ordenServicioModel, pk=pk)
@@ -147,6 +135,12 @@ def orden_servicio_mecanico(request):
 		form = ordenServicioMecanicoForm(request.POST)
 	return render(request, 'orden_servicio_mecanico.html', {'forms': form})
 
+def ordenes_por_servicios(request):
+	form = ordenPorServicioForm()
+	if request.method == "POST":
+		form = ordenPorServicioForm(request.POST)
+	return render(request, 'ordenes_por_servicios.html', {'forms': form})
+
 def delete_orden_servicio(request, pk):
 	response = {}
 	orden = ordenServicioDetalleModel.objects.get(pk = pk)
@@ -183,4 +177,30 @@ class OrdenReporteMecanicoPDFView(PDFTemplateView):
 		context['orden_servicio'] = orden_servicio
 		context['fecha_in'] = fecha_in
 		context['fecha_fin'] = fecha_fin
+		return context
+
+class OrdenesPorServicioReportePDFView(PDFTemplateView):
+	template_name = "pdf_ordenes_por_servicios_reporte.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(OrdenesPorServicioReportePDFView, self).get_context_data(**kwargs)
+		servicio = self.kwargs['servicio']
+		fecha_in = self.kwargs['fecha_in']
+		fecha_fin = self.kwargs['fecha_fin']
+		servicio_data = ordenServicioDetalleModel.objects.filter(fecha__range = [fecha_in, fecha_fin])
+		if servicio != 'ALL':
+			servicio_data.filter(servicio = servicio)
+		context['servicio_data'] = servicio_data
+		return context
+
+class OrdenServicioReportePDFView(PDFTemplateView):
+	template_name = "pdf_orden_servicio_reporte.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(OrdenServicioReportePDFView, self).get_context_data(**kwargs)
+		orden_pk = self.kwargs['orden_pk']
+		servicio_data = ordenServicioModel.objects.get(pk = orden_pk)
+		ordenDetalle = ordenServicioDetalleModel.objects.filter(ordenServicio = servicio_data)
+		context['servicio_data'] = servicio_data
+		context['total_valor'] = ordenDetalle.aggregate(Sum('valorTotal'))
 		return context

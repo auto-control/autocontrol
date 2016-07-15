@@ -68,7 +68,7 @@
 		<div class="row menu-group-item">
 			<a class="col-10 clk" href="#">
 				<div>
-					<span class="icon-users"> Maestros</span>
+					<span class="icon-users"> Mecánicos</span>
 				</div>
 			</a>
 			<div class="col-2 center middle show-submenu clk">
@@ -94,8 +94,10 @@
 			</div>
 		</div>
 		<ul class="submenu-list">
+			<li class="submenu-item"><a href="{% url 'ordenes_por_servicios' %}">Servicios</a></li>
 			<li class="submenu-item"><a href="{% url 'orden_servicio_auto' %}">Servicios por auto</a></li>
 			<li class="submenu-item"><a href="{% url 'orden_servicio_mecanico' %}">Servicios por Mecanico</a></li>
+			<li class="submenu-item"><a href="{% url 'vehiculo_soat' %}">SOAT</a></li>
 		</ul>
 	</li>
 

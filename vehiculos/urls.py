@@ -10,4 +10,7 @@ urlpatterns = [
 	url(r'^vehiculo/$', listVehiculosView.as_view(), name = 'list_vehiculo'),
 	url(r'^obtener-linea/(?P<marca>[\w\-]+)/$', 'vehiculos.views.getLinea', name = 'get_linea'),
 
+	#Reportes
+	url(r'^vehiculo-soat/$', 'vehiculos.views.vehiculo_soat', name = 'vehiculo_soat'),
+	url(r'^vehivulo-reporte-soat/(?P<fecha_in>[\w\-]+)/(?P<fecha_fin>[\w\-]+)/$', ReporteSoatPDFView.as_view(), name = 'vehiculo_reporte_soat'),
 ]

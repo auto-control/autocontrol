@@ -57,3 +57,7 @@ class vehiculoOrden(forms.ModelForm):
 			'marca': forms.TextInput(attrs={'class': 'form-control'}),
 			'clase': forms.Select(attrs={'class': 'form-control'}),
 		}
+
+class vehiculoSoatForm(forms.Form):
+	fecha_in = forms.CharField(label = "Fecha de inicio", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))
+	fecha_fin = forms.CharField(label = "Fecha Final", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))
