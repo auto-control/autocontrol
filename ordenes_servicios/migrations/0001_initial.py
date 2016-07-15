@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
                 ('valorUnitario', models.PositiveIntegerField(null=True, verbose_name=b'V. Unitario', blank=True)),
                 ('valorTotal', models.PositiveIntegerField(null=True, verbose_name=b'V. Total', blank=True)),
                 ('time', models.TimeField(null=True, blank=True)),
+                ('fecha', models.DateField(auto_now=True, null=True)),
                 ('mecanico', models.ForeignKey(blank=True, to='maestros.mecanicoModel', null=True)),
             ],
         ),

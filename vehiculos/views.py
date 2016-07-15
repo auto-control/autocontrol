@@ -23,7 +23,7 @@ def historialVehiculo(request):
 			placa = form.cleaned_data['placa']
 			vehiculo = get_or_none(vehiculoModel, placa=placa)
 			if vehiculo is not None:
-				url = u'%s/%s' % ('/historial', placa)
+				url = '/historial-vehiculo/'+str(vehiculo.pk)+'/'
 				return HttpResponseRedirect(url)
 			else:
 				message = "El vehiculo no se encuentra registrado."
@@ -45,11 +45,9 @@ class vehiculoDetail(DetailView):
 		context["ordenes_servicios"] = self.get_ordenes_servicios()
 		return context
 
-
 	def get_ordenes_servicios(self):
 		vehiculo = self.object
 		ordenesServicios = ordenServicioModel.objects.filter(vehiculo=vehiculo)
-
 		return ordenesServicios
 
 def getLinea(request, marca):

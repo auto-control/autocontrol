@@ -47,8 +47,5 @@ class Migration(migrations.Migration):
                 ('cliente', models.ForeignKey(to='clientes.clienteModel')),
                 ('linea', models.ForeignKey(blank=True, to='vehiculos.tipoLineaModel', null=True)),
             ],
-            options={
-                'ordering': ['-pk'],
-            },
         ),
     ]
