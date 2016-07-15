@@ -21,7 +21,7 @@ def historialVehiculo(request):
 		form = buscarVehiculoHistorialForm(request.POST)
 		if form.is_valid():
 			placa = form.cleaned_data['placa']
-			vehiculo = get_or_none(vehiculoModel, placa=placa)
+			vehiculo = get_or_none(vehiculoModel, placa__name=placa)
 			if vehiculo is not None:
 				url = u'%s/%s' % ('/historial', placa)
 				return HttpResponseRedirect(url)
