@@ -47,11 +47,7 @@ class vehiculoModel(models.Model):
 	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg')
 
 	def __str__(self):
-		return str(self.placa)
+		return self.placa
 
 	def __unicode__(self):
-		return str(self.placa)
-
-	class Meta:
-		ordering = ['-pk']
-
+		return self.placa
