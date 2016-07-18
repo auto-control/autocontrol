@@ -109,7 +109,6 @@ DATABASES = {
 		'HOST': '127.0.0.1',
 	}
 }
-"""
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -131,7 +130,7 @@ DATABASES = {
 		'PORT': '',
 	}
 }
-"""
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
