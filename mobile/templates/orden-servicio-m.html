@@ -28,7 +28,7 @@
 {% endblock head %}
 
 {% block content %}
-	<h2>Orden de servicio <a href="{% url 'list_orden' %}" class="btn btn-default">Lista orden de servicio</a></h2>
+	<h2>Orden de servicio <a href="{% url 'list_orden' %}" class="btn btn-primary">Lista orden de servicio</a></h2>
 	<p>Digite la placa del vehiculo para crear una orden de servicio nueva</p>
 	<form method="POST" action="{% url 'find_vehiculo' %}">
 		<div class="form-group">
