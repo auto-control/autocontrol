@@ -92,3 +92,8 @@ class ReporteSoatPDFView(PDFTemplateView):
 		context['vehiculo_data'] = vehiculo_data
 		context['fecha_hoy'] = datetime.datetime.now().date()
 		return context
+
+def soat(request):
+	now = datetime.datetime.now().date()
+	soat = vehiculoModel.objects.filter(soat__lte = now).order_by('soat')
+	return render(request, 'soat.html', {'soat': soat})
