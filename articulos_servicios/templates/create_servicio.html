@@ -34,7 +34,8 @@
 				$('.servicio').show()
 				$('.servicio').prev().show()
 				$('.title').empty().text('Servicio')
-			}else{
+			}
+			if($('input#id_repuesto').is(':checked')){
 				$('.articulo').show()
 				$('.articulo').prev().show()
 				$('.servicio').hide()
@@ -43,6 +44,11 @@
 			}
 		}
 		$('#id_servicio').click(function(){
+			$("input#id_repuesto").prop( "checked", false)
+			verify_checked();
+		});
+		$('#id_repuesto').click(function(){
+			$("input#id_servicio").prop( "checked", false)
 			verify_checked();
 		});
 	</script>

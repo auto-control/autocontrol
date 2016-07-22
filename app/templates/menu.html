@@ -1,15 +1,6 @@
 <ul class="menu-list">
 	<li class="menu-group">
 		<div class="row menu-group-item">
-			<a class="col-12 clk" href="{% url 'soat' %}">
-				<div>
-					<span class="glyphicon glyphicon-info-sign"> SOAT</span>
-				</div>
-			</a>
-		</div>
-	</li>
-	<li class="menu-group">
-		<div class="row menu-group-item">
 			<a class="col-10 clk" href="#">
 				<div>
 					<span class="icon-user-tie"> Clientes</span>
@@ -45,7 +36,7 @@
 		<div class="row menu-group-item">
 			<a class="col-10 clk" href="#">
 				<div>
-					<span class="icon-stack"> Articulos y servicios</span>
+					<span class="icon-stack"> Repuestos y servicios</span>
 				</div>
 			</a>
 			<div class="col-2 center middle show-submenu clk">
@@ -54,7 +45,7 @@
 		</div>
 		<ul class="submenu-list">
 			<li class="submenu-item"><a href="{% url 'create_servicio' %}">Crear nuevo</a></li>
-			<li class="submenu-item"><a href="{% url 'list_servicio' %}">Lista de servicios</a></li>
+			<li class="submenu-item"><a href="{% url 'list_servicio' %}">Lista de servicios/Respuestos</a></li>
 			<li class="submenu-item"><a href="#">Grupos de servicios</a></li>
 		</ul>
 	</li>
@@ -72,6 +63,18 @@
 		<ul class="submenu-list">
 			<li class="submenu-item"><a href="{% url 'orden_servicio' %}">Nueva orden</a></li>
 		</ul>
+	</li>
+	<li class="menu-group">
+		<div class="row menu-group-item">
+			<a class="col-10 clk" href="{% url 'soat' %}">
+				<div>
+					<span class="glyphicon glyphicon-info-sign"> SOAT</span>
+				</div>
+			</a>
+			<div class="col-2 center middle show-submenu clk">
+				<span>></span>
+			</div>
+		</div>
 	</li>
 	<li class="menu-group">
 		<div class="row menu-group-item">
