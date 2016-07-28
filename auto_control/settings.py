@@ -97,7 +97,6 @@ DATABASES = {
 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	}
 }
-"""
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
@@ -108,6 +107,27 @@ DATABASES = {
 			'autocommit': True,
 		},
 		'HOST': '127.0.0.1',
+	}
+}
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'd346l91psbgrur',
+		'USER': 'qjyvkomyeveefp',
+		'PASSWORD': 'Sxul6ddjGX8YljsIFhTEfdtB9N',
+		'HOST': 'ec2-54-235-195-226.compute-1.amazonaws.com',
+		'PORT': '5432'
+	}
+}
+"""
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'autocontrol',
+		'USER': 'root',
+		'PASSWORD': 'root',
+		'HOST': 'localhost',
+		'PORT': '',
 	}
 }
 # Internationalization
@@ -140,7 +160,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MEDIA_URL = '/media/'
 
-"""
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static')
@@ -149,4 +168,15 @@ MEDIA_URL ='/img/'
 
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, 'static'),
+)
+"""
+
+STATIC_ROOT = 'static'
+
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'auto_control/static')
+
+STATICFILES_DIRS = (
+	os.path.join(BASE_DIR, 'auto_control/static'),
 )

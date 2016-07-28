@@ -19,6 +19,14 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='tipoLineaModel',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('nombre_tipo', models.CharField(max_length=50)),
+                ('marca', models.ForeignKey(blank=True, to='vehiculos.MarcaModel', null=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='tipoVehiculoModel',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -31,13 +39,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('placa', models.CharField(max_length=10)),
                 ('cilindraje', models.IntegerField(null=True, blank=True)),
-                ('clase', models.CharField(max_length=50, null=True, blank=True)),
                 ('kilometraje_actual', models.CharField(max_length=10, null=True, blank=True)),
                 ('soat', models.DateField(null=True, blank=True)),
+                ('modelo', models.IntegerField(null=True, blank=True)),
                 ('foto', models.ImageField(default=b'img/none.jpg', upload_to=b'img/vehiculo/')),
+                ('categoria', models.ForeignKey(blank=True, to='vehiculos.tipoVehiculoModel', null=True)),
                 ('cliente', models.ForeignKey(to='clientes.clienteModel')),
-                ('marca', models.ForeignKey(blank=True, to='vehiculos.MarcaModel', null=True)),
-                ('tipo', models.ForeignKey(blank=True, to='vehiculos.tipoVehiculoModel', null=True)),
+                ('linea', models.ForeignKey(blank=True, to='vehiculos.tipoLineaModel', null=True)),
             ],
             options={
                 'ordering': ['-pk'],

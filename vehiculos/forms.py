@@ -20,7 +20,7 @@ class vehiculoModelForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(vehiculoModelForm, self).__init__(*args, **kwargs)
-		self.fields['marca'] = forms.ModelChoiceField(queryset = MarcaModel.objects.all().order_by('marca'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = True)
+		self.fields['marca'] = forms.ModelChoiceField(queryset = MarcaModel.objects.all().order_by('marca'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = False)
 		self.fields['categoria'] = forms.ModelChoiceField(queryset = tipoVehiculoModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = True)
 		self.fields['cliente'] = forms.ModelChoiceField(queryset = clienteModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen', 'required': True}))
 
@@ -57,3 +57,7 @@ class vehiculoOrden(forms.ModelForm):
 			'marca': forms.TextInput(attrs={'class': 'form-control'}),
 			'clase': forms.Select(attrs={'class': 'form-control'}),
 		}
+
+class vehiculoSoatForm(forms.Form):
+	fecha_in = forms.CharField(label = "Fecha de inicio", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))
+	fecha_fin = forms.CharField(label = "Fecha Final", widget = forms.TextInput(attrs = {'class': 'form-control datepicker', 'required': True}))

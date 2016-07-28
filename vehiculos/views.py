@@ -8,10 +8,11 @@ from django.views.generic import DetailView, CreateView, ListView, UpdateView
 from app.utils import get_or_none
 from django.core import serializers
 from django.views.generic import DetailView
+from easy_pdf.views import PDFTemplateView
 from ordenes_servicios.models import ordenServicioModel
 from vehiculos.models import *
-from vehiculos.forms import buscarVehiculoHistorialForm, vehiculoModelForm
-
+from vehiculos.forms import *
+import datetime
 
 def historialVehiculo(request):
 	form = buscarVehiculoHistorialForm()
@@ -76,18 +77,20 @@ class listVehiculosView(ListView):
 	context_object_name = 'vehiculos'
 	paginate_by = 10
 
-	#def get_object(self, queryset=None):
-	#	pk = self.kwargs.get(self.pk_url_kwarg)
-	#	if pk is None:
-	#		raise AttributeError("Error")
-	#	else:
-	#		raise AttributeError("Sin Error")
-#
-	#	return obj
+def vehiculo_soat(request):
+	form = vehiculoSoatForm()
+	if request.method == "POST":
+		form = vehiculoSoatForm(request.POST)
+	return render(request, 'vehiculo_soat.html', {'forms': form})
 
-		# obj = super(historialVehiculoDetail, self).get_object(queryset=None)
-		# if obj is None:
-		#	 return obj
-		# else:
-		#	 return obj
+class ReporteSoatPDFView(PDFTemplateView):
+	template_name = "pdf_vehiculo_soat.html"
 
+	def get_context_data(self, **kwargs):
+		context = super(ReporteSoatPDFView, self).get_context_data(**kwargs)
+		fecha_in = self.kwargs['fecha_in']
+		fecha_fin = self.kwargs['fecha_fin']
+		vehiculo_data = vehiculoModel.objects.filter(soat__range = [fecha_in, fecha_fin]).order_by('soat')
+		context['vehiculo_data'] = vehiculo_data
+		context['fecha_hoy'] = datetime.datetime.now().date()
+		return context

@@ -11,67 +11,48 @@
 	{% endif %}
 	<div class="well">
 		<form method="POST">
-			<fieldset>
-				<legend>Mecánico</legend>
-					{% csrf_token %}
-					<div class="form-group col-md-6 row middle">
-						{{ form.nombre.errors }}
-						<label class="col-2" for="{{ form.nombre.id_for_label }}">
-							{{form.nombre.label}}:
-						</label>
-						{{ form.nombre }}
-					</div>
-					<div class="form-group col-md-6 row middle">
-						{{ form.apellido.errors }}
-						<label class="col-2" for="{{ form.apellido.id_for_label }}">
-							{{form.apellido.label}}:
-						</label>
-						{{ form.apellido }}
-					</div>
-					<div class="form-group col-md-6 row middle">
-						{{ form.telefono.errors }}
-						<label class="col-2" for="{{ form.telefono.id_for_label }}">
-							{{form.telefono.label}}:
-						</label>
-						{{ form.telefono }}
-					</div>
-					<div class="form-group col-md-6 row middle">
-						{{ form.celular.errors }}
-						<label class="col-2" for="{{ form.celular.id_for_label }}">
-							{{form.celular.label}}:
-						</label>
-						{{ form.celular }}
-					</div>
-					<div class="form-group col-md-6 row middle">
-						{{ form.documento.errors }}
-						<label class="col-2" for="{{ form.documento.id_for_label }}">
-							{{form.documento.label}}:
-						</label>
-						{{ form.documento }}
-					</div>
-					<div class="form-group col-md-6 row middle">
-						{{ form.fnaci.errors }}
-						<label class="col-2" for="{{ form.fnaci.id_for_label }}">
-							{{form.fnaci.label}}:
-						</label>
-						{{ form.fnaci }}
-					</div>
-					<div class="form-group col-md-6 row middle">
-						{{ form.direccion.errors }}
-						<label class="col-2" for="{{ form.direccion.id_for_label }}">
-							{{form.direccion.label}}:
-						</label>
-						{{ form.direccion }}
-					</div>
-					<div class="form-group col-md-6 row middle">
-						{{ form.activo.errors }}
-						<label class="col-2" for="{{ form.activo.id_for_label }}">
-							{{form.activo.label}}:
-						</label>
-						{{ form.activo }}
-					</div>
-					<input type="submit" class="btn btn-success" value="Guardar">
-			</fieldset>
+			{% csrf_token %}
+			<div class="form-group col-md-6">
+				{{ form.nombre.errors }}
+				<label>{{form.nombre.label}}</label>
+				{{ form.nombre }}
+			</div>
+			<div class="form-group col-md-6">
+				{{ form.apellido.errors }}
+				<label>{{form.apellido.label}}</label>
+				{{ form.apellido }}
+			</div>
+			<div class="form-group col-md-6">
+				{{ form.telefono.errors }}
+				<label>{{form.telefono.label}}</label>
+				{{ form.telefono }}
+			</div>
+			<div class="form-group col-md-6">
+				{{ form.celular.errors }}
+				<label>{{form.celular.label}}</label>
+				{{ form.celular }}
+			</div>
+			<div class="form-group col-md-6">
+				{{ form.documento.errors }}
+				<label>{{form.documento.label}}</label>
+				{{ form.documento }}
+			</div>
+			<div class="form-group col-md-6">
+				{{ form.fnaci.errors }}
+				<label>{{form.fnaci.label}}</label>
+				{{ form.fnaci }}
+			</div>
+			<div class="form-group col-md-6">
+				{{ form.direccion.errors }}
+				<label>{{form.direccion.label}}</label>
+				{{ form.direccion }}
+			</div>
+			<div class="form-group col-md-6">
+				{{ form.activo.errors }}
+				<label>{{form.activo.label}}</label>
+				{{ form.activo }}
+			</div>
+			<input type="submit" class="btn btn-success" value="Guardar">
 		</form>
 	</div>
 {% endblock content %}

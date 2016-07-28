@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             name='ordenServicioModel',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('fecha', models.DateField(default=datetime.datetime.now)),
+                ('fecha', models.DateTimeField(default=datetime.datetime.now)),
                 ('state', models.PositiveIntegerField(default=1)),
                 ('vehiculo', models.ForeignKey(to='vehiculos.vehiculoModel')),
             ],

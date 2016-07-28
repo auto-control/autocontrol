@@ -26,6 +26,8 @@ class ordenServicioDetalleModel(models.Model):
 	mecanico = models.ForeignKey(mecanicoModel,null=True,blank=True)
 	ordenServicio = models.ForeignKey(ordenServicioModel,null=False,blank=False)
 	time = models.TimeField(auto_now = False, null = True, blank = True)
+	fecha = models.DateField(null=True,blank=True,auto_now=True)
+
 	def __str__(self):
 		return u'%s - %s' % (self.ordenServicio, self.pk)
 

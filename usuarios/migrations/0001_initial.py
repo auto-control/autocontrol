@@ -16,8 +16,8 @@ class Migration(migrations.Migration):
             name='usuariosModel',
             fields=[
                 ('usuario', models.OneToOneField(primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('cedula', models.PositiveIntegerField(null=True, blank=True)),
-                ('celular', models.PositiveIntegerField(null=True, blank=True)),
+                ('cedula', models.CharField(max_length=15, null=True, blank=True)),
+                ('celular', models.CharField(max_length=15, null=True, blank=True)),
             ],
         ),
     ]
