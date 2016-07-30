@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
 from clientes.models import clienteModel
 from clientes.forms import clienteModelForm
+from django.core.exceptions import ObjectDoesNotExist
 from usuarios.models import *
 
 class listClientesView(ListView):
@@ -52,3 +53,26 @@ class updateClienteView(SuccessMessageMixin, UpdateView):
 	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
 	def dispatch(self, *args, **kwargs):
 		return super(updateClienteView,  self).dispatch(*args, **kwargs)
+
+	def form_valid(self, form):
+		tipo_usuario = tipoUsuario.objects.get(nombre_tipo = 'Cliente')
+		cliente = form.save(commit = False)
+		try:
+			cuenta_cliente = User.objects.get(email = cliente.email)
+			cuenta_cliente.first_name = cliente.nombre
+			cuenta_cliente.last_name = cliente.apellido
+			cuenta_cliente.username = cliente.email
+			cuenta_cliente.email = cliente.email
+			cuenta_cliente.save()
+			cliente.save()
+		except ObjectDoesNotExist:
+			password = cliente.documento
+			user = User.objects.create_user(cliente.email, cliente.email, password)
+			user.first_name = cliente.nombre
+			user.last_name = cliente.apellido
+			user.save()
+			perfil_cliente = usuariosModel(usuario = user, tipoUsuario = tipo_usuario)
+			perfil_cliente.save()
+			cliente.cuenta = perfil_cliente
+			cliente.save()
+		return super(updateClienteView, self).form_valid(form)

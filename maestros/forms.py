@@ -23,25 +23,25 @@ class mecanicoModelForm(forms.ModelForm):
 
 	def clean_email(self):
 		email = self.cleaned_data['email']
-		if User.objects.filter(email = email).count() > 0:
+		if User.objects.filter(email = email).exclude(pk = self.instance.cuenta.usuario.pk).count() > 0:
 			raise forms.ValidationError("El email ya está registrado.")
 		return email
 
 	def clean_documento(self):
 		documento = self.cleaned_data['documento']
-		if mecanicoModel.objects.filter(documento = documento).count() > 0:
+		if mecanicoModel.objects.filter(documento = documento).exclude(pk = self.instance.pk).count() > 0:
 			raise forms.ValidationError("El No. de documento ya está registrado")
 		return documento
 
 	def clean_celular(self):
 		celular = self.cleaned_data['celular']
-		if mecanicoModel.objects.filter(celular = celular).count() > 0:
+		if mecanicoModel.objects.filter(celular = celular).exclude(pk = self.instance.pk).count() > 0:
 			raise forms.ValidationError("El No. de celular ya está registrado")
 		return celular
 
 	def clean_telefono(self):
 		telefono = self.cleaned_data['telefono']
-		if mecanicoModel.objects.filter(telefono = telefono).count() > 0:
+		if mecanicoModel.objects.filter(telefono = telefono).exclude(pk = self.instance.pk).count() > 0:
 			raise forms.ValidationError("El No. de telefono ya está registrado")
 		return telefono
 
