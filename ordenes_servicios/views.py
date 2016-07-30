@@ -21,7 +21,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 import json
 
 @login_required
-@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
+#@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def detalleOrdenServicio(request, pk):
 	sum_tot = 0
 	orden = get_or_none(ordenServicioModel, pk=pk)
