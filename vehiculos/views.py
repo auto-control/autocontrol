@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import DetailView, CreateView, ListView, UpdateView
-
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required, user_passes_test
 from app.utils import get_or_none
 from django.core import serializers
 from django.views.generic import DetailView
@@ -14,6 +14,8 @@ from vehiculos.models import *
 from vehiculos.forms import *
 import datetime
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def historialVehiculo(request):
 	form = buscarVehiculoHistorialForm()
 	message = ''
@@ -40,6 +42,10 @@ class vehiculoDetail(DetailView):
 	model = vehiculoModel
 	context_object_name = 'vehiculo'
 
+	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
+	def dispatch(self, *args, **kwargs):
+		return super(vehiculoDetail,  self).dispatch(*args, **kwargs)
+
 	def get_context_data(self, **kwargs):
 		context = super(vehiculoDetail, self).get_context_data(**kwargs)
 		context["ordenes_servicios"] = self.get_ordenes_servicios()
@@ -50,6 +56,8 @@ class vehiculoDetail(DetailView):
 		ordenesServicios = ordenServicioModel.objects.filter(vehiculo=vehiculo)
 		return ordenesServicios
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def getLinea(request, marca):
 	current_marca = MarcaModel.objects.get(pk=marca)
 	models = tipoLineaModel.objects.filter(marca=current_marca)
@@ -62,6 +70,10 @@ class createVehiculoView(SuccessMessageMixin, CreateView):
 	success_url = '/vehiculo'
 	success_message ='Se añadio con éxito el vehiculo!'
 
+	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
+	def dispatch(self, *args, **kwargs):
+		return super(createVehiculoView,  self).dispatch(*args, **kwargs)
+
 class updateVehiculoView(SuccessMessageMixin, UpdateView):
 	model = vehiculoModel
 	form_class = vehiculoModelForm
@@ -69,12 +81,22 @@ class updateVehiculoView(SuccessMessageMixin, UpdateView):
 	success_url = '/vehiculo'
 	success_message = 'Se ha actualizado con exito el vehiculo'
 
+	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
+	def dispatch(self, *args, **kwargs):
+		return super(updateVehiculoView,  self).dispatch(*args, **kwargs)
+
 class listVehiculosView(ListView):
 	template_name = 'list_vehiculo.html'
 	model = vehiculoModel
 	context_object_name = 'vehiculos'
 	paginate_by = 10
 
+	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
+	def dispatch(self, *args, **kwargs):
+		return super(listVehiculosView,  self).dispatch(*args, **kwargs)
+
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def vehiculo_soat(request):
 	form = vehiculoSoatForm()
 	if request.method == "POST":
@@ -93,6 +115,8 @@ class ReporteSoatPDFView(PDFTemplateView):
 		context['fecha_hoy'] = datetime.datetime.now().date()
 		return context
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def soat(request):
 	now = datetime.datetime.now().date()
 	soat = vehiculoModel.objects.filter(soat__lte = now).order_by('soat')

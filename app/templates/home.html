@@ -4,7 +4,7 @@
 {% endblock contentViewTitle %}
 {% block content %}
 	<div class="well ordenes-pendientes-content">
-		<h3>Ordenes pendientes</h3>
+		<h3>Ordenes realizadas</h3>
 		<table class="table table-striped table-hover ">
 			<thead>
 				<tr>
@@ -16,21 +16,39 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for orden in ordenesPendientes %}
-					<tr>
-						<td>{{ orden.id }}</td>
-						<td>{{ orden.vehiculo }}</td>
-						<td>{{ orden.fecha }}</td>
-						<td>{% if orden.state == 1 %}<span class="label label-success">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</td>
-						<td>
-							{% if orden.state == 1 %}
-								<a href="{% url 'edit_orden_servicio' orden.vehiculo.placa orden.pk %}" class="btn btn-success btn-sm">Editar</a>
-								<a href="{% url 'close_service' orden.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
-							{% endif %}
-							<a href="{% url 'detalle_orden_servicio' orden.pk %}" class="btn btn-primary btn-sm">Ver</a>
-						</td>
-					</tr>
-				{% endfor %}
+				{% if ordenesPendientesM %}
+					{% for orden in ordenesPendientesM %}
+						<tr>
+							<td>{{ orden.ordenServicio.id }}</td>
+							<td>{{ orden.ordenServicio.vehiculo }}</td>
+							<td>{{ orden.ordenServicio.fecha }}</td>
+							<td>{% if orden.ordenServicio.state == 1 %}<span class="label label-success">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</td>
+							<td>
+								{% if orden.ordenServicio.state == 1 %}
+									<a href="{% url 'edit_orden_servicio' orden.ordenServicio.vehiculo.placa orden.ordenServicio.pk %}" class="btn btn-success btn-sm">Editar</a>
+									<a href="{% url 'close_service' orden.ordenServicio.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
+								{% endif %}
+								<a href="{% url 'detalle_orden_servicio' orden.ordenServicio.pk %}" class="btn btn-primary btn-sm">Ver</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					{% for orden in ordenesPendientes %}
+						<tr>
+							<td>{{ orden.id }}</td>
+							<td>{{ orden.vehiculo }}</td>
+							<td>{{ orden.fecha }}</td>
+							<td>{% if orden.state == 1 %}<span class="label label-success">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</td>
+							<td>
+								{% if orden.state == 1 %}
+									<a href="{% url 'edit_orden_servicio' orden.vehiculo.placa orden.pk %}" class="btn btn-success btn-sm">Editar</a>
+									<a href="{% url 'close_service' orden.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
+								{% endif %}
+								<a href="{% url 'detalle_orden_servicio' orden.pk %}" class="btn btn-primary btn-sm">Ver</a>
+							</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
 			</tbody>
 		</table
 	</div>

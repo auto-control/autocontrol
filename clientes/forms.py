@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
-
+from django.contrib.auth.models import User
 from clientes.models import clienteModel
 
 
@@ -8,6 +8,7 @@ class clienteModelForm(forms.ModelForm):
 	class Meta:
 		model = clienteModel
 		fields = '__all__'
+		exclude = {'cuenta'}
 		widgets = {
 			'nombre': forms.TextInput(attrs={'required': True, 'class': 'form-control', 'maxlength': 35, 'pattern': '[A-Za-z-ñÑáéíóúÁÉÍÓÚ ]+', 'title': 'Digite solo letras'}),
 			'apellido': forms.TextInput(attrs={'required': True, 'class': 'form-control', 'maxlength': 35, 'pattern': '[A-Za-z-ñÑáéíóúÁÉÍÓÚ ]+', 'title': 'Digite solo letras'}),
@@ -42,6 +43,6 @@ class clienteModelForm(forms.ModelForm):
 
 	def clean_email(self):
 		email = self.cleaned_data['email']
-		if clienteModel.objects.filter(email = email).count() > 0:
+		if User.objects.filter(email = email).count() > 0:
 			raise forms.ValidationError("El email ya está registrado.")
 		return email

@@ -18,15 +18,12 @@
 				<h2>Ingresar</h2>
 				<form method="POST">
 					{% csrf_token %}
-					{% for forms in form %}
 					<div class="form-group">
-						{{ forms.errors }}
-						<label for="{{ forms.id_for_label }}">
-							{{forms.label}}:
-						</label>
-						{{ forms }}
+						<input id="id_username" type="text" class="form-control" name="username" value="" placeholder="Usuario" required>
 					</div>
-					{% endfor %}
+					<div class="form-group">
+						<input id="id_password" type="password" class="form-control" name="password" placeholder="Contraseña" required>
+					</div>
 					<input type="submit" value="ingresar" class="btn btn-success">
 				</form>
 			</div>

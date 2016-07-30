@@ -1,8 +1,10 @@
 from django.db import models
+from usuarios.models import usuariosModel
 
 class clienteModel(models.Model):
 
 	"""Modelo Cliente"""
+	cuenta = models.ForeignKey(usuariosModel, blank=True, null=True)
 	nombre = models.CharField(max_length=35)
 	apellido = models.CharField(max_length=35)
 	documento = models.CharField(max_length=20)

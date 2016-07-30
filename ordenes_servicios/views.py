@@ -17,8 +17,11 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.db.models import Sum
 from easy_pdf.views import PDFTemplateView
+from django.contrib.auth.decorators import login_required, user_passes_test
 import json
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def detalleOrdenServicio(request, pk):
 	sum_tot = 0
 	orden = get_or_none(ordenServicioModel, pk=pk)
@@ -31,6 +34,8 @@ def detalleOrdenServicio(request, pk):
 	}
 	return render(request,'detail_orden_servicio.html', context)
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 @csrf_exempt
 def guardarOrden(request):
 	if request.method == "POST":
@@ -65,6 +70,8 @@ def guardarOrden(request):
 		url = u'%s/%s' % ('/orden-servicio', orden.pk)
 		return HttpResponseRedirect(url)
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def ordenServicioNueva(request, pk):
 
 	vehiculo = get_or_none(vehiculoModel, placa=pk)
@@ -76,7 +83,8 @@ def ordenServicioNueva(request, pk):
 	}
 	return render(request,'create_orden_servicio.html', context)
 
-
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def ordenServicioEditar(request, pk, orden):
 
 	vehiculo = get_or_none(vehiculoModel, placa=pk)
@@ -90,6 +98,8 @@ def ordenServicioEditar(request, pk, orden):
 	}
 	return render(request,'edit_orden_servicio.html', context)
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def ordenServicio(request):
 
 	form = vehiculoOrdenForm()
@@ -112,7 +122,8 @@ def ordenServicio(request):
 
 	return render(request, 'orden_servicio.html', context)
 
-
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def getServicioValor(request):
 	if request.is_ajax():
 		codigoServicio = request.GET.get('servicio')
@@ -123,24 +134,32 @@ def getServicioValor(request):
 			safe=False
 		)
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def orden_servicio_auto(request):
 	form = ordenServicioAutoForm()
 	if request.method == "POST":
 		form = ordenServicioAutoForm(request.POST)
 	return render(request, 'orden_servicio_auto.html', {'forms': form})
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def orden_servicio_mecanico(request):
 	form = ordenServicioMecanicoForm()
 	if request.method == "POST":
 		form = ordenServicioMecanicoForm(request.POST)
 	return render(request, 'orden_servicio_mecanico.html', {'forms': form})
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def ordenes_por_servicios(request):
 	form = ordenPorServicioForm()
 	if request.method == "POST":
 		form = ordenPorServicioForm(request.POST)
 	return render(request, 'ordenes_por_servicios.html', {'forms': form})
 
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def delete_orden_servicio(request, pk):
 	response = {}
 	orden = ordenServicioDetalleModel.objects.get(pk = pk)

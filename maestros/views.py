@@ -9,6 +9,10 @@ from datetime import datetime, time, timedelta
 from maestros.models import mecanicoModel
 from ordenes_servicios.models import ordenServicioDetalleModel
 from maestros.forms import mecanicoModelForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
+from usuarios.models import *
 
 class listMecanicosView(ListView):
 	template_name = 'list_mecanicos.html'
@@ -16,11 +20,34 @@ class listMecanicosView(ListView):
 	context_object_name = 'mecanicos'
 	paginate_by = 10
 
+	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
+	def dispatch(self, *args, **kwargs):
+		return super(listMecanicosView,  self).dispatch(*args, **kwargs)
+
 class createMecanicoView(SuccessMessageMixin, CreateView):
 	template_name = 'create_mecanicos.html'
 	form_class = mecanicoModelForm
 	success_url = '/mecanicos'
 	success_message = 'Se añadio con exito el Mecánico'
+
+	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
+	def dispatch(self, *args, **kwargs):
+		return super(createMecanicoView,  self).dispatch(*args, **kwargs)
+
+	def form_valid(self, form):
+		tipo_usuario = tipoUsuario.objects.get(nombre_tipo = 'Mecanico')
+		mecanico = form.save(commit = False)
+		username = form.cleaned_data['email']
+		password = mecanico.documento
+		user = User.objects.create_user(username, form.cleaned_data['email'], password)
+		user.first_name = mecanico.nombre
+		user.last_name = mecanico.apellido
+		user.save()
+		perfil_mecanico = usuariosModel(usuario = user, tipoUsuario = tipo_usuario)
+		perfil_mecanico.save()
+		mecanico.cuenta = perfil_mecanico
+		mecanico.save()
+		return super(createMecanicoView, self).form_valid(form)
 
 class updateMecanicoView(SuccessMessageMixin, UpdateView):
 	model = mecanicoModel
@@ -29,6 +56,12 @@ class updateMecanicoView(SuccessMessageMixin, UpdateView):
 	success_url = '/mecanicos'
 	success_message = 'Se ha actualizado con exito el mecanico'
 
+	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
+	def dispatch(self, *args, **kwargs):
+		return super(updateMecanicoView, self).dispatch(*args, **kwargs)
+
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def time_mecanicos(request):
 	mecanicos = mecanicoModel.objects.all()
 	return render(request, 'time_mecanicos.html', {'mecanicos': mecanicos})

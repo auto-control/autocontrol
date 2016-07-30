@@ -1,6 +1,19 @@
 <ul class="menu-list">
 	<li class="menu-group">
 		<div class="row menu-group-item">
+			<a class="col-10 clk" href="{% url 'home' %}">
+				<div>
+					<span class="glyphicon glyphicon-home"> Inicio</span>
+				</div>
+			</a>
+			<div class="col-2 center middle show-submenu clk">
+				<span>></span>
+			</div>
+		</div>
+	</li>
+	{% if user.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador' %}
+	<li class="menu-group">
+		<div class="row menu-group-item">
 			<a class="col-10 clk" href="#">
 				<div>
 					<span class="icon-user-tie"> Clientes</span>
@@ -143,5 +156,19 @@
 		<ul class="submenu-list">
 			<li class="submenu-item"><a href="#">Manual</a></li>
 		</ul>
+	</li>
+	{% elif user.usuariosmodel.tipoUsuario.nombre_tipo == 'Mecanico' %}
+	{% endif %}
+	<li class="menu-group">
+		<div class="row menu-group-item">
+			<a class="col-10 clk" href="{% url 'salir' %}">
+				<div>
+					<span class="glyphicon glyphicon-off"> Salir</span>
+				</div>
+			</a>
+			<div class="col-2 center middle show-submenu clk">
+				<span>></span>
+			</div>
+		</div>
 	</li>
 </ul>

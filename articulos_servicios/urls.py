@@ -1,5 +1,4 @@
 from django.conf.urls import include, url
-
 from articulos_servicios.views import createServicioView, listServicioView
 
 urlpatterns = [

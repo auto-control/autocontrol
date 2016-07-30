@@ -1,6 +1,8 @@
 from django.db import models
+from usuarios.models import usuariosModel
 
 class mecanicoModel(models.Model):
+	cuenta = models.ForeignKey(usuariosModel, blank=True, null=True)
 	nombre = models.CharField(max_length=50)
 	apellido = models.CharField(max_length=50)
 	telefono = models.CharField(max_length=20, blank=True, null=True)

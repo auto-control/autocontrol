@@ -85,8 +85,16 @@ TEMPLATES = [
 	},
 ]
 
+AUTHENTICATION_BACKENDS = (
+	'auto_control.backends.EmailBackend',
+	'django.contrib.auth.backends.ModelBackend'
+)
+
 WSGI_APPLICATION = 'auto_control.wsgi.application'
 
+LOGIN_REDIRECT_URL = '/'
+
+LOGIN_URL = '/ingresar/'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
