@@ -24,10 +24,6 @@
 							<td>{{ orden.ordenServicio.fecha }}</td>
 							<td>{% if orden.ordenServicio.state == 1 %}<span class="label label-success">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</td>
 							<td>
-								{% if orden.ordenServicio.state == 1 %}
-									<a href="{% url 'edit_orden_servicio' orden.ordenServicio.vehiculo.placa orden.ordenServicio.pk %}" class="btn btn-success btn-sm">Editar</a>
-									<a href="{% url 'close_service' orden.ordenServicio.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
-								{% endif %}
 								<a href="{% url 'detalle_orden_servicio' orden.ordenServicio.pk %}" class="btn btn-primary btn-sm">Ver</a>
 							</td>
 						</tr>
@@ -38,11 +34,21 @@
 							<td>{{ orden.id }}</td>
 							<td>{{ orden.vehiculo }}</td>
 							<td>{{ orden.fecha }}</td>
-							<td>{% if orden.state == 1 %}<span class="label label-success">Abierto</span>{% else %}<span class="label label-danger">Cerrado</span>{% endif %}</td>
 							<td>
 								{% if orden.state == 1 %}
-									<a href="{% url 'edit_orden_servicio' orden.vehiculo.placa orden.pk %}" class="btn btn-success btn-sm">Editar</a>
-									<a href="{% url 'close_service' orden.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
+									<span class="label label-success">Abierto</span>
+								{% elif orden.state == 0 %}
+									<span class="label label-danger">Cerrado</span>
+								{% elif orden.state == 2 %}
+									<span class="label label-info">Trámite</span>
+								{% endif %}
+							</td>
+							<td>
+								{% if request.user.usuariosmodel.tipoUsuario.nombre_tipo == "Administrador" %}
+									{% if orden.state == 1 or orden.state == 2 %}
+										<a href="{% url 'edit_orden_servicio' orden.vehiculo.placa orden.pk %}" class="btn btn-success btn-sm">Editar</a>
+										<a href="{% url 'close_service' orden.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
+									{% endif %}
 								{% endif %}
 								<a href="{% url 'detalle_orden_servicio' orden.pk %}" class="btn btn-primary btn-sm">Ver</a>
 							</td>

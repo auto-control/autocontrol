@@ -31,3 +31,11 @@ def close_service(request, orden):
 	orden.state = 0
 	orden.save(update_fields = ['state'])
 	return HttpResponseRedirect('/')
+
+@login_required
+@user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
+def tramite_service(request, orden):
+	orden = ordenServicioModel.objects.get(pk=orden)
+	orden.state = 2
+	orden.save(update_fields = ['state'])
+	return HttpResponseRedirect('/')
