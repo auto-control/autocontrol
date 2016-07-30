@@ -4,11 +4,13 @@
 {% block contentViewTitle %}
 	<h3>
 		Orden de servicio
+	</h3>
+	<div style="position: absolute; right: 100px;">
 		{% if orden.state == 1 %}
 			<a href="{% url 'tramite_service' orden.pk %}" class="btn btn-info btn-sm" id="close">tramite</a>
 		{% endif %}
 			<a href="{% url 'close_service' orden.pk %}" class="btn btn-danger btn-sm" id="close">cerrar</a>
-	</h3>
+	</div>
 {% endblock contentViewTitle %}
 {% block content %}
 	<div class="well orden-servicio">
