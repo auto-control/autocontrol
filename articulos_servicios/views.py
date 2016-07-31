@@ -19,8 +19,14 @@ class listServicioView(ListView):
 	template_name = 'list_servicio.html'
 	model = servicioModel
 	context_object_name = 'servicios'
-	paginate_by = 10
 
 	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
 	def dispatch(self, *args, **kwargs):
 		return super(listServicioView,  self).dispatch(*args, **kwargs)
+
+	def get_context_data(self, **kwargs):
+		context = super(listServicioView, self).get_context_data(**kwargs)
+		seresp = servicioModel.objects.all()
+		context['servicios_data'] = seresp.filter(servicio = True)
+		context['repuestos_data'] = seresp.filter(repuesto = True)
+		return context

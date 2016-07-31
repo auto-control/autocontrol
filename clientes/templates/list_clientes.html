@@ -50,6 +50,7 @@
 						{% endif %}
 					</td>
 					<td>
+						<a href="{% url 'detail_clientes' cliente.pk %}" class="btn btn-info">Ver</a>
 						<a href="{% url 'update_clientes' cliente.pk %}" class="btn btn-primary">Editar</a>
 					</td>
 				</tr>

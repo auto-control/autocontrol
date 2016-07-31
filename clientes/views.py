@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
@@ -8,6 +8,14 @@ from clientes.models import clienteModel
 from clientes.forms import clienteModelForm
 from django.core.exceptions import ObjectDoesNotExist
 from usuarios.models import *
+
+class detailClientesView(DetailView):
+	template_name = 'detail_clientes.html'
+	model = clienteModel
+
+	def get_context_data(self, **kwargs):
+		context = super(detailClientesView, self).get_context_data(**kwargs)
+		return context
 
 class listClientesView(ListView):
 	queryset = clienteModel.objects.all().order_by('apellido')
