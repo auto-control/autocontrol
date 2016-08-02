@@ -23,7 +23,7 @@ class mecanicoModelForm(forms.ModelForm):
 
 	def clean_email(self):
 		email = self.cleaned_data['email']
-		if User.objects.filter(email = email).exclude(pk = self.instance.cuenta.usuario.pk).count() > 0:
+		if User.objects.filter(email = email).exclude(first_name = self.cleaned_data['nombre']).count() > 0:
 			raise forms.ValidationError("El email ya está registrado.")
 		return email
 
