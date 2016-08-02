@@ -2,7 +2,6 @@
 from django import forms
 from maestros.models import mecanicoModel
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 
 class mecanicoModelForm(forms.ModelForm):
 	class Meta:
@@ -24,12 +23,7 @@ class mecanicoModelForm(forms.ModelForm):
 
 	def clean_email(self):
 		email = self.cleaned_data['email']
-		query = User.objects.filter(email = email)
-		try:
-			query = query.exclude(pk = self.instance.cuenta.usuario.pk)
-		except ObjectDoesNotExist:
-			query = query
-		if query.count() > 0:
+		if User.objects.filter(email = email).exclude(pk = self.instance.cuenta.usuario.pk).count() > 0:
 			raise forms.ValidationError("El email ya está registrado.")
 		return email
 
@@ -54,7 +48,7 @@ class mecanicoModelForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		data = kwargs['instance']
 		super(mecanicoModelForm, self).__init__(*args, **kwargs)
-		if data.cuenta.usuario.email:
+		if data:
 			data = data.cuenta.usuario.email
 		else:
 			data = ''
