@@ -23,7 +23,12 @@ class mecanicoModelForm(forms.ModelForm):
 
 	def clean_email(self):
 		email = self.cleaned_data['email']
-		if User.objects.filter(email = email).exclude(pk = self.instance.cuenta.usuario.pk).count() > 0:
+		query = User.objects.filter(email = email)
+		try:
+			query = query.exclude(pk = self.instance.cuenta.usuario.pk)
+		except:
+			query = query
+		if query.count() > 0:
 			raise forms.ValidationError("El email ya está registrado.")
 		return email
 
