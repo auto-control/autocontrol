@@ -54,11 +54,8 @@ class mecanicoModelForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		data = kwargs['instance']
 		super(mecanicoModelForm, self).__init__(*args, **kwargs)
-		if data:
-			try:
-				data = data.cuenta.usuario.email
-			except ObjectDoesNotExist:
-				data = ''
+		if data.cuenta.usuario.email:
+			data = data.cuenta.usuario.email
 		else:
 			data = ''
 		self.fields['email'] = forms.EmailField(label = "Correo electronico", widget = forms.TextInput(attrs = {'class': 'form-control col-md-10', 'value': data, 'required': True}))
