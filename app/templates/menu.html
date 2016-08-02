@@ -170,6 +170,19 @@
 				</div>
 			</div>
 		</li>
+	{% elif user.usuariosmodel.tipoUsuario.nombre_tipo == 'Mecanico' %}
+		<li class="menu-group">
+			<div class="row menu-group-item">
+				<a class="col-10 clk" href="{% url 'detail_mecanicos' user.usuariosmodel.clientemodel_set.get.pk %}">
+					<div>
+						<span class="glyphicon glyphicon-user"> Perfil</span>
+					</div>
+				</a>
+				<div class="col-2 center middle show-submenu clk">
+					<span>></span>
+				</div>
+			</div>
+		</li>
 	{% endif %}
 	<li class="menu-group">
 		<div class="row menu-group-item">
