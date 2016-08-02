@@ -51,7 +51,7 @@ class mecanicoModelForm(forms.ModelForm):
 		if data:
 			try:
 				data = data.cuenta.usuario.email
-			except ObjectDoesNotExist:
+			except:
 				data = ''
 		else:
 			data = ''
