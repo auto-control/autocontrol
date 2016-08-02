@@ -60,6 +60,29 @@ class updateMecanicoView(SuccessMessageMixin, UpdateView):
 	def dispatch(self, *args, **kwargs):
 		return super(updateMecanicoView, self).dispatch(*args, **kwargs)
 
+	def form_valid(self, form):
+		tipo_usuario = tipoUsuario.objects.get(nombre_tipo = 'Mecanico')
+		mecanico = form.save(commit = False)
+		try:
+			cuenta_mecanico = User.objects.get(email = mecanico.email)
+			cuenta_mecanico.first_name = mecanico.nombre
+			cuenta_mecanico.last_name = mecanico.apellido
+			cuenta_mecanico.username = mecanico.email
+			cuenta_mecanico.email = mecanico.email
+			cuenta_mecanico.save()
+			mecanico.save()
+		except ObjectDoesNotExist:
+			password = mecanico.documento
+			user = User.objects.create_user(mecanico.email, mecanico.email, password)
+			user.first_name = mecanico.nombre
+			user.last_name = mecanico.apellido
+			user.save()
+			perfil_mecanico = usuariosModel(usuario = user, tipoUsuario = tipo_usuario)
+			perfil_mecanico.save()
+			mecanico.cuenta = perfil_mecanico
+			mecanico.save()
+		return super(updateClienteView, self).form_valid(form)
+
 @login_required
 @user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def time_mecanicos(request):
