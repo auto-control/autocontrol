@@ -12,6 +12,7 @@ from maestros.forms import mecanicoModelForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from usuarios.models import *
 
 class listMecanicosView(ListView):
@@ -71,7 +72,7 @@ class updateMecanicoView(SuccessMessageMixin, UpdateView):
 			cuenta_mecanico.email = mecanico.email
 			cuenta_mecanico.save()
 			mecanico.save()
-		except:
+		except ObjectDoesNotExist:
 			password = mecanico.documento
 			user = User.objects.create_user(mecanico.email, mecanico.email, password)
 			user.first_name = mecanico.nombre
