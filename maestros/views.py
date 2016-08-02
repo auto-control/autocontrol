@@ -71,7 +71,7 @@ class updateMecanicoView(SuccessMessageMixin, UpdateView):
 			cuenta_mecanico.email = mecanico.email
 			cuenta_mecanico.save()
 			mecanico.save()
-		except ObjectDoesNotExist:
+		except:
 			password = mecanico.documento
 			user = User.objects.create_user(mecanico.email, mecanico.email, password)
 			user.first_name = mecanico.nombre
