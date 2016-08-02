@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -14,6 +14,14 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from usuarios.models import *
+
+class detailMecanicosView(DetailView):
+	template_name = 'detail_mecanicos.html'
+	model = mecanicoModel
+
+	def get_context_data(self, **kwargs):
+		context = super(detailMecanicosView, self).get_context_data(**kwargs)
+		return context
 
 class listMecanicosView(ListView):
 	template_name = 'list_mecanicos.html'
@@ -65,16 +73,16 @@ class updateMecanicoView(SuccessMessageMixin, UpdateView):
 		tipo_usuario = tipoUsuario.objects.get(nombre_tipo = 'Mecanico')
 		mecanico = form.save(commit = False)
 		try:
-			cuenta_mecanico = User.objects.get(email = mecanico.email)
+			cuenta_mecanico = User.objects.get(email = form.cleaned_data['email'])
 			cuenta_mecanico.first_name = mecanico.nombre
 			cuenta_mecanico.last_name = mecanico.apellido
-			cuenta_mecanico.username = mecanico.email
-			cuenta_mecanico.email = mecanico.email
+			cuenta_mecanico.username = form.cleaned_data['email']
+			cuenta_mecanico.email = form.cleaned_data['email']
 			cuenta_mecanico.save()
 			mecanico.save()
 		except ObjectDoesNotExist:
 			password = mecanico.documento
-			user = User.objects.create_user(mecanico.email, mecanico.email, password)
+			user = User.objects.create_user(form.cleaned_data['email'], form.cleaned_data['email'], password)
 			user.first_name = mecanico.nombre
 			user.last_name = mecanico.apellido
 			user.save()
@@ -82,7 +90,7 @@ class updateMecanicoView(SuccessMessageMixin, UpdateView):
 			perfil_mecanico.save()
 			mecanico.cuenta = perfil_mecanico
 			mecanico.save()
-		return super(updateClienteView, self).form_valid(form)
+		return super(updateMecanicoView, self).form_valid(form)
 
 @login_required
 @user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')

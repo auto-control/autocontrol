@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="row content-view-title middle">
+		<h3>Mecanico {{ object }}</h3>
+	</div>
+	<div class="row">
+		<div class="well col-md-12">
+			<div class="col-md-6">
+				<p><b>Cédula:</b> {{ object.documento }}</p>
+				<p><b>Fecha Nacimiento:</b> {{ object.fnaci }}</p>
+				<p><b>Telefono:</b> {{ object.telefono }}</p>
+			</div>
+			<div class="col-md-6">
+				<p><b>Celular:</b> {{ object.celular }}</p>
+				<p><b>Email:</b> {{ object.cuenta.usuario.email }}</p>
+				<p><b>Dirección:</b> {{ object.direccion }}</p>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
