@@ -25,6 +25,10 @@ def home(request):
 	return render(request, 'home.html', context)
 
 @login_required
+def manual(request):
+	return render(request, 'manuales/manual_'+request.user.usuariosmodel.tipoUsuario.nombre_tipo+'.html', {})
+
+@login_required
 @user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/')
 def close_service(request, orden):
 	orden = ordenServicioModel.objects.get(pk=orden)

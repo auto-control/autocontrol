@@ -125,38 +125,18 @@
 			<li class="submenu-item"><a href="{% url 'vehiculo_soat' %}">SOAT</a></li>
 		</ul>
 	</li>
-
 	<li class="menu-group">
-		<div class="row menu-group-item">
-			<a class="col-10 clk" href="#">
-				<div>
-					<span class="icon-cog"> Configuraciones</span>
+			<div class="row menu-group-item">
+				<a class="col-10 clk" href="{% url 'manual' %}">
+					<div>
+						<span class="icon-question"> Ayuda</span>
+					</div>
+				</a>
+				<div class="col-2 center middle show-submenu clk">
+					<span>></span>
 				</div>
-			</a>
-			<div class="col-2 center middle show-submenu clk">
-				<span>></span>
 			</div>
-		</div>
-		<ul class="submenu-list">
-			<li class="submenu-item"><a href="#">Menu 1</a></li>
-			<li class="submenu-item"><a href="#">Menu 2</a></li>
-		</ul>
-	</li>
-	<li class="menu-group">
-		<div class="row menu-group-item">
-			<a class="col-10 clk" href="#">
-				<div>
-					<span class="icon-question"> Ayuda</span>
-				</div>
-			</a>
-			<div class="col-2 center middle show-submenu clk">
-				<span>></span>
-			</div>
-		</div>
-		<ul class="submenu-list">
-			<li class="submenu-item"><a href="#">Manual</a></li>
-		</ul>
-	</li>
+		</li>
 	{% elif user.usuariosmodel.tipoUsuario.nombre_tipo == 'Cliente' %}
 		<li class="menu-group">
 			<div class="row menu-group-item">

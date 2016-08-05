@@ -108,7 +108,7 @@ DATABASES = {
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'auto_control',
+		'NAME': 'autocontrol',
 		'USER': 'root',
 		'PASSWORD': 'root',
 		'OPTIONS': {

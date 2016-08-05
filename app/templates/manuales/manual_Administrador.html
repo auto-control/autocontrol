@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contentViewTitle %}
+	<h3>Manual de {{ user.usuariosmodel.tipoUsuario.nombre_tipo }}</h3>
+{% endblock contentViewTitle %}
+{% block content %}
+	<div class="well ordenes-pendientes-content">
+		<h3>Indice:</h3>
+		<br>
+		<div class="row">
+			<div class="col-md-3">
+				<h4>Módulo Clientes</h4>
+				<ol>
+					<li><a href="#c_cliente">Creación de clientes</a></li>
+					<li><a href="#l_cliente">Edición de clientes</a></li>
+				</ol>
+			</div>
+			<div class="col-md-3">
+				<h4>Módulo Vehículos</h4>
+				<ol>
+					<li><a href="#c_vehiculo">Creación de vehículos</a></li>
+					<li><a href="#e_vehiculo">Edición de vehículos</a></li>
+					<li><a href="#h_vehiculo">Historial de vehículos</a></li>
+				</ol>
+			</div>
+			<div class="col-md-3">
+				<h4>Módulo Respuestos y Servicios</h4>
+				<ol>
+					<li><a href="#c_repuesto">Creación de repuesto/servicio</a></li>
+					<li><a href="#l_repuesto">Listado de repuesto/servicio</a></li>
+				</ol>
+			</div>
+			<div class="col-md-3">
+				<h4>Módulo Ordenes de Servicios</h4>
+				<ol>
+					<li><a href="#c_orden">Creación de ordenes servicio</a></li>
+				</ol>
+			</div>
+			<div class="col-md-3">
+				<h4>Módulo SOAT</h4>
+				<ol>
+					<li><a href="#l_soat">Listado de SOAT</a></li>
+				</ol>
+			</div>
+			<div class="col-md-3">
+				<h4>Módulo Mecánicos</h4>
+				<ol>
+					<li><a href="#c_mecanico">Creación de mecánicos</a></li>
+					<li><a href="#e_mecanico">Edición de mecánicos</a></li>
+				</ol>
+			</div>
+			<div class="col-md-3">
+				<h4>Módulo Reportes</h4>
+				<ol>
+					<li><a href="#g_reporte">Generación de reportes</a></li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Módulo Clientes</h1>
+			</div>
+			<div id="c_cliente">
+				<h4>Creación de clientes</h4>
+				<p>En el menú lateral izquierdo, diríjase al menú desplegable llamado clientes, a continuación seleccione la opción crear cliente.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/m_cliente.png' %}" width="200">
+				</div>
+				<p>A continuación, aparecerá la siguiente ventana, digite todos los campos solicitados y de click sobre el botón guardar para agregar el nuevo cliente al sistema.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/f_cliente.png' %}" height="200">
+				</div>
+			</div>
+			<div id="l_cliente">
+				<h4>Edición de clientes</h4>
+				<p>Seleccione la opción Lista de clientes ubicado en el menú izquierdo dentro de la sección Clientes. A continuación se visualizará la siguiente pantalla:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/l_cliente.png' %}" height="200">
+				</div>
+				<p>De click sobre el botón Editar del cliente que se requiera de actualización de datos, digite los campos a actualizar y de clic sobre guardar para actualizar el cliente.</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Módulo Vehículos</h1>
+			</div>
+			<div id="c_vehiculo">
+				<h4>Creación de vehículos</h4>
+				<p>En el menú lateral izquierdo, diríjase al menú desplegable llamado vehículos, a continuación seleccione la opción crear vehículos.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/c_vehiculo.png' %}" width="200">
+				</div>
+				<p>A continuación, aparecerá la siguiente ventana, digite todos los campos solicitados y de click sobre el botón guardar para agregar el nuevo vehículo al sistema (<b>Nota:</b> Puede crear un cliente dando clic sobre el botón Crear cliente).</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/f_vehiculo.png' %}" height="300">
+				</div>
+			</div>
+			<div id="e_vehiculo">
+				<h4>Edición de vehículos</h4>
+				<p>Seleccione la opción Lista de vehículos ubicado en el menú izquierdo dentro de la sección Vehículos. A continuación se visualizará la siguiente pantalla:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/e_vehiculo.png' %}" height="250">
+				</div>
+				<p>De click sobre el botón Editar del vehículo que se requiera de actualización de datos, digite los campos a actualizar y de clic sobre guardar para actualizar el vehículo.</p>
+			</div>
+			<div id="h_vehiculo">
+				<h4>Historial de vehículos</h4>
+				<p>Seleccione la opción Historial de vehículos ubicado en el menú izquierdo dentro de la sección Vehículos. A continuación se visualizará la siguiente pantalla:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/h_vehiculo.png' %}" height="100">
+				</div>
+				<p>Digite la placa del vehículo a consultar, se observará la siguiente pantalla mostrando datos del vehículo, dueño del mismo y servicios que se le han realizado:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/h2_vehiculo.png' %}" height="300">
+				</div>
+				<p>Da clic sobre Ver para visualizar más detalles del servicio seleccionado del vehículo en vista. A continuación se visualizará la siguiente pantalla:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/h3_vehiculo.png' %}" height="400">
+				</div>
+				<p>Para imprimir la orden de servicio, de clic sobre el botón imprimir ubicado en la parte inferior derecha de la pantalla. A continuación se visualizará la siguiente pantalla:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/h4_vehiculo.png' %}" height="400">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Módulo Respuestos y Servicios</h1>
+			</div>
+			<div id="c_repuesto">
+				<h4>Creación de repuesto/servicio</h4>
+				<p>En el menú lateral izquierdo, diríjase al menú desplegable llamado repuestos y servicios, a continuación seleccione la opción crear nuevo.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/m_servicio.png' %}" width="200">
+				</div>
+				<p>A continuación, aparecerá la siguiente ventana, digite todos los campos solicitados y de click sobre el botón crear para agregar el nuevo repuesto/servicio al sistema (<b>Nota:</b> En la pantalla se encuentra dos caja de selección para crear un repuesto o servicio según sea el caso).</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/s_rep.png' %}" height="300">
+					<img src="{% static 'img/manual/r_rep.png' %}" height="300">
+				</div>
+			</div>
+			<div id="l_repuesto">
+				<h4>Listado de repuesto/servicio</h4>
+				<p>Seleccione la opción Lista de servicios/repuestos ubicado en el menú izquierdo dentro de la sección Repuestos y servicios. A continuación se visualizará la siguiente pantalla:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/l_servi.png' %}" height="200">
+				</div>
+				<p>Puede agregar un nuevo servicio/repuesto dando clic sobre el botón Nuevo servicio.</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Módulo Ordenes de Servicios</h1>
+			</div>
+			<div id="c_orden">
+				<h4>Creación orden de servicio</h4>
+				<p>En el menú lateral izquierdo, diríjase al menú desplegable llamado ordenes de servicio, a continuación seleccione la opción nueva orden.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/m_orden.png' %}" width="200">
+				</div>
+				<p>A continuación, aparecerá la siguiente ventana, digite la placa del vehículo y luego de clic sobre el botón Enviar:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/b_orden.png' %}" height="150">
+				</div>
+				<p>Una vez ingresado la placa del vehículo, seleccione y/o digite los campos servicio/repuesto, cantidad, mecánico, y después de haber ingresado los campos anteriores, dé clic sobre el botón agregar para añadir el servicio al vehículo. Puede repetir el proceso anterior agregando diferentes servicios/repuestos al vehículo. Una vez terminado, continúe dando clic sobre el botón Guardar para crear la orden de servicio.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/mu_orden.png' %}" height="300">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Módulo SOAT</h1>
+			</div>
+			<div id="l_soat">
+				<h4>Listado de SOAT</h4>
+				<p> En el menú lateral izquierdo, diríjase al menú y de clic en SOAT.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/m_soat.png' %}" width="200">
+				</div>
+				<p>A continuación, se visualizará la siguiente pantalla, en ella se podrá mostrar los vehículos con SOAT vencido. Puede dar clic sobre el botón Editar para actualizar la fecha del SOAT del vehículo.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/b_soat.png' %}" height="130">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Módulo Mecánicos</h1>
+			</div>
+			<div id="c_mecanico">
+				<h4>Creación de mecánicos</h4>
+				<p>En el menú lateral izquierdo, diríjase al menú desplegable llamado Mecánicos, a continuación seleccione la opción Crear Mecánico.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/m_mecanico.png' %}" width="200">
+				</div>
+				<p>A continuación, aparecerá la siguiente ventana, digite todos los campos solicitados y de click sobre el botón guardar para agregar el nuevo mecánico al sistema.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/b_mecanico.png' %}" height="200">
+				</div>
+			</div>
+			<div id="e_mecanico">
+				<h4>Edición de mecánicos</h4>
+				<p>Seleccione la opción Lista de Mecánicos ubicado en el menú izquierdo dentro de la sección Mecánicos. A continuación se visualizará la siguiente pantalla:</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/b2_mecanico.png' %}" height="150">
+				</div>
+				<p>De click sobre el botón Editar del mecánico que se requiera de actualización de datos, digite los campos a actualizar y de clic sobre guardar para actualizar el mecánico.</p>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Módulo Reportes</h1>
+			</div>
+			<div id="g_reporte">
+				<h4>Generación de reportes</h4>
+				<p>Hay distintos reportes que se pueden generar en el sistema, diríjase hacia el menú lateral, en la sección Reportes y seleccione el tipo de reporte a visualizar.</p>
+				<div class="text-center">
+					<img src="{% static 'img/manual/m_reportes.png' %}" width="200">
+				</div>
+				<p><b>Nota:</b> En cada reporte debe de seleccionar el rango de fecha para poder visualizar el reporte en un tiempo determinado.</p>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
