@@ -10,11 +10,11 @@ class vehiculoModelForm(forms.ModelForm):
 		fields = '__all__'
 		widgets = {
 			'placa': forms.TextInput(attrs={'class': 'form-control', 'required': True, 'placeholder': 'XXX111', 'max_length': 10, 'title': 'XXX000(Mayusculas)', 'pattern': '[A-Z]{3}[0-9]{3}'}),
-			'linea': forms.TextInput(attrs={'class': 'form-control', 'max_length': 50, 'required': True,}),
-			'kilometraje_actual': forms.TextInput(attrs={'class': 'form-control', 'max_length': 10, 'required': True,}),
-			'soat': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'required': True,}),
-			'cilindraje': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{1,9}', 'title': 'Solo dato numerico', 'required': True,}),
-			'modelo': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{4}', 'title': 'Solo dato numerico', 'required': True,}),
+			'linea': forms.TextInput(attrs={'class': 'form-control', 'max_length': 50, 'required': False,}),
+			'kilometraje_actual': forms.TextInput(attrs={'class': 'form-control', 'max_length': 10, 'required': False,}),
+			'soat': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'required': False,}),
+			'cilindraje': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{1,9}', 'title': 'Solo dato numerico', 'required': False,}),
+			'modelo': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{4}', 'title': 'Solo dato numerico', 'required': False,}),
 			'linea': forms.Select(attrs={'class': 'form-control', 'disabled': True}),
 			'n_chasis': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
 			'n_motor': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
@@ -23,7 +23,7 @@ class vehiculoModelForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(vehiculoModelForm, self).__init__(*args, **kwargs)
 		self.fields['marca'] = forms.ModelChoiceField(queryset = MarcaModel.objects.all().order_by('marca'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = False)
-		self.fields['categoria'] = forms.ModelChoiceField(queryset = tipoVehiculoModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = True)
+		self.fields['categoria'] = forms.ModelChoiceField(queryset = tipoVehiculoModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen'}), required = False)
 		self.fields['cliente'] = forms.ModelChoiceField(queryset = clienteModel.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class': 'form-control chosen', 'required': True}))
 
 	def clean_placa(self):

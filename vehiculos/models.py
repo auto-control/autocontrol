@@ -44,7 +44,7 @@ class vehiculoModel(models.Model):
 	categoria = models.ForeignKey(tipoVehiculoModel, null=True, blank=True)
 	modelo = models.IntegerField(null=True, blank=True)
 	cliente = models.ForeignKey(clienteModel, null=False, blank=False)
-	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg')
+	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg', null=True, blank=True)
 	n_chasis = models.IntegerField(default = 0)
 	n_motor = models.IntegerField(default = 0)
 
