@@ -63,6 +63,7 @@
 				<th>Tiempo</th>
 				<th>Grupo</th>
 				<th>Detalle</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -73,6 +74,9 @@
 					<td>{{ servicio.time }}</td>
 					<td>{{ servicio.grupo }}</td>
 					<td>{{ servicio.detail }}</td>
+					<td>
+						<a href="{% url 'update_servicios' servicio.pk %}" class="btn btn-primary">Editar</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
@@ -85,6 +89,7 @@
 				<th>Fecha vencimiento</th>
 				<th>refencia</th>
 				<th>Detalle</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -95,6 +100,9 @@
 					<td>{{ repuesto.fecha_vencimiento }}</td>
 					<td>{{ repuesto.referencia }}</td>
 					<td>{{ repuesto.detail }}</td>
+					<td>
+						<a href="{% url 'update_servicios' repuesto.pk %}" class="btn btn-primary">Editar</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
