@@ -7,10 +7,10 @@ class clienteModel(models.Model):
 	cuenta = models.ForeignKey(usuariosModel, blank=True, null=True)
 	nombre = models.CharField(max_length=35)
 	apellido = models.CharField(max_length=35)
-	documento = models.CharField(max_length=20)
+	documento = models.CharField(max_length=20,blank=True, null=True)
 	fnaci = models.DateField(blank=True, null=True)
 	telefono = models.CharField(max_length=20, blank=True, null=True)
-	celular = models.CharField(max_length=50)
+	celular = models.CharField(max_length=50,blank=True, null=True)
 	direccion = models.CharField(max_length=50, blank=True, null=True)
 	email = models.EmailField(blank=True, null=True)
 

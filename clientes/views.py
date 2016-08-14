@@ -40,14 +40,15 @@ class createClienteView(SuccessMessageMixin, CreateView):
 	def form_valid(self, form):
 		tipo_usuario = tipoUsuario.objects.get(nombre_tipo = 'Cliente')
 		cliente = form.save(commit = False)
-		password = cliente.documento
-		user = User.objects.create_user(cliente.email, cliente.email, password)
-		user.first_name = cliente.nombre
-		user.last_name = cliente.apellido
-		user.save()
-		perfil_cliente = usuariosModel(usuario = user, tipoUsuario = tipo_usuario)
-		perfil_cliente.save()
-		cliente.cuenta = perfil_cliente
+		if cliente.email != "":
+			password = cliente.documento
+			user = User.objects.create_user(cliente.email, cliente.email, password)
+			user.first_name = cliente.nombre
+			user.last_name = cliente.apellido
+			user.save()
+			perfil_cliente = usuariosModel(usuario = user, tipoUsuario = tipo_usuario)
+			perfil_cliente.save()
+			cliente.cuenta = perfil_cliente
 		cliente.save()
 		return super(createClienteView, self).form_valid(form)
 

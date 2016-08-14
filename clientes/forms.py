@@ -15,9 +15,9 @@ class clienteModelForm(forms.ModelForm):
 			'documento': forms.TextInput(attrs={'class': 'form-control', 'pattern': '[0-9]{1,12}', 'title': 'Digite solo numeros'}),
 			'fnaci': forms.DateInput(attrs={'class': 'form-control', 'max': '1998-12-31', 'type': 'date'}),
 			'telefono': forms.TextInput(attrs={'placeholder': 'XXXXXXXXX', 'class': 'form-control', 'maxlength': 10, 'pattern': '[0-9]{1,10}', 'title': 'Digite solo numeros'}),
-			'celular': forms.TextInput(attrs={'required': True, 'placeholder': 'XXXXXXXXX', 'class': 'form-control', 'maxlength': 10, 'pattern': '[0-9]{1,10}', 'title': 'Digite solo numeros'}),
+			'celular': forms.TextInput(attrs={'placeholder': 'XXXXXXXXX', 'class': 'form-control', 'maxlength': 10, 'pattern': '[0-9]{1,10}', 'title': 'Digite solo numeros'}),
 			'direccion': forms.TextInput(attrs={'placeholder': 'XXXXXXXX', 'class': 'form-control'}),
-			'email': forms.EmailInput(attrs={'placeholder': 'ejemplo@ejemplo.com', 'required': True, 'class': 'form-control'})
+			'email': forms.EmailInput(attrs={'placeholder': 'ejemplo@ejemplo.com', 'class': 'form-control'})
 		}
 		labels = {
 			'fnaci': 'Fecha de nacimiento'
@@ -31,7 +31,7 @@ class clienteModelForm(forms.ModelForm):
 
 	def clean_telefono(self):
 		telefono = self.cleaned_data['telefono']
-		if clienteModel.objects.filter(telefono = telefono).exclude(pk = self.instance.pk).count() > 0:
+		if clienteModel.objects.filter(telefono = telefono).exclude(pk = self.instance.pk).count() > 0 and telefono != "":
 			raise forms.ValidationError("El No. de telefono ya está registrado.")
 		return telefono
 
