@@ -34,17 +34,18 @@ class vehiculoModelForm(forms.ModelForm):
 
 	def clean_soat(self):
 		soat = self.cleaned_data['soat']
-		now = datetime.datetime.now().date()
-		before = now - datetime.timedelta(days = 365)
-		print before
-		if soat < before:
-			raise forms.ValidationError("Fecha incorrecta. Maximo un año de vencimiento")
+		if soat is not None:
+			now = datetime.datetime.now().date()
+			before = now - datetime.timedelta(days = 365)
+			if soat < before:
+				raise forms.ValidationError("Fecha incorrecta. Maximo un año de vencimiento")
 		return soat
 
 	def clean_modelo(self):
 		modelo = self.cleaned_data['modelo']
-		if int(modelo) < 1900:
-			raise forms.ValidationError("Modelo incorrecto.")
+		if modelo is not None:
+			if int(modelo) < 1900:
+				raise forms.ValidationError("Modelo incorrecto.")
 		return modelo
 
 class buscarVehiculoHistorialForm(forms.Form):
