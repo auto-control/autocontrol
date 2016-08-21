@@ -6,7 +6,7 @@ class clienteModel(models.Model):
 	"""Modelo Cliente"""
 	cuenta = models.ForeignKey(usuariosModel, blank=True, null=True)
 	nombre = models.CharField(max_length=35)
-	apellido = models.CharField(max_length=35)
+	apellido = models.CharField(max_length=35, blank=True, null=True)
 	documento = models.CharField(max_length=20,blank=True, null=True)
 	fnaci = models.DateField(blank=True, null=True)
 	telefono = models.CharField(max_length=20, blank=True, null=True)

@@ -41,6 +41,7 @@ PROJECT_APPS = (
 	'mobile',
 	'usuarios',
 	'easy_pdf',
+	'dbbackup',
 )
 
 DJANGO_APPS = (
@@ -190,3 +191,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'auto_control/static')
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, 'auto_control/static'),
 )
+
+DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR,'auto_control/static/backups')}
