@@ -10,12 +10,11 @@ class vehiculoModelForm(forms.ModelForm):
 		fields = '__all__'
 		widgets = {
 			'placa': forms.TextInput(attrs={'class': 'form-control', 'required': True, 'placeholder': 'XXX111', 'max_length': 10, 'title': 'XXX000(Mayusculas)', 'pattern': '[A-Z]{3}[0-9]{3}'}),
-			'linea': forms.TextInput(attrs={'class': 'form-control', 'max_length': 50, 'required': False,}),
 			'kilometraje_actual': forms.TextInput(attrs={'class': 'form-control', 'max_length': 10, 'required': False,}),
 			'soat': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'required': False,}),
 			'cilindraje': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{1,9}', 'title': 'Solo dato numerico', 'required': False,}),
 			'modelo': forms.TextInput(attrs={'class': 'form-control number', 'pattern': '[0-9]{4}', 'title': 'Solo dato numerico', 'required': False,}),
-			'linea': forms.Select(attrs={'class': 'form-control', 'disabled': True}),
+			'linea': forms.Select(attrs={'class': 'form-control', 'disabled': True, 'required': False}),
 			'n_chasis': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
 			'n_motor': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
 		}

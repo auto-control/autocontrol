@@ -91,11 +91,17 @@
 {% block scripts %}
 	<script>
 		$(".chosen").chosen();
+		$( "form" ).submit(function( event ) {
+			if($('#id_linea').val() == ''){
+				$("#id_marca").val('').trigger('change');
+			}
+		});
 		$(document).ready(
 			function(){
 				$("select#id_marca").change(function() {
+					console.log(0)
 					if ($(this).val() == '') {
-						$("select#id_linea").html("<option>--------</option>");
+						$("select#id_linea").html("<option value=''>--------</option>");
 						$("select#id_linea").attr('disabled', true);
 						$("select#id_linea").removeAttr('class', 'chosen');
 						$("select#id_linea").attr('class', 'form-control');
@@ -103,7 +109,7 @@
 						var url = "/obtener-linea/"+$(this).val()+"/";
 						var brand = $(this).val();
 						$.getJSON(url, function(models) {
-							var options = '<option>--------</option>';
+							var options = '<option value="">--------</option>';
 							for (var i = 0; i < models.length; i++) {
 								options += '<option value="' + models[i].pk + '">' + models[i].fields['nombre_tipo'] + '</option>';
 							}
