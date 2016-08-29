@@ -21,7 +21,6 @@ class listClientesView(ListView):
 	queryset = clienteModel.objects.all().order_by('apellido')
 	template_name = 'list_clientes.html'
 	context_object_name = 'clientes'
-	paginate_by = 10
 
 	@method_decorator(user_passes_test(lambda u: u.usuariosmodel.tipoUsuario.nombre_tipo == 'Administrador', login_url='/'))
 	def dispatch(self, *args, **kwargs):

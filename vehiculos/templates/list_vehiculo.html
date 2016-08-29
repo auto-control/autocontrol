@@ -2,20 +2,10 @@
 {% block contentViewTitle %}
 	<h3>
 		Lista de Vehiculos
+		<a href="{% url 'create_vehiculo' %}" class="btn btn-primary">Nuevo Vehiculo</a>
 	</h3>
 {% endblock contentViewTitle %}
 {% block content %}
-	<div class="row well actions-top middle">
-		<div class="col-1">
-			<label for="">Buscar:</label>
-		</div>
-		<div class="col-8">
-			<input type="text" class="form-control" placeholder="">
-		</div>
-		<div class="col-3">
-			<input type="submit" class="btn btn-success" value="Buscar">
-		</div>
-	</div>
 	{% if messages %}
 		<div class="alert alert-success " role="alert">
 			{% for message in messages %}
@@ -23,7 +13,7 @@
 			{% endfor %}
 		</div>
 	{% endif %}
-	<table class="table table-striped table-hover ">
+	<table class="table table-striped table-hover" id="table">
 		<thead>
 			<tr>
 				<th>Placa</th>
@@ -72,8 +62,5 @@
 				</a>
 			{% endif %}
 		{% endif %}
-	</div>
-	<div class="row center">
-		<a href="{% url 'create_vehiculo' %}" class="btn btn-primary">Nuevo Vehiculo</a>
 	</div>
 {% endblock content %}

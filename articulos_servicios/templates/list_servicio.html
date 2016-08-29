@@ -10,18 +10,20 @@
 
 {% block scripts %}
 	<script>
-		$('#servicio').hide();
-		$('#repuesto').show();
 		repuesto();
 		function repuesto(){
 			$('#repuesto').show();
 			$('#servicio').hide();
 			$('#titulo').text('Repuestos');
+			$('#table-repuesto').DataTable();
+			$('#table-servicio').DataTable().destroy();
 		}
 		function servicio(){
 			$('#servicio').show();
 			$('#repuesto').hide();
 			$('#titulo').text('Servicios');
+			$('#table-repuesto').DataTable().destroy();
+			$('#table-servicio').DataTable();
 		}
 		$('#servicio_btn').click(function(){
 			$('#servicio_btn').attr('disabled');
@@ -37,17 +39,6 @@
 {% endblock scripts %}
 
 {% block content %}
-	<div class="row well actions-top middle">
-		<div class="col-1">
-			<label for="">Buscar:</label>
-		</div>
-		<div class="col-8">
-			<input type="text" class="form-control" placeholder="">
-		</div>
-		<div class="col-3">
-			<input type="submit" class="btn btn-success" value="Buscar">
-		</div>
-	</div>
 	{% if messages %}
 		<div class="alert alert-success " role="alert">
 			{% for message in messages %}
@@ -55,58 +46,62 @@
 			{% endfor %}
 		</div>
 	{% endif %}
-	<table class="table table-striped table-hover" id="servicio">
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>valor</th>
-				<th>Tiempo</th>
-				<th>Grupo</th>
-				<th>Detalle</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for servicio in servicios_data %}
+	<div id="servicio">
+		<table class="table table-striped table-hover" id="table-servicio">
+			<thead>
 				<tr>
-					<td>{{ servicio.nombre }}</td>
-					<td>{{ servicio.valor }}</td>
-					<td>{{ servicio.time }}</td>
-					<td>{{ servicio.grupo }}</td>
-					<td>{{ servicio.detail }}</td>
-					<td>
-						<a href="{% url 'update_servicios' servicio.pk %}" class="btn btn-primary">Editar</a>
-					</td>
+					<th>Nombre</th>
+					<th>valor</th>
+					<th>Tiempo</th>
+					<th>Grupo</th>
+					<th>Detalle</th>
+					<th></th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-	<table class="table table-striped table-hover" id="repuesto">
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>valor</th>
-				<th>Fecha vencimiento</th>
-				<th>refencia</th>
-				<th>Detalle</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for repuesto in repuestos_data %}
+			</thead>
+			<tbody>
+				{% for servicio in servicios_data %}
+					<tr>
+						<td>{{ servicio.nombre }}</td>
+						<td>{{ servicio.valor }}</td>
+						<td>{{ servicio.time }}</td>
+						<td>{{ servicio.grupo }}</td>
+						<td>{{ servicio.detail }}</td>
+						<td>
+							<a href="{% url 'update_servicios' servicio.pk %}" class="btn btn-primary">Editar</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div id="repuesto">
+		<table class="table table-striped table-hover" id="table-repuesto">
+			<thead>
 				<tr>
-					<td>{{ repuesto.nombre }}</td>
-					<td>{{ repuesto.valor }}</td>
-					<td>{{ repuesto.fecha_vencimiento }}</td>
-					<td>{{ repuesto.referencia }}</td>
-					<td>{{ repuesto.detail }}</td>
-					<td>
-						<a href="{% url 'update_servicios' repuesto.pk %}" class="btn btn-primary">Editar</a>
-					</td>
+					<th>Nombre</th>
+					<th>valor</th>
+					<th>Fecha vencimiento</th>
+					<th>refencia</th>
+					<th>Detalle</th>
+					<th></th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for repuesto in repuestos_data %}
+					<tr>
+						<td>{{ repuesto.nombre }}</td>
+						<td>{{ repuesto.valor }}</td>
+						<td>{{ repuesto.fecha_vencimiento }}</td>
+						<td>{{ repuesto.referencia }}</td>
+						<td>{{ repuesto.detail }}</td>
+						<td>
+							<a href="{% url 'update_servicios' repuesto.pk %}" class="btn btn-primary">Editar</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 	<div class="row center">
 		<a class="btn btn-primary" href="{% url 'create_servicio' %}">Nuevo Servicio</a>
 	</div>
