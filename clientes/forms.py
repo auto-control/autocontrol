@@ -13,7 +13,7 @@ class clienteModelForm(forms.ModelForm):
 			'nombre': forms.TextInput(attrs={'required': True, 'class': 'form-control', 'maxlength': 35, 'title': 'Digite solo letras'}),
 			'apellido': forms.TextInput(attrs={'class': 'form-control', 'maxlength': 35, 'title': 'Digite solo letras'}),
 			'documento': forms.TextInput(attrs={'class': 'form-control'}),
-			'fnaci': forms.DateInput(attrs={'class': 'form-control', 'max': '1998-12-31', 'type': 'date'}),
+			'fnaci': forms.TextInput(attrs={'class': 'form-control datepicker'}),
 			'telefono': forms.TextInput(attrs={'placeholder': 'XXXXXXXXX', 'class': 'form-control', 'maxlength': 10, 'pattern': '[0-9]{1,10}', 'title': 'Digite solo numeros'}),
 			'celular': forms.TextInput(attrs={'placeholder': 'XXXXXXXXX', 'class': 'form-control', 'maxlength': 10, 'pattern': '[0-9]{1,10}', 'title': 'Digite solo numeros'}),
 			'direccion': forms.TextInput(attrs={'placeholder': 'XXXXXXXX', 'class': 'form-control'}),

@@ -2,6 +2,15 @@
 {% block contentViewTitle %}
 	<h3>Crear nuevo cliente</h3>
 {% endblock contentViewTitle %}
+
+{% load staticfiles %}
+
+{% block head %}
+	<script src="{% static 'js/moment.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.datetimepicker.css' %}">
+	<script src="{% static 'js/bootstrap.datetimepicker.js' %}"></script>
+{% endblock head %}
+
 {% block content %}
 	{% if form.errors %}
 		<div class="alert alert-danger">
@@ -27,3 +36,9 @@
 		</form>
 	</div>
 {% endblock content %}
+
+{% block scripts %}
+	<script>
+		$('.datepicker').datetimepicker({format: 'YYYY-MM-DD'});
+	</script>
+{% endblock scripts %}
