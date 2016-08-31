@@ -57,8 +57,9 @@
 <script src="{% static 'js/jquery.time-to.js' %}"></script>
 <script src="{% static 'js/list.js' %}"></script>
 <script src="{% static 'js/datatables.min.js' %}"></script>
+<script src="{% static 'js/template.js' %}"></script>
 <script>
-	$('#table').DataTable();
+	$('#table').DataTable({"language": languageDataTable,});
 </script>
 {% block scripts %}
 {% endblock scripts %}
