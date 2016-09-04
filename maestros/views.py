@@ -78,6 +78,7 @@ class updateMecanicoView(SuccessMessageMixin, UpdateView):
 			cuenta_mecanico.last_name = mecanico.apellido
 			cuenta_mecanico.username = form.cleaned_data['email']
 			cuenta_mecanico.email = form.cleaned_data['email']
+			cuenta_mecanico.set_password(form.cleaned_data['documento'])
 			cuenta_mecanico.save()
 			mecanico.save()
 		except ObjectDoesNotExist:

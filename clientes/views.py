@@ -71,6 +71,7 @@ class updateClienteView(SuccessMessageMixin, UpdateView):
 			cuenta_cliente.last_name = cliente.apellido
 			cuenta_cliente.username = cliente.email
 			cuenta_cliente.email = cliente.email
+			cuenta_cliente.set_password(cliente.documento)
 			cuenta_cliente.save()
 			cliente.save()
 		except ObjectDoesNotExist:

@@ -15,7 +15,7 @@
 			$('#repuesto').show();
 			$('#servicio').hide();
 			$('#titulo').text('Repuestos');
-			$('#table-repuesto').DataTable();
+			$('#table-repuesto').DataTable({"language": languageDataTable,});
 			$('#table-servicio').DataTable().destroy();
 		}
 		function servicio(){
@@ -23,7 +23,7 @@
 			$('#repuesto').hide();
 			$('#titulo').text('Servicios');
 			$('#table-repuesto').DataTable().destroy();
-			$('#table-servicio').DataTable();
+			$('#table-servicio').DataTable({"language": languageDataTable,});
 		}
 		$('#servicio_btn').click(function(){
 			$('#servicio_btn').attr('disabled');
