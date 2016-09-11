@@ -45,6 +45,8 @@ class vehiculoModel(models.Model):
 	modelo = models.IntegerField(null=True, blank=True)
 	cliente = models.ForeignKey(clienteModel, null=False, blank=False)
 	foto = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg', null=True, blank=True)
+	foto_chasis = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg', null=True, blank=True)
+	foto_motor = models.ImageField(upload_to = 'img/vehiculo/', default = 'img/none.jpg', null=True, blank=True)
 	n_chasis = models.CharField(max_length = 50, blank=True, null=True)
 	n_motor = models.CharField(max_length = 50, blank=True, null=True)
 

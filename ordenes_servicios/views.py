@@ -43,6 +43,7 @@ def guardarOrden(request):
 		servicios = request.POST.getlist('servicios[]')
 		cantidades = request.POST.getlist('cantidades[]')
 		mecanicos = request.POST.getlist('mecanicos[]')
+		vunitarios = request.POST.getlist('vunitarios[]')
 
 		if 'orden' in request.GET:
 			orden = ordenServicioModel(pk=request.GET.get('orden'))
@@ -54,13 +55,14 @@ def guardarOrden(request):
 		for i in range(0,len(servicios)):
 			servicio = get_or_none(servicioModel, pk=servicios[i])
 			cantidad = cantidades[i]
+			vunitario = vunitarios[i]
 			mecanico = get_or_none(mecanicoModel, pk=mecanicos[i])
-			total = int(servicio.valor)* int(cantidad)
+			total = int(vunitario)* int(cantidad)
 			time = get_time(servicio.time)
 			ordenDetalle = ordenServicioDetalleModel(
 				servicio = servicio,
 				cantidad = cantidad,
-				valorUnitario = servicio.valor,
+				valorUnitario = vunitario,
 				valorTotal = total,
 				mecanico = mecanico,
 				ordenServicio = orden,

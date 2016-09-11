@@ -135,7 +135,27 @@
 		}
 
 		function addServicio (form) {
-			var html = "<div class='row orden-servicio-item'><div class='col-3 center'><input id=''  type='text' disabled value='"+form.servicio.options[form.servicio.selectedIndex].text+"'> <input type='hidden' id='servicio' name='servicios[]' value='"+form.servicio.options[form.servicio.selectedIndex].value+"'/></div><div class='col-1 center'><input id='' type='number' disabled value='"+form.elements.id_cantidad.value+"'><input id='cantidad' name='cantidades[]' type='hidden' value='"+form.elements.id_cantidad.value+"'></div><div class='col-2 center'><input id='vunitario' name='vunitarios[]' type='number' disabled value="+form.elements.id_valorUnitario.value+"></div><div class='col-2 center'><input id='vtotal' name='vtotales[]' type='number' disabled value='"+form.elements.id_valorTotal.value+"'></div><div class='col-2 center'><input id='' type='text' disabled value='"+form.mecanico.options[form.mecanico.selectedIndex].text+"'><input type='hidden' id='mecanico' name='mecanicos[]' value='"+form.mecanico.options[form.mecanico.selectedIndex].value+"'/></div></div>";
+			var html = "<div class='row orden-servicio-item'>"+
+				"<div class='col-3 center'>"+
+					"<input id=''  type='text' disabled value='"+form.servicio.options[form.servicio.selectedIndex].text+"'>"+
+					"<input type='hidden' id='servicio' name='servicios[]' value='"+form.servicio.options[form.servicio.selectedIndex].value+"'/>"+
+				"</div>"+
+				"<div class='col-1 center'>"+
+					"<input id='' type='number' disabled value='"+form.elements.id_cantidad.value+"'>"+
+					"<input id='cantidad' name='cantidades[]' type='hidden' value='"+form.elements.id_cantidad.value+"'>"+
+				"</div>"+
+				"<div class='col-2 center'>"+
+					"<input id='' type='number' disabled value="+form.elements.id_valorUnitario.value+">"+
+					"<input id='vunitario' name='vunitarios[]' type='hidden' value="+form.elements.id_valorUnitario.value+">"+
+				"</div>"+
+				"<div class='col-2 center'>"+
+					"<input id='vtotal' name='vtotales[]' type='number' disabled value='"+form.elements.id_valorTotal.value+"'>"+
+				"</div>"+
+				"<div class='col-2 center'>"+
+					"<input id='' type='text' disabled value='"+form.mecanico.options[form.mecanico.selectedIndex].text+"'>"+
+					"<input type='hidden' id='mecanico' name='mecanicos[]' value='"+form.mecanico.options[form.mecanico.selectedIndex].value+"'/>"+
+				"</div>"+
+			"</div>";
 
 			$('#orden-items').append(html);
 			var btn = document.getElementById('form-save-btn')
